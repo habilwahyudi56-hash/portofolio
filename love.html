@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Untukmu — Khusus</title>
+    <style>
+        /* Reset sederhana */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+            background: radial-gradient(circle at 10% 10%, #ffe6f0 0%, #fff 20%, #ffeef8 40%, #fff5f9 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            color: #222
+        }
+
+        .card {
+            width: 100%;
+            max-width: 920px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.95));
+            border-radius: 18px;
+            box-shadow: 0 12px 40px rgba(12, 12, 30, 0.12);
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 0;
+            align-items: stretch
+        }
+
+        @media (max-width:880px) {
+            .card {
+                grid-template-columns: 1fr;
+                max-width: 420px
+            }
+        }
+
+        .left {
+            padding: 40px
+        }
+
+        .logo {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 14px
+        }
+
+        .logo .dot {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ff7aa2, #ffb3d9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 8px
+        }
+
+        p.lead {
+            color: #444;
+            margin-bottom: 18px
+        }
+
+        .typewriter {
+            font-size: 20px;
+            line-height: 1.5;
+            margin-top: 8px;
+            color: #333;
+            min-height: 3.2em
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            margin-top: 22px;
+            flex-wrap: wrap
+        }
+
+        .btn {
+            padding: 10px 16px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #ff7aa2, #ff5c96);
+            color: white
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border: 1px solid rgba(0, 0, 0, 0.07)
+        }
+
+        .reveal {
+            margin-top: 18px;
+            padding: 12px 14px;
+            border-radius: 12px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.8));
+            border: 1px dashed rgba(255, 90, 140, 0.12)
+        }
+
+        /* kanan */
+        .right {
+            background: linear-gradient(180deg, #fff5fb, #fff0f7);
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            align-items: center;
+            justify-content: center
+        }
+
+        .heart {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            cursor: pointer;
+            position: relative
+        }
+
+        .heart svg {
+            width: 84px;
+            height: 84px;
+            transform-origin: center center;
+            transition: transform .18s ease
+        }
+
+        .hint {
+            font-size: 13px;
+            color: #6b6b6b
+        }
+
+        .customize {
+            width: 100%;
+            display: flex;
+            gap: 8px
+        }
+
+        .customize input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.06)
+        }
+
+        footer {
+            font-size: 13px;
+            color: #666;
+            margin-top: 10px
+        }
+
+        /* confetti placeholder */
+        canvas.confetti {
+            position: fixed;
+            left: 0;
+            top: 0;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+            z-index: 9999
+        }
+
+        /* small animations */
+        .pulse {
+            animation: pulse 1s linear
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1)
+            }
+
+            50% {
+                transform: scale(1.08)
+            }
+
+            100% {
+                transform: scale(1)
+            }
+        }
+
+        /* little hearts */
+        .floating-heart {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(0) scale(0.7);
+            transition: transform 900ms cubic-bezier(.2, .9, .25, 1), opacity 900ms
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="left">
+            <div class="logo">
+                <div class="dot">K</div>
+                <div><strong>Untukmu</strong>
+                    <div style="font-size:12px;color:#6b6b6b">Buat dedikasimu</div>
+                </div>
+            </div>
+            <h1 id="title">Halo, sayang...</h1>
+            <p class="lead">Sebuah laman kecil ini kubuat khusus untukmu. Klik hati di sisi kanan atau ketik namamu di
+                bawah untuk melihat pesanku.</p>
+
+            <div class="typewriter" id="typewriter">Klik hati 💖 atau tekan "Kirim" untuk membuka pesan.</div>
+
+            <div class="controls">
+                <button class="btn btn-primary" id="revealBtn">Kirim Pesan</button>
+                <button class="btn btn-ghost" id="playMelody">Putar Melodi</button>
+                <button class="btn btn-ghost" id="downloadBtn">Simpan sebagai HTML</button>
+            </div>
+
+            <div class="reveal" id="messageBox" style="display:none">
+                <strong>Pesan khusus:</strong>
+                <p id="finalMessage" style="margin-top:8px">Aku suka cara kamu membuat hariku lebih berwarna. Mau jadi
+                    bagian dari cerita hidupku?</p>
+            </div>
+
+            <div style="margin-top:18px">
+                <div style="font-size:13px;color:#666;margin-bottom:6px">Personalisasi (opsional)</div>
+                <div class="customize">
+                    <input id="nameInput" placeholder="Masukkan nama pacarmu (mis. Ayu)" />
+                    <input id="lineInput" placeholder="Tambahkan 1 kalimat singkat" />
+                </div>
+            </div>
+
+            <footer>Tip: ganti gambar, teks, atau warna sesukamu — cocok untuk surprise kecil 💌</footer>
+        </div>
+
+        <div class="right">
+            <div class="heart" id="heartBtn" title="Klik untuk membuka pesan">
+                <!-- SVG hati -->
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path
+                        d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 22l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"
+                        fill="#ff6f98" stroke="none"></path>
+                </svg>
+            </div>
+            <div class="hint">Sentuh atau klik hati — biar aku bilang sesuatu manis.</div>
+            <div style="font-size:12px;color:#777;text-align:center">Mau aku tambahkan foto? Kirim fotonya, aku bantu
+                edit teksnya.</div>
+        </div>
+    </div>
+
+    <canvas class="confetti" id="confettiCanvas" aria-hidden></canvas>
+
+    <script>
+        // --- Konten default yang bisa diganti ---
+        const defaultLines = [
+            "Waktu pertama kali kita bertemu, aku langsung tahu ada yang istimewa.",
+            "Setiap senyummu bikin siangku lebih terang, malamku lebih hangat.",
+            "Mau terus bareng kamu, dari cerita kecil sampai mimpi besar.",
+            "Maukah kamu jadi alasan aku tersenyum setiap hari? 💖"
+        ];
+
+        const nameInput = document.getElementById('nameInput');
+        const lineInput = document.getElementById('lineInput');
+        const typeEl = document.getElementById('typewriter');
+        const heartBtn = document.getElementById('heartBtn');
+        const revealBtn = document.getElementById('revealBtn');
+        const messageBox = document.getElementById('messageBox');
+        const finalMessage = document.getElementById('finalMessage');
+        const playMelody = document.getElementById('playMelody');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        // simple typewriter
+        function typeLines(lines, el, speed = 40) {
+            el.innerHTML = '';
+            let i = 0;
+            function nextLine() {
+                if (i >= lines.length) return;
+                const line = lines[i++];
+                let j = 0;
+                const p = document.createElement('div');
+                el.appendChild(p);
+                const t = setInterval(() => {
+                    p.textContent = line.slice(0, j + 1);
+                    j++;
+                    if (j >= line.length) {
+                        clearInterval(t);
+                        setTimeout(nextLine, 450);
+                    }
+                }, speed);
+            }
+            nextLine();
+        }
+
+        // reveal action (heart or button)
+        function reveal() {
+            // build lines with personalization
+            const name = nameInput.value.trim();
+            const extra = lineInput.value.trim();
+            const lines = defaultLines.slice();
+            if (name) lines.unshift(`Untuk ${name},`);
+            if (extra) lines.push(extra);
+            typeLines(lines, typeEl, 35);
+            messageBox.style.display = 'block';
+            finalMessage.textContent = (name ? `${name}, ` : '') + 'Aku suka cara kamu membuat hariku lebih berwarna. Kalau kamu mau, ayo kita buat banyak cerita bersama.';
+            popHearts();
+            runConfetti();
+            pulseHeart();
+            playTune(0.12);
+        }
+
+        heartBtn.addEventListener('click', reveal);
+        revealBtn.addEventListener('click', reveal);
+
+        // play small melody using WebAudio
+        let audioCtx;
+        function playTune(durationMultiplier = 0.12) {
+            try {
+                audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+                const notes = [523.25, 659.25, 783.99, 1046.5]; // C5, E5, G5, C6
+                let t = audioCtx.currentTime;
+                notes.forEach((f, i) => {
+                    const o = audioCtx.createOscillator();
+                    const g = audioCtx.createGain();
+                    o.type = 'sine'; o.frequency.value = f;
+                    g.gain.value = 0.0001;
+                    o.connect(g); g.connect(audioCtx.destination);
+                    o.start(t + i * durationMultiplier);
+                    g.gain.exponentialRampToValueAtTime(0.12, t + i * durationMultiplier + 0.01);
+                    g.gain.exponentialRampToValueAtTime(0.0001, t + (i + 1) * durationMultiplier);
+                    o.stop(t + (i + 1) * durationMultiplier + 0.02);
+                });
+            } catch (e) { console.warn(e) }
+        }
+        playMelody.addEventListener('click', () => playTune(0.14));
+
+        // confetti (very small lightweight impl)
+        function runConfetti() {
+            const canvas = document.getElementById('confettiCanvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = innerWidth; canvas.height = innerHeight;
+            const pieces = [];
+            for (let i = 0; i < 60; i++) {
+                pieces.push({ x: Math.random() * canvas.width, y: Math.random() * -canvas.height * 0.6, r: Math.random() * 6 + 4, d: Math.random() * 40 + 15, s: (Math.random() * 2) + 0.5, a: Math.random() * 360 });
+            }
+            let frames = 0;
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (const p of pieces) {
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate((p.a + frames * p.s) / 180 * Math.PI);
+                    ctx.fillStyle = ['#ff6f98', '#ffd1e6', '#ffb3d9', '#fff1f7'][Math.floor(Math.random() * 4)];
+                    ctx.fillRect(-p.r / 2, -p.r / 2, p.r, p.r * 1.6);
+                    ctx.restore();
+                    p.y += p.s + Math.sin(frames / 15 + p.d) * 0.5;
+                    if (p.y > canvas.height + 20) { p.y = -20; p.x = Math.random() * canvas.width }
+                }
+                frames++;
+                if (frames < 260) requestAnimationFrame(draw); else ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            draw();
+        }
+
+        // tiny heart pop animation
+        function popHearts() {
+            for (let i = 0; i < 12; i++) {
+                const h = document.createElement('div');
+                h.className = 'floating-heart';
+                h.style.left = (50 + (Math.random() * 80 - 40)) + 'px';
+                h.style.top = (50 + (Math.random() * 80 - 40)) + 'px';
+                h.style.opacity = 1;
+                h.innerHTML = '❤';
+                h.style.fontSize = (12 + Math.random() * 18) + 'px';
+                document.body.appendChild(h);
+                setTimeout(() => { h.style.transform = 'translateY(-120px) scale(1)'; h.style.opacity = 0; }, 20);
+                setTimeout(() => { h.remove() }, 1200);
+            }
+        }
+
+        function pulseHeart() {
+            const svg = heartBtn.querySelector('svg');
+            svg.classList.add('pulse');
+            setTimeout(() => svg.classList.remove('pulse'), 600);
+        }
+
+        // download current page as HTML file
+        downloadBtn.addEventListener('click', () => {
+            const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a'); a.href = url; a.download = 'untukmu.html'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+        });
+
+        // convenience: press Enter in input to reveal
+        [nameInput, lineInput].forEach(inp => inp.addEventListener('keydown', (e) => { if (e.key === 'Enter') { reveal(); } }));
+
+        // accessibility: if user prefers reduced motion, cut animations
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('.pulse').forEach(n => n.style.animation = 'none');
+        }
+
+        // initial small hint
+        typeEl.textContent = 'Klik hati atau tekan "Kirim Pesan" untuk membuka kalimat manis.';
+    </script>
+</body>
+
+</html>
