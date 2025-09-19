@@ -16,23 +16,27 @@
       line-height: 1.6;
       color: #fff;
       min-height: 100vh;
-      position: relative;
-
       background: url("back.jpg") no-repeat center center fixed;
       background-size: cover;
-      overflow-x: hidden; /* cegah geser horizontal */
+      position: relative;
+      overflow-x: hidden;
     }
 
-    /* Overlay full layar */
+    /* Overlay hitam full layar */
     body::before {
       content: "";
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;   /* lebar penuh */
-      height: 100vh;  /* tinggi penuh */
-      background: rgba(0, 0, 0, 0.7); /* bg hitam transparan 70% */
-      z-index: -1;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7); /* 70% hitam */
+      z-index: 0; /* overlay di atas bg tapi di bawah konten */
+    }
+
+    header, section {
+      position: relative;
+      z-index: 1; /* supaya konten tetap muncul di atas overlay */
     }
 
     header {
@@ -40,7 +44,6 @@
       color: #fff;
       padding: 20px;
       text-align: center;
-      position: relative;
     }
 
     header h1 {
@@ -65,15 +68,12 @@
       border-radius: 3px;
     }
 
-    nav {
-      margin-top: 10px;
-    }
-
     nav ul {
       list-style: none;
       display: flex;
       justify-content: center;
       gap: 20px;
+      margin-top: 10px;
     }
 
     nav a {
@@ -100,11 +100,6 @@
       text-align: center;
     }
 
-    #tentang p {
-      text-align: center;
-      font-size: 18px;
-    }
-
     .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -125,8 +120,8 @@
 
     .portfolio-item img {
       width: 100%;
-      height: 200px;      /* tinggi seragam */
-      object-fit: cover;  /* crop agar rapi */
+      height: 200px;
+      object-fit: cover;
       border-radius: 8px;
       margin-top: 10px;
     }
