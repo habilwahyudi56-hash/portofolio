@@ -22,7 +22,6 @@
       color: #fff;
       padding: 20px;
       text-align: center;
-      flex-wrap: wrap;
     }
 
     header h1 {
@@ -46,7 +45,7 @@
 
     section {
       padding: 40px 20px;
-      max-width: 900px;
+      max-width: 1000px;
       margin: auto;
     }
 
@@ -63,7 +62,7 @@
 
     .portfolio-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
     }
 
@@ -80,8 +79,9 @@
     }
 
     .portfolio-item img {
-      max-width: 100%;
-      height: auto;
+      width: 100%;
+      height: 250px;        /* tinggi tetap */
+      object-fit: cover;    /* potong gambar biar proporsional */
       border-radius: 8px;
       margin-top: 10px;
     }
@@ -110,9 +110,6 @@
         display: block;
         margin: 10px 0;
       }
-      header {
-        flex-direction: column;
-      }
     }
   </style>
 </head>
@@ -129,13 +126,15 @@
 
   <section id="tentang">
     <h2>Tentang Saya</h2>
-    <p>   Halo! Saya seorang pengembang web yang lahir dengan ilmu dan pengetahuan yang cukup sedikit
-    dan dari sini saya belajar bahwa kehidupan tidak selalu bergelut degan hal yang besar namun
-    dimulai dari hal yang terkecil.
-    
-       selain suka di dunia website, saya juga suka dalam dunia sound mulai dari perakitan hingga
-    menyeting agar supaya suara yang dihasilkan enak didengar. sama seperti website, pengtahuan saya
-    untuk perakitan dan setting sound hanya saya dapatkan di jurusan smk saya.</p>
+    <p>
+      Halo! Saya seorang pengembang web yang lahir dengan ilmu dan pengetahuan yang cukup sedikit
+      dan dari sini saya belajar bahwa kehidupan tidak selalu bergelut dengan hal yang besar namun
+      dimulai dari hal yang terkecil.
+      <br><br>
+      Selain suka di dunia website, saya juga suka dalam dunia sound mulai dari perakitan hingga
+      menyeting agar supaya suara yang dihasilkan enak didengar. Sama seperti website, pengetahuan saya
+      untuk perakitan dan setting sound hanya saya dapatkan di jurusan SMK saya.
+    </p>
   </section>
 
   <section id="pengalaman">
@@ -143,24 +142,25 @@
     <div class="portfolio-grid">
       <div class="portfolio-item">
         <h3>Proyek 1</h3>
-        <p>desain 3D model menggunakan aplikasi blender</p>
+        <p>Desain 3D model menggunakan aplikasi Blender</p>
         <img src="WhatsApp Image 2025-09-19 at 20.22.08.jpeg" alt="Proyek 1">
       </div>
       <div class="portfolio-item">
         <h3>Proyek 2</h3>
-        <p>rakitan mini sound dengan 2 speaker 3 inc</p>
+        <p>Rakitan mini sound dengan 2 speaker 3 inch</p>
         <img src="WhatsApp Image 2025-09-19 at 20.22.07 (1).jpeg" alt="Proyek 2">
       </div>
       <div class="portfolio-item">
         <h3>Proyek 3</h3>
         <p>Deskripsi singkat proyek.</p>
+        <img src="WhatsApp Image 2025-09-19 at 20.22.07.jpeg" alt="Proyek 3">
       </div>
     </div>
   </section>
 
   <section id="kontak">
     <h2>Kontak</h2>
-    <a href="https://www.instagram.com/habilqw_?igsh=bGhqdGN0M3hudjJki">instagram</a>
+    <a href="https://www.instagram.com/habilqw_?igsh=bGhqdGN0M3hudjJki" target="_blank">Instagram</a>
     <a href="https://linkedin.com/in/username" target="_blank">LinkedIn</a>
     <a href="https://github.com/habilwahyudi56-hash" target="_blank">GitHub</a>
   </section>
