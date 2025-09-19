@@ -29,7 +29,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.8); /* transparansi 50% */
+      background: rgba(0, 0, 0, 0.7); /* overlay hitam 70% agar bg tampak 30% */
       z-index: -1;
     }
 
@@ -122,8 +122,9 @@
     }
 
     .portfolio-item img {
-      max-width: 100%;
-      height: auto;
+      width: 100%;
+      height: 200px;      /* tinggi seragam */
+      object-fit: cover;  /* potong proporsional */
       border-radius: 8px;
       margin-top: 10px;
     }
