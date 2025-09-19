@@ -15,21 +15,23 @@
     body {
       line-height: 1.6;
       color: #fff;
-      position: relative;
       min-height: 100vh;
+      position: relative;
 
       background: url("back.jpg") no-repeat center center fixed;
       background-size: cover;
+      overflow-x: hidden; /* cegah geser horizontal */
     }
 
+    /* Overlay full layar */
     body::before {
       content: "";
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7); /* overlay hitam 70% agar bg tampak 30% */
+      width: 100vw;   /* lebar penuh */
+      height: 100vh;  /* tinggi penuh */
+      background: rgba(0, 0, 0, 0.7); /* bg hitam transparan 70% */
       z-index: -1;
     }
 
@@ -124,7 +126,7 @@
     .portfolio-item img {
       width: 100%;
       height: 200px;      /* tinggi seragam */
-      object-fit: cover;  /* potong proporsional */
+      object-fit: cover;  /* crop agar rapi */
       border-radius: 8px;
       margin-top: 10px;
     }
