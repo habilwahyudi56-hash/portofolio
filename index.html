@@ -87,10 +87,17 @@
     section {
       padding: 60px 20px;
       max-width: 900px;
-      margin: auto;
+      margin: 40px auto;
       background: rgba(0, 0, 0, 0.5);
       border-radius: 10px;
-      animation: fadeInUp 1s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     h2 {
@@ -190,17 +197,6 @@
     }
 
     /* Animasi */
-    @keyframes fadeInUp {
-      0% {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
     @keyframes shine {
       0% { transform: translateX(-100%); }
       100% { transform: translateX(100%); }
@@ -295,5 +291,19 @@
       <a href="#kontak">Kontak</a>
     </p>
   </footer>
+
+  <script>
+    // Animasi muncul saat scroll
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, { threshold: 0.2 });
+
+    sections.forEach(section => observer.observe(section));
+  </script>
 </body>
 </html>
