@@ -17,11 +17,12 @@
       color: #fff;
       position: relative;
       min-height: 100vh;
-
       background: url("back.jpg") no-repeat center center fixed;
       background-size: cover;
+      overflow-x: hidden;
     }
 
+    /* Overlay */
     body::before {
       content: "";
       position: fixed;
@@ -29,7 +30,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.7); /* overlay hitam 70% agar bg tampak 30% */
+      background: rgba(0, 0, 0, 0.7); /* 70% hitam -> bg 30% */
       z-index: -1;
     }
 
@@ -39,6 +40,7 @@
       padding: 20px;
       text-align: center;
       position: relative;
+      animation: fadeInDown 1s ease-in-out;
     }
 
     header h1 {
@@ -78,10 +80,11 @@
       color: #fff;
       text-decoration: none;
       font-weight: bold;
+      transition: color 0.3s;
     }
 
     nav a:hover {
-      text-decoration: underline;
+      color: #f1c40f;
     }
 
     section {
@@ -90,6 +93,14 @@
       margin: auto;
       background: rgba(0, 0, 0, 0.5);
       border-radius: 10px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1s ease;
+    }
+
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     h2 {
@@ -114,17 +125,20 @@
       padding: 20px;
       border-radius: 10px;
       text-align: center;
-      transition: transform 0.3s;
+      transition: transform 0.3s, opacity 0.5s;
+      opacity: 0;
+      transform: scale(0.9);
     }
 
-    .portfolio-item:hover {
-      transform: translateY(-5px);
+    .portfolio-item.show {
+      opacity: 1;
+      transform: scale(1);
     }
 
     .portfolio-item img {
       width: 100%;
-      height: 200px;      /* tinggi seragam */
-      object-fit: cover;  /* potong proporsional */
+      height: 200px; 
+      object-fit: cover; 
       border-radius: 8px;
       margin-top: 10px;
     }
@@ -147,6 +161,18 @@
     #kontak a:hover {
       background: #d4ac0d;
       color: #fff;
+    }
+
+    /* Keyframes animasi */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* Responsif */
@@ -229,5 +255,28 @@
     <a href="https://linkedin.com/in/username" target="_blank">LinkedIn</a>
     <a href="https://github.com/habilwahyudi56-hash" target="_blank">GitHub</a>
   </section>
+
+  <script>
+    // animasi muncul saat scroll
+    const sections = document.querySelectorAll("section");
+    const items = document.querySelectorAll(".portfolio-item");
+
+    const revealOnScroll = () => {
+      let trigger = window.innerHeight * 0.85;
+
+      sections.forEach(sec => {
+        let top = sec.getBoundingClientRect().top;
+        if (top < trigger) sec.classList.add("show");
+      });
+
+      items.forEach(it => {
+        let top = it.getBoundingClientRect().top;
+        if (top < trigger) it.classList.add("show");
+      });
+    };
+
+    window.addEventListener("scroll", revealOnScroll);
+    window.addEventListener("load", revealOnScroll);
+  </script>
 </body>
 </html>
