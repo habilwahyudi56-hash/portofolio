@@ -14,28 +14,69 @@
 
     body {
       line-height: 1.6;
-      color: #333;
+      color: #fff;
+      position: relative;
+      min-height: 100vh;
+
+      background: url("back.jpg") no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); /* transparansi 50% */
+      z-index: -1;
     }
 
     header {
-      background: #2c3e50;
+      background: rgba(44, 62, 80, 0.8);
       color: #fff;
       padding: 20px;
       text-align: center;
+      position: relative;
     }
 
     header h1 {
       margin-bottom: 5px;
     }
 
+    /* Menu hamburger */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background: #fff;
+      margin: 4px 0;
+      border-radius: 3px;
+    }
+
     nav {
       margin-top: 10px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
     }
 
     nav a {
       color: #fff;
       text-decoration: none;
-      margin: 0 15px;
       font-weight: bold;
     }
 
@@ -44,14 +85,16 @@
     }
 
     section {
-      padding: 40px 20px;
-      max-width: 1000px;
+      padding: 60px 20px;
+      max-width: 900px;
       margin: auto;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
     }
 
     h2 {
       margin-bottom: 20px;
-      color: #2c3e50;
+      color: #f1c40f;
       text-align: center;
     }
 
@@ -62,12 +105,12 @@
 
     .portfolio-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 20px;
     }
 
     .portfolio-item {
-      background: #ecf0f1;
+      background: rgba(255, 255, 255, 0.1);
       padding: 20px;
       border-radius: 10px;
       text-align: center;
@@ -79,9 +122,8 @@
     }
 
     .portfolio-item img {
-      width: 100%;
-      height: 250px;        /* tinggi tetap */
-      object-fit: cover;    /* potong gambar biar proporsional */
+      max-width: 100%;
+      height: auto;
       border-radius: 8px;
       margin-top: 10px;
     }
@@ -94,21 +136,35 @@
       display: inline-block;
       margin: 10px;
       padding: 10px 20px;
-      background: #2c3e50;
-      color: #fff;
+      background: #f1c40f;
+      color: #000;
       text-decoration: none;
       border-radius: 5px;
       transition: 0.3s;
     }
 
     #kontak a:hover {
-      background: #34495e;
+      background: #d4ac0d;
+      color: #fff;
     }
 
-    @media (max-width: 600px) {
-      nav a {
-        display: block;
-        margin: 10px 0;
+    /* Responsif */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      nav ul {
+        flex-direction: column;
+        display: none;
+        margin-top: 20px;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 15px;
+        border-radius: 10px;
+      }
+
+      nav ul.showing {
+        display: flex;
       }
     }
   </style>
@@ -117,10 +173,19 @@
   <header>
     <h1>HABIL QODAM WAHYUDI</h1>
     <p>Web Developer | Engineer | Creator</p>
+
+    <div class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('showing')">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
     <nav>
-      <a href="#tentang">tentang</a>
-      <a href="#pengalaman">pengalaman</a>
-      <a href="#kontak">kontak</a>
+      <ul>
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#pengalaman">Pengalaman</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+      </ul>
     </nav>
   </header>
 
@@ -128,9 +193,8 @@
     <h2>Tentang Saya</h2>
     <p>
       Halo! Saya seorang pengembang web yang lahir dengan ilmu dan pengetahuan yang cukup sedikit
-      dan dari sini saya belajar bahwa kehidupan tidak selalu bergelut dengan hal yang besar namun
-      dimulai dari hal yang terkecil.
-      <br><br>
+      dan dari sini saya belajar bahwa kehidupan tidak selalu bergelut degan hal yang besar namun
+      dimulai dari hal yang terkecil.<br><br>
       Selain suka di dunia website, saya juga suka dalam dunia sound mulai dari perakitan hingga
       menyeting agar supaya suara yang dihasilkan enak didengar. Sama seperti website, pengetahuan saya
       untuk perakitan dan setting sound hanya saya dapatkan di jurusan SMK saya.
@@ -147,12 +211,12 @@
       </div>
       <div class="portfolio-item">
         <h3>Proyek 2</h3>
-        <p>Rakitan mini sound dengan 2 speaker 3 inch</p>
+        <p>Rakitan mini sound dengan 2 speaker 3 inc</p>
         <img src="WhatsApp Image 2025-09-19 at 20.22.07 (1).jpeg" alt="Proyek 2">
       </div>
       <div class="portfolio-item">
         <h3>Proyek 3</h3>
-        <p>Perakitan PLC (Programmable Logic Controller)</p>
+        <p>Deskripsi singkat proyek.</p>
         <img src="WhatsApp Image 2025-09-19 at 20.22.07.jpeg" alt="Proyek 3">
       </div>
     </div>
