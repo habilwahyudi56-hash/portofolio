@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Habil Qodam Wahyudi</title>
+  <title>Habil Qdam Wahyudi</title>
   <style>
     * {
       margin: 0;
@@ -28,20 +28,44 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.7); /* overlay 70% */
+      background: rgba(0, 0, 0, 0.7);
       z-index: -1;
     }
 
     header {
       background: #2c3e50; /* solid biru tua */
       color: #fff;
-      padding: 20px;
+      padding: 40px 20px;
       text-align: center;
       position: relative;
     }
 
     header h1 {
       margin-bottom: 5px;
+      font-size: 28px;
+      white-space: nowrap;
+      border-right: 3px solid #fff;
+      width: fit-content;
+      margin: auto;
+      overflow: hidden;
+    }
+
+    header p {
+      margin-top: 10px;
+    }
+
+    /* Animasi ketik otomatis */
+    .typing {
+      animation: typing 4s steps(30, end), blink 0.7s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink {
+      50% { border-color: transparent; }
     }
 
     /* Menu hamburger */
@@ -156,16 +180,8 @@
       margin-top: 30px;
     }
 
-    .typing {
-      border-right: 3px solid #f1c40f;
-      display: inline-block;
-      white-space: nowrap;
-      overflow: hidden;
-      animation: blink 0.7s step-end infinite;
-    }
-
-    @keyframes blink {
-      50% { border-color: transparent; }
+    footer p {
+      color: #aaa;
     }
 
     /* Responsif */
@@ -191,7 +207,7 @@
 </head>
 <body>
   <header>
-    <h1>HABIL QODAM WAHYUDI</h1>
+    <h1 class="typing">HABIL QODAM WAHYUDI</h1>
     <p>Web Developer | Engineer | Creator</p>
 
     <div class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('showing')">
@@ -213,7 +229,7 @@
     <h2>Tentang Saya</h2>
     <p>
       Halo! Saya seorang pengembang web yang lahir dengan ilmu dan pengetahuan yang cukup sedikit
-      dan dari sini saya belajar bahwa kehidupan tidak selalu bergelut degan hal yang besar namun
+      dan dari sini saya belajar bahwa kehidupan tidak selalu bergelut dengan hal yang besar namun
       dimulai dari hal yang terkecil.<br><br>
       Selain suka di dunia website, saya juga suka dalam dunia sound mulai dari perakitan hingga
       menyeting agar supaya suara yang dihasilkan enak didengar. Sama seperti website, pengetahuan saya
@@ -250,20 +266,7 @@
   </section>
 
   <footer>
-    <p class="typing" id="typing-text"></p>
+    <p>© 2025 HABIL QODAM WAHYUDI | Semua Hak Dilindungi</p>
   </footer>
-
-  <script>
-    const text = "© 2025 HABIL QODAM WAHYUDI | Semua Hak Dilindungi";
-    let index = 0;
-    function typeEffect() {
-      if (index < text.length) {
-        document.getElementById("typing-text").textContent += text.charAt(index);
-        index++;
-        setTimeout(typeEffect, 100);
-      }
-    }
-    window.onload = typeEffect;
-  </script>
 </body>
 </html>
