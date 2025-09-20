@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portofolio Saya</title>
+  <title>Habil Qodam Wahyudi</title>
   <style>
     * {
       margin: 0;
@@ -28,12 +28,12 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.7); /* overlay hitam 70% agar bg tampak 30% */
+      background: rgba(0, 0, 0, 0.7); /* overlay 70% */
       z-index: -1;
     }
 
     header {
-      background: #2c3e50; /* solid biru gelap */
+      background: #2c3e50; /* solid biru tua */
       color: #fff;
       padding: 20px;
       text-align: center;
@@ -77,27 +77,19 @@
       color: #fff;
       text-decoration: none;
       font-weight: bold;
-      transition: color 0.3s ease;
     }
 
     nav a:hover {
-      color: #f1c40f;
+      text-decoration: underline;
     }
 
     section {
       padding: 60px 20px;
       max-width: 900px;
-      margin: 40px auto;
+      margin: auto;
       background: rgba(0, 0, 0, 0.5);
       border-radius: 10px;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-
-    section.show {
-      opacity: 1;
-      transform: translateY(0);
+      margin-top: 20px;
     }
 
     h2 {
@@ -122,18 +114,17 @@
       padding: 20px;
       border-radius: 10px;
       text-align: center;
-      transition: transform 0.3s, box-shadow 0.3s;
+      transition: transform 0.3s;
     }
 
     .portfolio-item:hover {
-      transform: translateY(-8px);
-      box-shadow: 0px 6px 15px rgba(0,0,0,0.6);
+      transform: translateY(-5px);
     }
 
     .portfolio-item img {
       width: 100%;
-      height: 200px;      /* tinggi seragam */
-      object-fit: cover;  /* potong proporsional */
+      height: 200px;
+      object-fit: cover;
       border-radius: 8px;
       margin-top: 10px;
     }
@@ -158,47 +149,23 @@
       color: #fff;
     }
 
-    /* Footer */
     footer {
-      margin-top: 40px;
-      background: #2c3e50; /* solid biru gelap */
-      text-align: center;
+      background: #111;
       padding: 20px;
-      position: relative;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .typing {
+      border-right: 3px solid #f1c40f;
+      display: inline-block;
+      white-space: nowrap;
       overflow: hidden;
+      animation: blink 0.7s step-end infinite;
     }
 
-    footer p {
-      margin: 5px 0;
-      font-size: 14px;
-      color: #ddd;
-    }
-
-    footer a {
-      color: #f1c40f;
-      text-decoration: none;
-      margin: 0 10px;
-      transition: 0.3s;
-    }
-
-    footer a:hover {
-      color: #fff;
-    }
-
-    footer::before {
-      content: "";
-      position: absolute;
-      width: 200%;
-      height: 200%;
-      top: -100%;
-      left: -100%;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.1), transparent);
-      animation: shine 5s linear infinite;
-    }
-
-    @keyframes shine {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
+    @keyframes blink {
+      50% { border-color: transparent; }
     }
 
     /* Responsif */
@@ -283,26 +250,20 @@
   </section>
 
   <footer>
-    <p>&copy; 2025 Habil Qodam Wahyudi. All Rights Reserved.</p>
-    <p>
-      <a href="#tentang">Tentang</a> | 
-      <a href="#pengalaman">Pengalaman</a> | 
-      <a href="#kontak">Kontak</a>
-    </p>
+    <p class="typing" id="typing-text"></p>
   </footer>
 
   <script>
-    // Animasi muncul saat scroll
-    const sections = document.querySelectorAll("section");
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-        }
-      });
-    }, { threshold: 0.2 });
-
-    sections.forEach(section => observer.observe(section));
+    const text = "© 2025 HABIL QODAM WAHYUDI | Semua Hak Dilindungi";
+    let index = 0;
+    function typeEffect() {
+      if (index < text.length) {
+        document.getElementById("typing-text").textContent += text.charAt(index);
+        index++;
+        setTimeout(typeEffect, 100);
+      }
+    }
+    window.onload = typeEffect;
   </script>
 </body>
 </html>
