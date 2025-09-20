@@ -207,21 +207,22 @@
 </footer>
 
 <script>
-  // Efek ketik otomatis
+  // Efek ketik otomatis dengan kursor hilang setelah selesai
   const text = "HABIL QODAM WAHYUDI";
   const typingElement = document.getElementById("typing");
   let index = 0;
-  function typeWriter(){
+
+  function typeWriter() {
     if(index < text.length){
       typingElement.textContent += text.charAt(index);
       index++;
       setTimeout(typeWriter, 150);
     } else {
-      setInterval(()=>{
-        typingElement.style.borderRight = typingElement.style.borderRight ? "" : "3px solid #fff";
-      },500);
+      // Hapus kursor setelah selesai
+      typingElement.style.borderRight = "none";
     }
   }
+
   window.onload = typeWriter;
 
   // Animasi scroll masuk section
