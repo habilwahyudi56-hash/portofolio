@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Habil Qdam Wahyudi</title>
+  <title>Portofolio Saya</title>
   <style>
     * {
       margin: 0;
@@ -15,10 +15,10 @@
     body {
       line-height: 1.6;
       color: #fff;
-      position: relative;
       min-height: 100vh;
       background: url("back.jpg") no-repeat center center fixed;
       background-size: cover;
+      position: relative;
     }
 
     body::before {
@@ -28,12 +28,12 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.7); /* overlay hitam */
       z-index: -1;
     }
 
     header {
-      background: #2c3e50; /* solid biru tua */
+      background: #2c3e50; /* biru solid */
       color: #fff;
       padding: 40px 20px;
       text-align: center;
@@ -41,31 +41,17 @@
     }
 
     header h1 {
-      margin-bottom: 5px;
       font-size: 28px;
       white-space: nowrap;
+    }
+
+    header h1 span {
       border-right: 3px solid #fff;
-      width: fit-content;
-      margin: auto;
-      overflow: hidden;
+      padding-right: 5px;
     }
 
     header p {
       margin-top: 10px;
-    }
-
-    /* Animasi ketik otomatis */
-    .typing {
-      animation: typing 4s steps(30, end), blink 0.7s step-end infinite;
-    }
-
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-
-    @keyframes blink {
-      50% { border-color: transparent; }
     }
 
     /* Menu hamburger */
@@ -110,21 +96,15 @@
     section {
       padding: 60px 20px;
       max-width: 900px;
-      margin: auto;
+      margin: 20px auto;
       background: rgba(0, 0, 0, 0.5);
       border-radius: 10px;
-      margin-top: 20px;
     }
 
     h2 {
       margin-bottom: 20px;
       color: #f1c40f;
       text-align: center;
-    }
-
-    #tentang p {
-      text-align: center;
-      font-size: 18px;
     }
 
     .portfolio-grid {
@@ -207,7 +187,7 @@
 </head>
 <body>
   <header>
-    <h1 class="typing">HABIL QODAM WAHYUDI</h1>
+    <h1><span id="typing"></span></h1>
     <p>Web Developer | Engineer | Creator</p>
 
     <div class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('showing')">
@@ -268,5 +248,31 @@
   <footer>
     <p>© 2025 HABIL QODAM WAHYUDI | Semua Hak Dilindungi</p>
   </footer>
+
+  <script>
+    // Efek ketik otomatis di header
+    const text = "HABIL QODAM WAHYUDI";
+    const typingElement = document.getElementById("typing");
+    let index = 0;
+
+    function typeWriter() {
+      if (index < text.length) {
+        typingElement.textContent += text.charAt(index);
+        index++;
+        setTimeout(typeWriter, 150); // kecepatan ketik
+      } else {
+        // tambahkan kursor berkedip
+        setInterval(() => {
+          if (typingElement.style.borderRight) {
+            typingElement.style.borderRight = "";
+          } else {
+            typingElement.style.borderRight = "3px solid #fff";
+          }
+        }, 500);
+      }
+    }
+
+    window.onload = typeWriter;
+  </script>
 </body>
 </html>
