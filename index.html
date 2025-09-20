@@ -9,7 +9,7 @@
     body {
       min-height:100vh;
       color:#fff;
-      background: url("back.jpg") no-repeat center center fixed;
+      background: url("back.jpg") no-repeat center center;
       background-size: cover;
       line-height: 1.6;
       scroll-behavior: smooth;
@@ -27,27 +27,39 @@
     header {
       background: #2c3e50;
       color: #fff;
-      padding: 40px 20px;
+      padding: 20px 15px;
       text-align: center;
       position: relative;
     }
+
+    /* Container flex untuk HP */
+    .header-flex {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
     header h1 {
-      font-size: 2rem;
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
       white-space: nowrap;
       display:inline-block;
       border-right: 3px solid #fff;
       padding-right:5px;
     }
-    header p { margin-top:10px; color:#f1c40f; font-weight:500;}
+    header p { 
+      margin-top:5px; 
+      color:#f1c40f; 
+      font-weight:500; 
+      font-size:clamp(0.9rem, 3vw, 1.1rem); 
+    }
 
     /* Hamburger menu */
     .menu-toggle {
       display:none;
       flex-direction: column;
       cursor: pointer;
-      position: absolute;
-      top:20px; right:20px;
-      z-index:10;
+      margin-left:auto;
     }
     .menu-toggle span {
       height:3px; width:25px; background:#fff; margin:4px 0; border-radius:3px;
@@ -60,6 +72,7 @@
       justify-content:center;
       gap:20px;
       transition:all 0.5s ease;
+      flex-wrap:wrap;
     }
     nav a {
       color:#fff;
@@ -70,7 +83,7 @@
     nav a:hover { color:#f1c40f; }
 
     section {
-      padding:60px 20px;
+      padding:40px 15px;
       max-width:900px;
       margin: 20px auto;
       background: rgba(0,0,0,0.5);
@@ -85,16 +98,17 @@
       margin-bottom:20px;
       color:#f1c40f;
       text-align:center;
+      font-size: clamp(1.3rem, 4vw, 1.8rem);
     }
 
     .portfolio-grid {
       display:grid;
-      grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
-      gap:20px;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap:15px;
     }
     .portfolio-item {
       background: rgba(255,255,255,0.1);
-      padding:20px;
+      padding:15px;
       border-radius:10px;
       text-align:center;
       transition: transform 0.3s, box-shadow 0.3s;
@@ -105,7 +119,7 @@
       box-shadow: 0 10px 20px rgba(0,0,0,0.5);
     }
     .portfolio-item img {
-      width:100%; height:200px;
+      width:100%; height:180px;
       object-fit:cover;
       border-radius:8px;
       margin-top:10px;
@@ -115,32 +129,40 @@
     #kontak a {
       display:inline-block;
       margin:10px;
-      padding:12px 25px;
+      padding:10px 20px;
       background:#f1c40f;
       color:#000;
       text-decoration:none;
       border-radius:8px;
       font-weight:bold;
       transition:0.3s;
+      font-size:clamp(0.9rem, 3vw, 1rem);
     }
     #kontak a:hover { background:#d4ac0d; color:#fff; transform:scale(1.1); }
 
     footer {
       background:#111;
-      padding:20px;
+      padding:15px;
       text-align:center;
       margin-top:30px;
       color:#aaa;
+      font-size:0.9rem;
     }
 
+    /* MOBILE MODE */
     @media(max-width:768px){
+      header { text-align: left; }
+      .header-flex {
+        justify-content: space-between;
+        align-items: center;
+      }
       .menu-toggle { display:flex; }
       nav ul {
         flex-direction: column;
         display: none;
-        margin-top:20px;
-        background: rgba(0,0,0,0.8);
-        padding:15px;
+        margin-top:10px;
+        background: rgba(0,0,0,0.85);
+        padding:12px;
         border-radius:10px;
       }
       nav ul.showing { display:flex; }
@@ -150,11 +172,15 @@
 <body>
 
 <header>
-  <h1 id="typing"></h1>
-  <p>Web Developer | Engineer | Creator</p>
+  <div class="header-flex">
+    <div>
+      <h1 id="typing"></h1>
+      <p>Web Developer | Engineer | Creator</p>
+    </div>
 
-  <div class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('showing')">
-    <span></span><span></span><span></span>
+    <div class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('showing')">
+      <span></span><span></span><span></span>
+    </div>
   </div>
 
   <nav>
@@ -218,11 +244,9 @@
       index++;
       setTimeout(typeWriter, 150);
     } else {
-      // Hapus kursor setelah selesai
-      typingElement.style.borderRight = "none";
+      typingElement.style.borderRight = "none"; // kursor hilang
     }
   }
-
   window.onload = typeWriter;
 
   // Animasi scroll masuk section
