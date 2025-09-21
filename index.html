@@ -3,134 +3,317 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portofolio Saya</title>
+  <title>Portofolio Habil</title>
   <style>
+    * {margin:0; padding:0; box-sizing:border-box; font-family: Arial,sans-serif;}
+
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #222;
+      min-height:100vh;
+      color:#fff;
+      background:#000; /* hitam solid */
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      position: relative;
       transition: background 0.4s, color 0.4s;
     }
-    body.dark {
-      background: #111;
-      color: #f5f5f5;
+    body.light {
+      background:#f5f5f5;
+      color:#111;
     }
 
     header {
+      background: #2c3e50;
+      color: #fff;
+      padding: 20px 15px;
+      text-align: center;
+      position: relative;
+    }
+
+    .header-flex {
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      padding: 15px 30px;
-      background: #0077cc;
-      color: white;
+      flex-wrap: wrap;
     }
 
     header h1 {
-      margin: 0;
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      white-space: nowrap;
+      display:inline-block;
+      border-right: 3px solid #fff;
+      padding-right:5px;
+    }
+    header p { 
+      margin-top:5px; 
+      color:#f1c40f; 
+      font-weight:500; 
+      font-size:clamp(0.9rem, 3vw, 1.1rem); 
     }
 
-    canvas {
+    .menu-toggle {
+      display:none;
+      flex-direction: column;
       cursor: pointer;
-      border-radius: 6px;
-      background: transparent;
+      margin-left:auto;
+    }
+    .menu-toggle span {
+      height:3px; width:25px; background:#fff; margin:4px 0; border-radius:3px;
+      transition:0.3s;
     }
 
-    main {
-      padding: 40px;
-      text-align: center;
+    nav ul {
+      list-style:none;
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      transition:all 0.5s ease;
+      flex-wrap:wrap;
     }
+    nav a {
+      color:#fff;
+      text-decoration:none;
+      font-weight:bold;
+      transition:0.3s;
+    }
+    nav a:hover { color:#f1c40f; }
+
+    section {
+      padding:40px 15px;
+      max-width:900px;
+      margin: 20px auto;
+      background: rgba(255,255,255,0.05);
+      border-radius:10px;
+      opacity:0;
+      transform: translateY(50px);
+      transition: all 0.8s ease;
+    }
+    section.show { opacity:1; transform:translateY(0); }
+
+    h2 {
+      margin-bottom:20px;
+      color:#f1c40f;
+      text-align:center;
+      font-size: clamp(1.3rem, 4vw, 1.8rem);
+    }
+
+    .portfolio-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap:15px;
+    }
+    .portfolio-item {
+      background: rgba(255,255,255,0.1);
+      padding:15px;
+      border-radius:10px;
+      text-align:center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor:pointer;
+    }
+    .portfolio-item:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+    .portfolio-item img {
+      width:100%; height:180px;
+      object-fit:cover;
+      border-radius:8px;
+      margin-top:10px;
+    }
+
+    #kontak { text-align:center; }
+    #kontak a {
+      display:inline-block;
+      margin:10px;
+      padding:10px 20px;
+      background:#f1c40f;
+      color:#000;
+      text-decoration:none;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+      font-size:clamp(0.9rem, 3vw, 1rem);
+    }
+    #kontak a:hover { background:#d4ac0d; color:#fff; transform:scale(1.1); }
 
     footer {
-      margin-top: 40px;
-      padding: 20px;
-      text-align: center;
-      background: #222;
-      color: white;
+      background:#111;
+      padding:20px;
+      text-align:center;
+      margin-top:30px;
+      color:#aaa;
+      font-size:0.9rem;
     }
 
-    /* slider brightness */
+    /* brightness control */
     .brightness-control {
-      margin-top: 20px;
-      text-align: center;
+      margin-top:15px;
+    }
+    input[type="range"] {
+      width:250px;
     }
 
-    input[type="range"] {
-      width: 250px;
+    @media(max-width:768px){
+      header { text-align: left; }
+      .header-flex {
+        justify-content: space-between;
+        align-items: center;
+      }
+      .menu-toggle { display:flex; }
+      nav ul {
+        flex-direction: column;
+        display: none;
+        margin-top:10px;
+        background: rgba(0,0,0,0.85);
+        padding:12px;
+        border-radius:10px;
+      }
+      nav ul.showing { display:flex; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Portofolio Saya</h1>
-    <!-- Equalizer toggle -->
-    <canvas id="equalizer" width="120" height="50"></canvas>
-  </header>
 
-  <main>
-    <h2>Halo, saya Developer</h2>
-    <p>Ini adalah web portofolio saya.</p>
-  </main>
-
-  <footer>
-    <p>© 2025 Portofolio Saya</p>
-
-    <!-- brightness control -->
-    <div class="brightness-control">
-      <label for="brightness">Kecerahan Equalizer</label><br>
-      <input type="range" id="brightness" min="10" max="60" value="30">
+<header>
+  <div class="header-flex">
+    <div>
+      <h1 id="typing"></h1>
+      <p>Web Developer | Engineer | Creator</p>
     </div>
-  </footer>
 
-  <script>
-    const canvas = document.getElementById("equalizer");
-    const ctx = canvas.getContext("2d");
-    const body = document.body;
-    const brightnessSlider = document.getElementById("brightness");
+    <div class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('showing')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
 
-    let darkMode = false;
-    let brightness = parseInt(brightnessSlider.value, 10);
+  <nav>
+    <ul>
+      <li><a href="#tentang">Tentang</a></li>
+      <li><a href="#pengalaman">Pengalaman</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+  </nav>
+</header>
 
-    // jumlah batang lebih banyak (8 batang)
-    let barCount = 8;
-    let bars = Array(barCount).fill(20);
+<section id="tentang">
+  <h2>Tentang Saya</h2>
+  <p>
+    Halo! Saya seorang pengembang web yang lahir dengan ilmu dan pengetahuan yang cukup sedikit dan dari sini saya belajar bahwa kehidupan tidak selalu bergelut degan hal yang besar namun dimulai dari hal yang terkecil.
+    selain suka di dunia website, saya juga suka dalam dunia sound mulai dari perakitan hingga menyeting agar supaya suara yang dihasilkan enak didengar. sama seperti website, pengtahuan saya untuk perakitan dan setting sound hanya saya dapatkan di jurusan smk saya.
+  </p>
+</section>
 
-    function drawEqualizer() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+<section id="pengalaman">
+  <h2>Pengalaman</h2>
+  <div class="portfolio-grid">
+    <div class="portfolio-item">
+      <h3>Proyek 1</h3>
+      <p>Desain 3D model menggunakan Blender</p>
+      <img src="WhatsApp Image 2025-09-19 at 20.22.08.jpeg" alt="Proyek 1">
+    </div>
+    <div class="portfolio-item">
+      <h3>Proyek 2</h3>
+      <p>Rakitan mini sound dengan 2 speaker 3 inch</p>
+      <img src="WhatsApp Image 2025-09-19 at 20.22.07 (1).jpeg" alt="Proyek 2">
+    </div>
+    <div class="portfolio-item">
+      <h3>Proyek 3</h3>
+      <p>Perakitan PLC (Programmable Logic Controller)</p>
+      <img src="WhatsApp Image 2025-09-19 at 20.22.07.jpeg" alt="Proyek 3">
+    </div>
+  </div>
+</section>
 
-      ctx.fillStyle = darkMode ? "#f5f5f5" : "#222";
+<section id="kontak">
+  <h2>Kontak</h2>
+  <a href="https://www.instagram.com/habilqw_?igsh=bGhqdGN0M3hudjJki" target="_blank">Instagram</a>
+  <a href="https://www.tiktok.com/@habilwahyudi" target="_blank">tiktok</a>
+  <a href="https://github.com/habilwahyudi56-hash" target="_blank">GitHub</a>
+  <a href="https://wokwi.com/makers/habil_qw" target="_blank">wokwi</a>
+</section>
 
-      const barWidth = 8;
-      const gap = 6;
-      const baseY = canvas.height - 5;
+<footer>
+  <p>© 2025 HABIL QODAM WAHYUDI | Semua Hak Dilindungi</p>
 
-      bars.forEach((h, i) => {
-        const x = i * (barWidth + gap) + 10;
-        const y = baseY - h;
-        ctx.fillRect(x, y, barWidth, h);
-      });
+  <!-- Equalizer canvas -->
+  <canvas id="equalizer" width="200" height="60"></canvas>
+
+  <!-- slider brightness -->
+  <div class="brightness-control">
+    <label for="brightness">Kecerahan Equalizer</label><br>
+    <input type="range" id="brightness" min="10" max="80" value="40">
+  </div>
+</footer>
+
+<script>
+  // efek ketik otomatis
+  const text = "HABIL QODAM WAHYUDI";
+  const typingElement = document.getElementById("typing");
+  let index = 0;
+  function typeWriter() {
+    if(index < text.length){
+      typingElement.textContent += text.charAt(index);
+      index++;
+      setTimeout(typeWriter, 150);
+    } else {
+      typingElement.style.borderRight = "none";
     }
+  }
+  window.onload = typeWriter;
 
-    function animate() {
-      // batang selalu bergerak
-      bars = bars.map(() => 10 + Math.random() * brightness);
-
-      drawEqualizer();
-      requestAnimationFrame(animate);
-    }
-
-    // toggle dark/light saat klik canvas
-    canvas.addEventListener("click", () => {
-      darkMode = !darkMode;
-      body.classList.toggle("dark");
+  // animasi scroll section
+  const sections = document.querySelectorAll("section");
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add("show");
+      }
     });
+  }, { threshold:0.2 });
+  sections.forEach(section => observer.observe(section));
 
-    // ubah kecerahan
-    brightnessSlider.addEventListener("input", (e) => {
-      brightness = parseInt(e.target.value, 10);
+  // equalizer
+  const canvas = document.getElementById("equalizer");
+  const ctx = canvas.getContext("2d");
+  const body = document.body;
+  const brightnessSlider = document.getElementById("brightness");
+
+  let lightMode = false;
+  let brightness = parseInt(brightnessSlider.value, 10);
+  let barCount = 10;
+  let bars = Array(barCount).fill(20);
+
+  function drawEqualizer() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = lightMode ? "#222" : "#f1c40f";
+
+    const barWidth = 10;
+    const gap = 6;
+    const baseY = canvas.height - 5;
+
+    bars.forEach((h, i) => {
+      const x = i * (barWidth + gap) + 10;
+      const y = baseY - h;
+      ctx.fillRect(x, y, barWidth, h);
     });
+  }
 
-    animate();
-  </script>
+  function animate() {
+    bars = bars.map(() => 10 + Math.random() * brightness);
+    drawEqualizer();
+    requestAnimationFrame(animate);
+  }
+
+  canvas.addEventListener("click", () => {
+    lightMode = !lightMode;
+    body.classList.toggle("light");
+  });
+
+  brightnessSlider.addEventListener("input", (e) => {
+    brightness = parseInt(e.target.value, 10);
+  });
+
+  animate();
+</script>
+
 </body>
 </html>
