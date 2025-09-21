@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Portofolio dengan Equalizer</title>
   <style>
+    /* ===== Global Style ===== */
     body {
-      min-height: 100vh;
       margin: 0;
       font-family: Arial, sans-serif;
       line-height: 1.6;
-      scroll-behavior: smooth;
       transition: background 0.5s, color 0.5s;
       background: #000;
       color: #fff;
-      display: flex;
-      flex-direction: column;
     }
 
     body.light {
@@ -26,10 +23,18 @@
     header {
       padding: 20px;
       text-align: center;
-      font-size: 1.5rem;
+      font-size: 1.6rem;
       font-weight: bold;
     }
 
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 15px;
+      margin-top: 40px;
+    }
+
+    /* ===== Section Style ===== */
     section {
       position: relative;
       padding: 40px 15px;
@@ -62,13 +67,7 @@
       transform: translateY(0);
     }
 
-    footer {
-      text-align: center;
-      font-size: 0.9rem;
-      padding: 15px;
-    }
-
-    /* Equalizer */
+    /* ===== Equalizer ===== */
     #equalizer {
       position: fixed;
       bottom: 80px;
@@ -79,7 +78,7 @@
       height: 120px;
     }
 
-    /* Slider Light/Dark */
+    /* ===== Slider Light/Dark ===== */
     .slider-container {
       position: fixed;
       bottom: 20px;
@@ -100,23 +99,26 @@
     input[type="range"]::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       background: lime;
       cursor: pointer;
+      border: none;
     }
 
     input[type="range"]::-moz-range-thumb {
-      width: 20px;
-      height: 20px;
+      width: 22px;
+      height: 22px;
       border-radius: 50%;
       background: lime;
       cursor: pointer;
+      border: none;
     }
 
+    /* ===== Responsive ===== */
     @media (max-width: 600px) {
-      header { font-size: 1.2rem; }
+      header { font-size: 1.3rem; }
       section { padding: 25px 12px; margin: 15px; }
       #equalizer { height: 100px; }
       input[type="range"] { width: 120px; }
@@ -124,8 +126,10 @@
   </style>
 </head>
 <body class="dark">
+  <!-- ===== Header ===== -->
   <header>Portofolio Saya</header>
 
+  <!-- ===== Sections ===== -->
   <section>
     <h2>Tentang Saya</h2>
     <p>Halo, saya seorang developer yang suka ngoprek hardware & software.</p>
@@ -141,19 +145,20 @@
     <p>Email: saya@email.com</p>
   </section>
 
-  <!-- Equalizer -->
+  <!-- ===== Equalizer ===== -->
   <canvas id="equalizer"></canvas>
 
-  <!-- Slider Light/Dark -->
+  <!-- ===== Slider Light/Dark ===== -->
   <div class="slider-container">
     <label for="modeSlider">🌞 / 🌙</label><br>
     <input type="range" id="modeSlider" min="0" max="1" step="1" value="1">
   </div>
 
+  <!-- ===== Footer ===== -->
   <footer>© 2025 Portofolio Saya</footer>
 
   <script>
-    // Animasi scroll section
+    /* ===== Animasi Scroll Section ===== */
     const sections = document.querySelectorAll("section");
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -164,7 +169,7 @@
     }, { threshold: 0.2 });
     sections.forEach(sec => observer.observe(sec));
 
-    // Equalizer
+    /* ===== Equalizer ===== */
     const canvas = document.getElementById("equalizer");
     const ctx = canvas.getContext("2d");
     let bars = new Array(20).fill(20);
@@ -191,22 +196,20 @@
 
     function animate() {
       bars = bars.map((h, i) => h + (targets[i] - h) * 0.05);
-
       if (Math.random() < 0.02) {
         targets = targets.map(() => 10 + Math.random() * 80);
       }
-
       drawEqualizer();
       requestAnimationFrame(animate);
     }
     animate();
 
-    // Slider Light/Dark
+    /* ===== Slider Light/Dark ===== */
     const modeSlider = document.getElementById("modeSlider");
     const body = document.body;
 
     modeSlider.addEventListener("input", () => {
-      if (modeSlider.value == "0") {
+      if (modeSlider.value === "0") {
         body.classList.add("light");
         body.classList.remove("dark");
       } else {
