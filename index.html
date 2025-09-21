@@ -3,336 +3,217 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portofolio Habil</title>
+  <title>Portofolio dengan Equalizer</title>
   <style>
-    * {margin:0; padding:0; box-sizing:border-box; font-family: Arial,sans-serif;}
     body {
-      min-height:100vh;
-      color:#fff;
-      background:#000;
+      min-height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
       line-height: 1.6;
       scroll-behavior: smooth;
-      transition: filter 0.3s ease;
+      transition: background 0.5s, color 0.5s;
+      background: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body.light {
+      background: #f5f5f5;
+      color: #111;
     }
 
     header {
-      background: #2c3e50;
-      color: #fff;
-      padding: 20px 15px;
+      padding: 20px;
       text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
     }
 
-    .header-flex {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    header h1 {
-      font-size: clamp(1.5rem, 5vw, 2.5rem);
-      white-space: nowrap;
-      display:inline-block;
-      border-right: 3px solid #fff;
-      padding-right:5px;
-    }
-    header p { 
-      margin-top:5px; 
-      color:#f1c40f; 
-      font-weight:500; 
-      font-size:clamp(0.9rem, 3vw, 1.1rem); 
-    }
-
-    .menu-toggle {
-      display:none;
-      flex-direction: column;
-      cursor: pointer;
-      margin-left:auto;
-    }
-    .menu-toggle span {
-      height:3px; width:25px; background:#fff; margin:4px 0; border-radius:3px;
-      transition:0.3s;
-    }
-
-    nav ul {
-      list-style:none;
-      display:flex;
-      justify-content:center;
-      gap:20px;
-      transition:all 0.5s ease;
-      flex-wrap:wrap;
-    }
-    nav a {
-      color:#fff;
-      text-decoration:none;
-      font-weight:bold;
-      transition:0.3s;
-    }
-    nav a:hover { color:#f1c40f; }
-
-    /* Section dengan overlay */
     section {
       position: relative;
-      padding:30px 15px;
-      max-width:900px;
+      padding: 40px 15px;
+      max-width: 900px;
       margin: 20px auto;
-      border-radius:10px;
+      border-radius: 10px;
       overflow: hidden;
-      opacity:0;
+      opacity: 0;
       transform: translateY(50px);
       transition: all 0.8s ease;
     }
+
     section::before {
-      content:"";
-      position:absolute;
-      inset:0;
+      content: "";
+      position: absolute;
+      inset: 0;
       background: rgba(255,255,255,0.08);
       backdrop-filter: blur(3px);
-      border-radius:10px;
-      z-index:0;
-    }
-    section > * { position: relative; z-index:1; }
-    section.show { opacity:1; transform:translateY(0); }
-
-    h2 {
-      margin-bottom:15px;
-      color:#f1c40f;
-      text-align:center;
-      font-size: clamp(1.2rem, 4vw, 1.8rem);
+      border-radius: 10px;
+      z-index: 0;
     }
 
-    .portfolio-grid {
-      display:grid;
-      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-      gap:15px;
-    }
-    .portfolio-item {
-      background: rgba(255,255,255,0.1);
-      padding:15px;
-      border-radius:10px;
-      text-align:center;
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor:pointer;
-    }
-    .portfolio-item:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 8px 15px rgba(0,0,0,0.5);
-    }
-    .portfolio-item img {
-      width:100%; height:160px;
-      object-fit:cover;
-      border-radius:8px;
-      margin-top:10px;
+    section > * {
+      position: relative;
+      z-index: 1;
     }
 
-    #kontak { text-align:center; }
-    #kontak a {
-      display:inline-block;
-      margin:8px;
-      padding:10px 18px;
-      background:#f1c40f;
-      color:#000;
-      text-decoration:none;
-      border-radius:8px;
-      font-weight:bold;
-      transition:0.3s;
-      font-size:clamp(0.9rem, 3vw, 1rem);
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
     }
-    #kontak a:hover { background:#d4ac0d; color:#fff; transform:scale(1.05); }
 
-    .brightness-control {
-      text-align:center;
-      padding:15px;
-      background:#000;
-    }
-    .brightness-control input {
-      width:90%;
-      max-width:400px;
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 15px;
     }
 
     /* Equalizer */
     #equalizer {
-      display:block;
-      margin:20px auto;
-      width:95%;
-      max-width:600px;
-      height:120px;
-      background:#000;
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 500px;
+      height: 120px;
     }
 
-    footer {
-      background:#111;
-      padding:15px;
-      text-align:center;
-      color:#aaa;
-      font-size:0.85rem;
+    /* Slider Light/Dark */
+    .slider-container {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
     }
 
-    @media(max-width:768px){
-      header { text-align: left; }
-      .header-flex {
-        justify-content: space-between;
-        align-items: center;
-      }
-      .menu-toggle { display:flex; }
-      nav ul {
-        flex-direction: column;
-        display: none;
-        margin-top:10px;
-        background: rgba(0,0,0,0.9);
-        padding:12px;
-        border-radius:10px;
-      }
-      nav ul.showing { display:flex; }
+    input[type="range"] {
+      width: 150px;
+      height: 6px;
+      border-radius: 5px;
+      background: #555;
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: lime;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: lime;
+      cursor: pointer;
+    }
+
+    @media (max-width: 600px) {
+      header { font-size: 1.2rem; }
+      section { padding: 25px 12px; margin: 15px; }
+      #equalizer { height: 100px; }
+      input[type="range"] { width: 120px; }
     }
   </style>
 </head>
-<body>
+<body class="dark">
+  <header>Portofolio Saya</header>
 
-<header>
-  <div class="header-flex">
-    <div>
-      <h1 id="typing"></h1>
-      <p>Web Developer | Engineer | Creator</p>
-    </div>
-    <div class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('showing')">
-      <span></span><span></span><span></span>
-    </div>
+  <section>
+    <h2>Tentang Saya</h2>
+    <p>Halo, saya seorang developer yang suka ngoprek hardware & software.</p>
+  </section>
+
+  <section>
+    <h2>Pengalaman</h2>
+    <p>Saya pernah mengerjakan berbagai proyek web, IoT, dan aplikasi interaktif.</p>
+  </section>
+
+  <section>
+    <h2>Kontak</h2>
+    <p>Email: saya@email.com</p>
+  </section>
+
+  <!-- Equalizer -->
+  <canvas id="equalizer"></canvas>
+
+  <!-- Slider Light/Dark -->
+  <div class="slider-container">
+    <label for="modeSlider">🌞 / 🌙</label><br>
+    <input type="range" id="modeSlider" min="0" max="1" step="1" value="1">
   </div>
-  <nav>
-    <ul>
-      <li><a href="#tentang">Tentang</a></li>
-      <li><a href="#pengalaman">Pengalaman</a></li>
-      <li><a href="#kontak">Kontak</a></li>
-    </ul>
-  </nav>
-</header>
 
-<section id="tentang">
-  <h2>Tentang Saya</h2>
-  <p>
-    Halo! Saya seorang pengembang web yang lahir dengan ilmu dan pengetahuan yang cukup sedikit dan dari sini saya belajar bahwa kehidupan tidak selalu bergelut degan hal yang besar namun dimulai dari hal yang terkecil.
-    Selain suka di dunia website, saya juga suka dalam dunia sound mulai dari perakitan hingga menyeting agar supaya suara yang dihasilkan enak didengar. Sama seperti website, pengetahuan saya untuk perakitan dan setting sound hanya saya dapatkan di jurusan SMK saya.
-  </p>
-</section>
+  <footer>© 2025 Portofolio Saya</footer>
 
-<section id="pengalaman">
-  <h2>Pengalaman</h2>
-  <div class="portfolio-grid">
-    <div class="portfolio-item">
-      <h3>Proyek 1</h3>
-      <p>Desain 3D model menggunakan Blender</p>
-      <img src="WhatsApp Image 2025-09-19 at 20.22.08.jpeg" alt="Proyek 1">
-    </div>
-    <div class="portfolio-item">
-      <h3>Proyek 2</h3>
-      <p>Rakitan mini sound dengan 2 speaker 3 inch</p>
-      <img src="WhatsApp Image 2025-09-19 at 20.22.07 (1).jpeg" alt="Proyek 2">
-    </div>
-    <div class="portfolio-item">
-      <h3>Proyek 3</h3>
-      <p>Perakitan PLC (Programmable Logic Controller)</p>
-      <img src="WhatsApp Image 2025-09-19 at 20.22.07.jpeg" alt="Proyek 3">
-    </div>
-  </div>
-</section>
+  <script>
+    // Animasi scroll section
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    }, { threshold: 0.2 });
+    sections.forEach(sec => observer.observe(sec));
 
-<section id="kontak">
-  <h2>Kontak</h2>
-  <a href="https://www.instagram.com/habilqw_" target="_blank">Instagram</a>
-  <a href="https://www.tiktok.com/@habilwahyudi" target="_blank">Tiktok</a>
-  <a href="https://github.com/habilwahyudi56-hash" target="_blank">GitHub</a>
-  <a href="https://wokwi.com/makers/habil_qw" target="_blank">Wokwi</a>
-</section>
+    // Equalizer
+    const canvas = document.getElementById("equalizer");
+    const ctx = canvas.getContext("2d");
+    let bars = new Array(20).fill(20);
+    let targets = bars.map(() => 10 + Math.random() * 80);
 
-<div class="brightness-control">
-  <label for="brightness">Atur Kecerahan:</label><br>
-  <input type="range" id="brightness" min="50" max="150" value="100">
-</div>
+    function drawEqualizer() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const barWidth = (canvas.width / bars.length) - 4;
+      const baseY = canvas.height - 10;
 
-<!-- Equalizer di tengah bawah -->
-<canvas id="equalizer"></canvas>
+      bars.forEach((h, i) => {
+        const x = i * (barWidth + 4) + 2;
+        const y = baseY - h;
 
-<footer>
-  <p>© 2025 HABIL QODAM WAHYUDI | Semua Hak Dilindungi</p>
-</footer>
+        const gradient = ctx.createLinearGradient(x, y, x, y + h);
+        gradient.addColorStop(0, "lime");
+        gradient.addColorStop(0.5, "yellow");
+        gradient.addColorStop(1, "red");
 
-<script>
-  // Efek ketik otomatis
-  const text = "HABIL QODAM WAHYUDI";
-  const typingElement = document.getElementById("typing");
-  let index = 0;
-  function typeWriter() {
-    if(index < text.length){
-      typingElement.textContent += text.charAt(index);
-      index++;
-      setTimeout(typeWriter, 150);
-    } else {
-      typingElement.style.borderRight = "none";
+        ctx.fillStyle = gradient;
+        ctx.fillRect(x, y, barWidth, h);
+      });
     }
-  }
-  window.onload = typeWriter;
 
-  // Animasi scroll masuk section
-  const sections = document.querySelectorAll("section");
-  const observer = new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add("show");
+    function animate() {
+      bars = bars.map((h, i) => h + (targets[i] - h) * 0.05);
+
+      if (Math.random() < 0.02) {
+        targets = targets.map(() => 10 + Math.random() * 80);
+      }
+
+      drawEqualizer();
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Slider Light/Dark
+    const modeSlider = document.getElementById("modeSlider");
+    const body = document.body;
+
+    modeSlider.addEventListener("input", () => {
+      if (modeSlider.value == "0") {
+        body.classList.add("light");
+        body.classList.remove("dark");
       } else {
-        entry.target.classList.remove("show");
+        body.classList.add("dark");
+        body.classList.remove("light");
       }
     });
-  }, { threshold:0.2 });
-  sections.forEach(section => observer.observe(section));
-
-  // Brightness slider
-  document.getElementById("brightness").addEventListener("input", e=>{
-    document.body.style.filter = `brightness(${e.target.value}%)`;
-  });
-
-  // Equalizer animasi
-  const canvas = document.getElementById("equalizer");
-  const ctx = canvas.getContext("2d");
-
-  function resizeCanvas() {
-    canvas.width = canvas.clientWidth;
-    canvas.height = canvas.clientHeight;
-  }
-  window.addEventListener("resize", resizeCanvas);
-  resizeCanvas();
-
-  let barCount = 20;
-  let bars = new Array(barCount).fill(20);
-  let targets = bars.map(() => 20 + Math.random() * (canvas.height - 40));
-
-  function drawEqualizer() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const barWidth = (canvas.width - (barCount+1)*5) / barCount;
-    const baseY = canvas.height - 10;
-
-    bars.forEach((h, i) => {
-      const x = i * (barWidth + 5) + 5;
-      const y = baseY - h;
-      const gradient = ctx.createLinearGradient(x, y, x, y + h);
-      gradient.addColorStop(0, "lime");
-      gradient.addColorStop(0.5, "yellow");
-      gradient.addColorStop(1, "red");
-      ctx.fillStyle = gradient;
-      ctx.fillRect(x, y, barWidth, h);
-    });
-  }
-
-  function animate() {
-    bars = bars.map((h, i) => h + (targets[i] - h) * 0.05);
-    if (Math.random() < 0.03) {
-      targets = targets.map(() => 20 + Math.random() * (canvas.height - 40));
-    }
-    drawEqualizer();
-    requestAnimationFrame(animate);
-  }
-  animate();
-</script>
-
+  </script>
 </body>
 </html>
