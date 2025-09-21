@@ -4,383 +4,267 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portofolio Habil</title>
+  <meta name="description" content="Portofolio Habil Qodam Wahyudi - Web Developer & Sound Enthusiast" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
+    :root{
+      --bg:#050506; --card:rgba(255,255,255,0.04); --accent:#f1c40f; --muted:#9aa3ad;
+      --glass: rgba(255,255,255,0.04);
+      --red:#ff4d4f; --orange:#ff8a1f; --yellow:#f1c40f; --lime:#9be564; --green:#2ecc71;
+      --max-width:1100px; --radius:14px; --ease: cubic-bezier(.2,.9,.3,1);
+      font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      min-height:100vh;background:var(--bg);color:#fff;line-height:1.6;scroll-behavior:smooth;
+      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;padding-bottom:40px;
     }
 
-    body {
-      min-height: 100vh;
-      color: #fff;
-      background: #000; /* solid black */
-      line-height: 1.6;
-      scroll-behavior: smooth;
-      transition: background 0.3s ease, color 0.3s ease;
+    /* Header */
+    header{
+      width:100%;position:sticky;top:0;z-index:60;backdrop-filter: blur(6px);
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.35));border-bottom:1px solid rgba(255,255,255,0.04);
+    }
+    .container{max-width:var(--max-width);margin:0 auto;padding:14px 18px}
+    .header-row{display:flex;align-items:center;gap:12px;justify-content:space-between}
+    .brand{
+      display:flex;align-items:center;gap:12px;min-width:0
+    }
+    .logo{
+      width:54px;height:54px;border-radius:12px;flex:0 0 54px;background:linear-gradient(135deg,var(--accent),var(--orange));display:flex;align-items:center;justify-content:center;font-weight:700;color:#111;font-size:18px;box-shadow:0 6px 18px rgba(0,0,0,0.6);
+    }
+    .brand-text{overflow:hidden}
+    .brand-text h1{font-size:clamp(1.05rem,3.6vw,1.25rem);letter-spacing:0.6px;white-space:nowrap}
+    .brand-text p{font-size:0.85rem;color:var(--muted);margin-top:2px}
+
+    /* nav */
+    nav{display:flex;align-items:center;gap:18px}
+    .nav-links{display:flex;gap:14px;align-items:center}
+    .nav-links a{color:#ddd;text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600;transition:all .18s var(--ease)}
+    .nav-links a:hover{transform:translateY(-3px);color:var(--bg);background:var(--accent)}
+
+    /* hamburger */
+    .menu-toggle{display:none;cursor:pointer;padding:8px;border-radius:10px}
+    .menu-toggle .bar{width:22px;height:2px;background:#fff;margin:4px 0;border-radius:2px;transition:all .25s}
+
+    /* Main sections */
+    main{max-width:var(--max-width);margin:26px auto;padding:0 18px}
+    section{position:relative;padding:36px;border-radius:var(--radius);margin:18px 0;overflow:hidden;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);opacity:0;transform:translateY(36px);transition:all .8s var(--ease)}
+    section.show{opacity:1;transform:none}
+    section .inner{position:relative;z-index:2}
+    section:before{content:'';position:absolute;inset:0;background:linear-gradient(120deg, rgba(255,255,255,0.02), transparent);pointer-events:none}
+    h2{text-align:center;color:var(--accent);font-size:clamp(1.2rem,3.6vw,1.7rem);margin-bottom:14px}
+    p{color:#d6dbe0}
+
+    /* Grid */
+    .portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+    .portfolio-item{background:var(--card);padding:12px;border-radius:12px;text-align:center;transition:transform .25s var(--ease), box-shadow .25s var(--ease);cursor:pointer}
+    .portfolio-item:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 12px 30px rgba(0,0,0,0.6)}
+    .portfolio-item h3{font-size:1.02rem;margin-bottom:6px}
+    .portfolio-item p{font-size:0.9rem;color:var(--muted)}
+    .portfolio-item img{width:100%;height:160px;object-fit:cover;border-radius:8px;margin-top:10px;display:block}
+
+    /* kontak buttons */
+    .links-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:10px;background:var(--accent);color:#111;text-decoration:none;font-weight:700;transition:transform .18s,var(--ease);box-shadow:0 8px 20px rgba(17,17,17,0.5)}
+    .btn:hover{transform:translateY(-6px)}
+
+    /* controls + equalizer */
+    .controls{max-width:540px;margin:18px auto 6px;text-align:center;padding:12px;border-radius:12px;background:transparent}
+    .mode{display:inline-flex;align-items:center;gap:8px;background:var(--card);padding:8px;border-radius:999px}
+    .mode input{appearance:none;width:44px;height:22px;background:rgba(255,255,255,0.06);border-radius:999px;position:relative;cursor:pointer}
+    .mode input:before{content:'';position:absolute;width:18px;height:18px;background:#fff;border-radius:50%;transform:translateX(3px);transition:transform .18s}
+    .mode input[data-on="1"]:before{transform:translateX(22px)}
+
+    .equalizer{display:flex;justify-content:center;align-items:flex-end;height:90px;gap:8px;padding:8px}
+    .equalizer .bar{width:10px;border-radius:6px;height:18px;transition:height .22s linear}
+    .bar--1{background:var(--red)}.bar--2{background:var(--orange)}.bar--3{background:var(--yellow)}
+    .bar--4{background:var(--lime)}.bar--5{background:var(--green)}.bar--6{background:var(--yellow)}
+    .bar--7{background:var(--orange)}.bar--8{background:var(--red)}.bar--9{background:var(--lime)}.bar--10{background:var(--yellow)}
+
+    footer{max-width:var(--max-width);margin:26px auto;padding:18px;border-radius:12px;text-align:center;color:var(--muted)}
+
+    /* small screens adjustments */
+    @media (max-width:768px){
+      .brand{flex-direction:column;align-items:flex-start;gap:6px}
+      .brand-text{display:flex;flex-direction:column;align-items:flex-start}
+      .header-row{gap:10px}
+      nav{display:flex;align-items:center}
+      .nav-links{position:fixed;right:14px;top:66px;flex-direction:column;background:rgba(0,0,0,0.85);padding:12px;border-radius:10px;backdrop-filter:blur(6px);display:none}
+      .nav-links.show{display:flex}
+      .menu-toggle{display:block}
+      .logo{width:46px;height:46px;font-size:15px}
     }
 
-    body.light {
-      background: #f9f9f9;
-      color: #222;
-    }
+    /* light theme support */
+    body.light{background:#f8f8fa;color:#111}
+    body.light section{background:linear-gradient(180deg, rgba(0,0,0,0.02), rgba(0,0,0,0.01));border:1px solid rgba(0,0,0,0.06)}
+    body.light .nav-links a{color:#111}
+    body.light .menu-toggle .bar{background:#111}
 
-    header {
-      background: #2c3e50;
-      color: #fff;
-      padding: 20px 15px;
-      text-align: center;
-    }
+    .muted{color:var(--muted)}
+    .kbd{background:rgba(255,255,255,0.04);padding:6px 10px;border-radius:8px;font-weight:700}
 
-    .header-flex {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    header h1 {
-      font-size: clamp(1.5rem, 5vw, 2.5rem);
-      white-space: nowrap;
-      display: inline-block;
-      border-right: 3px solid #fff;
-      padding-right: 5px;
-    }
-
-    header p {
-      margin-top: 5px;
-      color: #f1c40f;
-      font-weight: 500;
-      font-size: clamp(0.9rem, 3vw, 1.1rem);
-    }
-
-    .menu-toggle {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
-      margin-left: auto;
-    }
-
-    .menu-toggle span {
-      height: 3px;
-      width: 25px;
-      background: #fff;
-      margin: 4px 0;
-      border-radius: 3px;
-      transition: 0.3s;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      transition: all 0.5s ease;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    nav a:hover {
-      color: #f1c40f;
-    }
-
-    section {
-      position: relative;
-      padding: 40px 15px;
-      max-width: 900px;
-      margin: 20px auto;
-      border-radius: 10px;
-      overflow: hidden;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: all 0.8s ease;
-    }
-
-    section.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    section::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(3px);
-      border-radius: 10px;
-      z-index: 0;
-    }
-
-    section > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    h2 {
-      margin-bottom: 20px;
-      color: #f1c40f;
-      text-align: center;
-      font-size: clamp(1.3rem, 4vw, 1.8rem);
-    }
-
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-    }
-
-    .portfolio-item {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 15px;
-      border-radius: 10px;
-      text-align: center;
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer;
-    }
-
-    .portfolio-item:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-    }
-
-    .portfolio-item img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-top: 10px;
-    }
-
-    #kontak {
-      text-align: center;
-    }
-
-    #kontak a {
-      display: inline-block;
-      margin: 10px;
-      padding: 10px 20px;
-      background: #f1c40f;
-      color: #000;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: 0.3s;
-      font-size: clamp(0.9rem, 3vw, 1rem);
-    }
-
-    #kontak a:hover {
-      background: #d4ac0d;
-      color: #fff;
-      transform: scale(1.1);
-    }
-
-    footer {
-      background: #111;
-      padding: 15px;
-      text-align: center;
-      margin-top: 30px;
-      color: #aaa;
-      font-size: 0.9rem;
-    }
-
-    /* Controls + Equalizer */
-    .controls {
-      text-align: center;
-      margin: 20px 0;
-    }
-
-    .controls label {
-      display: block;
-      margin-bottom: 6px;
-    }
-
-    .controls input[type="range"] {
-      width: 200px;
-    }
-
-    .equalizer {
-      display: flex;
-      justify-content: center;
-      align-items: flex-end;
-      height: 70px;
-      margin: 10px 0 20px;
-      gap: 6px;
-    }
-
-    .equalizer .bar {
-      width: 10px;
-      height: 20px;
-      border-radius: 3px;
-      transition: height 0.3s ease;
-    }
-
-    .equalizer .bar:nth-child(1) { background: red; }
-    .equalizer .bar:nth-child(2) { background: orange; }
-    .equalizer .bar:nth-child(3) { background: yellow; }
-    .equalizer .bar:nth-child(4) { background: lime; }
-    .equalizer .bar:nth-child(5) { background: green; }
-    .equalizer .bar:nth-child(6) { background: yellow; }
-    .equalizer .bar:nth-child(7) { background: orange; }
-    .equalizer .bar:nth-child(8) { background: red; }
-    .equalizer .bar:nth-child(9) { background: lime; }
-    .equalizer .bar:nth-child(10) { background: yellow; }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      header { text-align: left; }
-      .header-flex {
-        justify-content: space-between;
-        align-items: center;
-      }
-      .menu-toggle { display: flex; }
-      nav ul {
-        flex-direction: column;
-        display: none;
-        margin-top: 10px;
-        background: rgba(0, 0, 0, 0.85);
-        padding: 12px;
-        border-radius: 10px;
-      }
-      nav ul.showing { display: flex; }
-    }
+    a:focus, button:focus{outline:2px dashed var(--accent);outline-offset:4px}
   </style>
 </head>
 <body>
   <header>
-    <div class="header-flex">
-      <div>
-        <h1 id="typing"></h1>
-        <p>Web Developer | Engineer | Creator</p>
-      </div>
-      <div class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('showing')">
-        <span></span><span></span><span></span>
+    <div class="container">
+      <div class="header-row">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">HQ</div>
+          <div class="brand-text">
+            <h1 id="typing" aria-label="Nama: Habil Qodam Wahyudi"></h1>
+            <p class="muted">Web Developer | Engineer | Creator</p>
+          </div>
+        </div>
+
+        <nav aria-label="Main navigation">
+          <div class="nav-links" id="navLinks">
+            <a href="#tentang">Tentang</a>
+            <a href="#pengalaman">Pengalaman</a>
+            <a href="#kontak">Kontak</a>
+          </div>
+          <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Buka menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+        </nav>
       </div>
     </div>
-    <nav>
-      <ul>
-        <li><a href="#tentang">Tentang</a></li>
-        <li><a href="#pengalaman">Pengalaman</a></li>
-        <li><a href="#kontak">Kontak</a></li>
-      </ul>
-    </nav>
   </header>
 
-  <section id="tentang">
-    <h2>Tentang Saya</h2>
-    <p>
-      Halo! Saya seorang pengembang web yang lahir dengan ilmu dan pengetahuan
-      yang cukup sedikit dan dari sini saya belajar bahwa kehidupan tidak
-      selalu bergelut degan hal yang besar namun dimulai dari hal yang
-      terkecil. Selain suka di dunia website, saya juga suka dalam dunia sound
-      mulai dari perakitan hingga menyeting agar supaya suara yang dihasilkan
-      enak didengar. Sama seperti website, pengtahuan saya untuk perakitan dan
-      setting sound hanya saya dapatkan di jurusan SMK saya.
-    </p>
-  </section>
+  <main>
+    <section id="tentang">
+      <div class="inner">
+        <h2>Tentang Saya</h2>
+        <p>
+          Halo! Saya seorang pengembang web yang lahir dengan ilmu dan pengetahuan
+          yang terus berkembang. Saya percaya bahwa proses besar berawal dari langkah kecil.
+          Selain pengembangan web, saya juga tertarik pada dunia audio — dari perakitan hingga tuning suara.
+        </p>
+      </div>
+    </section>
 
-  <section id="pengalaman">
-    <h2>Pengalaman</h2>
-    <div class="portfolio-grid">
-      <div class="portfolio-item">
-        <h3>Proyek 1</h3>
-        <p>Desain 3D model menggunakan Blender</p>
-        <img src="WhatsApp Image 2025-09-19 at 20.22.08.jpeg" alt="Proyek 1" />
+    <section id="pengalaman">
+      <div class="inner">
+        <h2>Pengalaman</h2>
+        <div class="portfolio-grid">
+          <div class="portfolio-item">
+            <h3>Proyek 1</h3>
+            <p>Desain 3D model menggunakan Blender</p>
+            <img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.08.jpeg" alt="Proyek 1" />
+          </div>
+          <div class="portfolio-item">
+            <h3>Proyek 2</h3>
+            <p>Rakitan mini sound dengan 2 speaker 3 inch</p>
+            <img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.07 (1).jpeg" alt="Proyek 2" />
+          </div>
+          <div class="portfolio-item">
+            <h3>Proyek 3</h3>
+            <p>Perakitan PLC (Programmable Logic Controller)</p>
+            <img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.07.jpeg" alt="Proyek 3" />
+          </div>
+        </div>
       </div>
-      <div class="portfolio-item">
-        <h3>Proyek 2</h3>
-        <p>Rakitan mini sound dengan 2 speaker 3 inch</p>
-        <img src="WhatsApp Image 2025-09-19 at 20.22.07 (1).jpeg" alt="Proyek 2" />
+    </section>
+
+    <section id="kontak">
+      <div class="inner">
+        <h2>Kontak</h2>
+        <div class="links-row">
+          <a class="btn" href="https://www.instagram.com/habilqw_?igsh=bGhqdGN0M3hudjJki" target="_blank" rel="noopener">Instagram</a>
+          <a class="btn" href="https://www.tiktok.com/@habilwahyudi" target="_blank" rel="noopener">Tiktok</a>
+          <a class="btn" href="https://github.com/habilwahyudi56-hash" target="_blank" rel="noopener">GitHub</a>
+          <a class="btn" href="https://wokwi.com/makers/habil_qw" target="_blank" rel="noopener">Wokwi</a>
+        </div>
       </div>
-      <div class="portfolio-item">
-        <h3>Proyek 3</h3>
-        <p>Perakitan PLC (Programmable Logic Controller)</p>
-        <img src="WhatsApp Image 2025-09-19 at 20.22.07.jpeg" alt="Proyek 3" />
+    </section>
+
+    <div class="controls" aria-hidden="false">
+      <div class="mode" title="Toggle light/dark">
+        <span class="muted">Light / Dark</span>
+        <div style="position:relative">
+          <input id="modeToggle" type="checkbox" aria-label="Toggel tema" />
+        </div>
       </div>
     </div>
-  </section>
 
-  <section id="kontak">
-    <h2>Kontak</h2>
-    <a href="https://www.instagram.com/habilqw_?igsh=bGhqdGN0M3hudjJki" target="_blank">Instagram</a>
-    <a href="https://www.tiktok.com/@habilwahyudi" target="_blank">Tiktok</a>
-    <a href="https://github.com/habilwahyudi56-hash" target="_blank">GitHub</a>
-    <a href="https://wokwi.com/makers/habil_qw" target="_blank">Wokwi</a>
-  </section>
+    <div class="equalizer" id="equalizer" aria-hidden="true">
+      <div class="bar bar--1"></div><div class="bar bar--2"></div><div class="bar bar--3"></div>
+      <div class="bar bar--4"></div><div class="bar bar--5"></div><div class="bar bar--6"></div>
+      <div class="bar bar--7"></div><div class="bar bar--8"></div><div class="bar bar--9"></div>
+      <div class="bar bar--10"></div>
+    </div>
 
-  <!-- Controls + Equalizer -->
-  <div class="controls">
-    <label for="modeSlider">Light / Dark</label>
-    <input type="range" id="modeSlider" min="0" max="1" step="1" value="0" />
-  </div>
-
-  <div class="equalizer" id="equalizer">
-    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
-    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
-    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
-    <div class="bar"></div>
-  </div>
+  </main>
 
   <footer>
     <p>© 2025 HABIL QODAM WAHYUDI | Semua Hak Dilindungi</p>
   </footer>
 
   <script>
-    // Efek ketik otomatis
-    const text = "HABIL QODAM WAHYUDI";
-    const typingElement = document.getElementById("typing");
-    let index = 0;
-    function typeWriter() {
-      if (index < text.length) {
-        typingElement.textContent += text.charAt(index);
-        index++;
-        setTimeout(typeWriter, 150);
-      } else {
-        typingElement.style.borderRight = "none";
+    /* Typing effect */
+    (function(){
+      const text = 'HABIL QODAM WAHYUDI';
+      const el = document.getElementById('typing');
+      let i=0;
+      el.style.borderRight = '2px solid var(--accent)';
+      el.style.paddingRight = '10px';
+      function type(){
+        if(i<text.length){ el.textContent += text[i++]; setTimeout(type, 110); }
+        else{ el.style.borderRight='none'; }
       }
-    }
-    window.onload = typeWriter;
+      window.addEventListener('DOMContentLoaded', ()=> setTimeout(type,200));
+    })();
 
-    // Animasi scroll naik/turun
-    const sections = document.querySelectorAll("section");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-          } else {
-            entry.target.classList.remove("show");
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
-    sections.forEach((section) => observer.observe(section));
+    /* Mobile menu toggle */
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', ()=>{
+      const opened = navLinks.classList.toggle('show');
+      menuToggle.setAttribute('aria-expanded', opened);
+    });
 
-    // Light/Dark toggle slider
-    const slider = document.getElementById("modeSlider");
-    slider.addEventListener("input", () => {
-      if (slider.value == "1") {
-        document.body.classList.add("light");
-      } else {
-        document.body.classList.remove("light");
+    navLinks.addEventListener('click', (e)=>{
+      if(e.target.tagName === 'A'){
+        navLinks.classList.remove('show'); menuToggle.setAttribute('aria-expanded', false);
       }
     });
 
-    // Equalizer realistis
-    const bars = document.querySelectorAll(".equalizer .bar");
-    setInterval(() => {
-      bars.forEach((bar) => {
-        const height = Math.floor(Math.random() * 60) + 10; // tinggi random
-        bar.style.height = height + "px";
+    /* Scroll reveal looping */
+    const sections = document.querySelectorAll('main section');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting) {
+          entry.target.classList.add('show');
+        } else {
+          entry.target.classList.remove('show'); // reset untuk looping animasi
+        }
       });
-    }, 300); // update tiap 0.3 detik
-  </script>
-</body>
-</html>
+    },{threshold:0.2});
+    sections.forEach(s=>io.observe(s));
+
+    /* Light/Dark toggle */
+    const modeToggle = document.getElementById('modeToggle');
+    const prefers = localStorage.getItem('theme');
+    if(prefers==='light'){ document.body.classList.add('light'); modeToggle.checked = true; }
+    modeToggle.addEventListener('change', ()=>{
+      if(modeToggle.checked){ document.body.classList.add('light'); localStorage.setItem('theme','light'); }
+      else{ document.body.classList.remove('light'); localStorage.setItem('theme','dark'); }
+    });
+
+    /* Equalizer */
+    const bars = Array.from(document.querySelectorAll('#equalizer .bar'));
+    function updateEQ(){
+      bars.forEach((b,idx)=>{
+        const base = Math.sin(Date.now()/300 + idx) * 18 + 24;
+        const noise = Math.random()*36;
+        const value = Math.max(6, Math.round(base + noise));
+        b.style.height = value + 'px';
+      });
+    }
+    let eqInterval = setInterval(updateEQ, 180);
+    document.add
