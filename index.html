@@ -1,176 +1,209 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portofolio Habil</title>
-  <meta name="description" content="Portofolio Habil Qodam Wahyudi - Web Developer & Sound Enthusiast" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Habil</title>
   <style>
-    :root{--bg:#050506;--card:rgba(255,255,255,0.04);--accent:#f1c40f;--muted:#9aa3ad;--max-width:1100px;--radius:12px}
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{min-height:100vh;background:var(--bg);color:#fff;font-family:Inter,system-ui,Arial,sans-serif}
-
-    /* Header */
-    header{position:sticky;top:0;z-index:60;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.35));backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.04)}
-    .container{max-width:var(--max-width);margin:0 auto;padding:12px 18px}
-    .header-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#ff8a1f);display:flex;align-items:center;justify-content:center;color:#111;font-weight:800}
-    .brand-text h1{font-size:1.05rem;white-space:nowrap}
-    .brand-text p{font-size:0.84rem;color:var(--muted)}
-
-    /* Nav */
-    nav{display:flex;align-items:center;gap:14px}
-    .nav-links{display:flex;gap:12px}
-    .nav-links a{color:#ddd;text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:700;transition:all .18s}
-    .nav-links a:hover{background:var(--accent);color:#111}
-
-    /* Hamburger (garis 3) */
-    .menu-toggle{display:none;border:none;background:transparent;cursor:pointer;padding:8px}
-    .menu-toggle .bar{display:block;width:26px;height:3px;border-radius:3px;background:#fff;margin:5px 0;transition:transform .25s,opacity .25s}
-    body.light .menu-toggle .bar{background:#111}
-
-    /* Responsive nav */
-    @media (max-width:768px){
-      .menu-toggle{display:block}
-      .nav-links{position:fixed;right:16px;top:68px;flex-direction:column;background:rgba(0,0,0,0.86);padding:10px;border-radius:10px;display:none}
-      .nav-links.show{display:flex}
-      body.light .nav-links{background:rgba(255,255,255,0.95)}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-
-    /* Main content */
-    main{max-width:var(--max-width);margin:24px auto;padding:0 18px}
-    section{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:34px;border-radius:var(--radius);margin:20px 0;overflow:hidden}
-
-    /* IMPORTANT: make sections visible by default so nothing disappears */
-    section{opacity:1;transform:none}
-
-    /* 'replay' animation applied when element gets .reveal */
-    .reveal{animation:revealUp .7s cubic-bezier(.2,.9,.3,1) both}
-    @keyframes revealUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:translateY(0);}}
-
-    h2{text-align:center;color:var(--accent);margin-bottom:12px}
-    p{color:#d6dbe0}
-
-    .portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-    .portfolio-item{background:var(--card);padding:12px;border-radius:10px;text-align:center;transition:transform .25s,box-shadow .25s}
-    .portfolio-item:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,0.5)}
-    .portfolio-item img{width:100%;height:160px;object-fit:cover;border-radius:8px;margin-top:10px}
-
-    .links-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-    .btn{display:inline-block;padding:10px 16px;border-radius:10px;background:var(--accent);color:#111;font-weight:800;text-decoration:none;transition:transform .18s}
-    .btn:hover{transform:translateY(-6px)}
-
-    footer{max-width:var(--max-width);margin:24px auto;padding:16px;text-align:center;color:var(--muted)}
-
-    /* Light theme tweaks */
-    body.light{background:#f8f8fa;color:#111}
-    body.light .brand-text p{color:#444}
-    body.light .nav-links a{color:#111}
-
-    /* reduced motion: disable animations */
-    @media (prefers-reduced-motion: reduce){.reveal{animation:none}}
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      background: #f4f4f4;
+      color: #333;
+      overflow-x: hidden;
+    }
+    header {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      background: #0066cc;
+      color: #fff;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
+    header h1 {
+      font-size: 1.5rem;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #ffcc00;
+    }
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+    }
+    .menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: #fff;
+    }
+    @media (max-width: 768px) {
+      nav ul {
+        display: none;
+        flex-direction: column;
+        background: #0066cc;
+        position: absolute;
+        top: 60px;
+        right: 20px;
+        padding: 15px;
+        border-radius: 8px;
+      }
+      nav ul.active {
+        display: flex;
+      }
+      .menu-toggle {
+        display: flex;
+      }
+    }
+    main {
+      margin-top: 80px;
+      padding: 20px;
+    }
+    section {
+      margin: 50px 0;
+      opacity: 1;
+      transform: translateY(0);
+      transition: all 0.8s ease;
+    }
+    section.reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Portfolio grid */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    .portfolio-item {
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      background: #fff;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .portfolio-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.25);
+    }
+    .portfolio-item img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+    }
+    .portfolio-item h3 {
+      padding: 10px;
+      text-align: center;
+      font-size: 1rem;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #333;
+      color: #fff;
+      margin-top: 50px;
+    }
   </style>
 </head>
 <body>
   <header>
-    <div class="container">
-      <div class="header-row">
-        <div class="brand">
-          <div class="logo" aria-hidden="true">HQ</div>
-          <div class="brand-text">
-            <h1 id="typing" aria-label="Nama: Habil Qodam Wahyudi"></h1>
-            <p>Web Developer | Engineer | Creator</p>
-          </div>
-        </div>
-
-        <nav aria-label="Main navigation">
-          <div class="nav-links" id="navLinks">
-            <a href="#tentang">Tentang</a>
-            <a href="#pengalaman">Pengalaman</a>
-            <a href="#kontak">Kontak</a>
-          </div>
-          <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Buka menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-          </button>
-        </nav>
+    <h1>Habil Portfolio</h1>
+    <nav>
+      <div class="menu-toggle" id="menu-toggle">
+        <span></span><span></span><span></span>
       </div>
-    </div>
+      <ul id="menu">
+        <li><a href="#about">Tentang</a></li>
+        <li><a href="#portfolio">Portofolio</a></li>
+        <li><a href="#contact">Kontak</a></li>
+      </ul>
+    </nav>
   </header>
 
   <main>
-    <section id="tentang">
+    <section id="about">
       <h2>Tentang Saya</h2>
-      <p>Halo! Saya seorang pengembang web yang lahir dengan ilmu dan pengetahuan yang terus berkembang. Saya percaya bahwa proses besar berawal dari langkah kecil. Selain pengembangan web, saya juga tertarik pada dunia audio — dari perakitan hingga tuning suara.</p>
+      <p>Saya Habil, seorang pengembang web kreatif yang fokus pada desain interaktif dan profesional.</p>
     </section>
 
-    <section id="pengalaman">
-      <h2>Pengalaman</h2>
+    <section id="portfolio">
+      <h2>Portofolio</h2>
       <div class="portfolio-grid">
-        <div class="portfolio-item"><h3>Proyek 1</h3><p>Desain 3D model menggunakan Blender</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.08.jpeg" alt="Proyek 1"></div>
-        <div class="portfolio-item"><h3>Proyek 2</h3><p>Rakitan mini sound dengan 2 speaker 3 inch</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.07 (1).jpeg" alt="Proyek 2"></div>
-        <div class="portfolio-item"><h3>Proyek 3</h3><p>Perakitan PLC (Programmable Logic Controller)</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.07.jpeg" alt="Proyek 3"></div>
+        <div class="portfolio-item">
+          <img src="https://via.placeholder.com/400x220" alt="Project 1" loading="lazy">
+          <h3>Project 1</h3>
+        </div>
+        <div class="portfolio-item">
+          <img src="https://via.placeholder.com/400x220" alt="Project 2" loading="lazy">
+          <h3>Project 2</h3>
+        </div>
+        <div class="portfolio-item">
+          <img src="https://via.placeholder.com/400x220" alt="Project 3" loading="lazy">
+          <h3>Project 3</h3>
+        </div>
+        <div class="portfolio-item">
+          <img src="https://via.placeholder.com/400x220" alt="Project 4" loading="lazy">
+          <h3>Project 4</h3>
+        </div>
       </div>
     </section>
 
-    <section id="kontak">
+    <section id="contact">
       <h2>Kontak</h2>
-      <div class="links-row">
-        <a class="btn" href="https://www.instagram.com/habilqw_?igsh=bGhqdGN0M3hudjJki" target="_blank" rel="noopener">Instagram</a>
-        <a class="btn" href="https://www.tiktok.com/@habilwahyudi" target="_blank" rel="noopener">Tiktok</a>
-        <a class="btn" href="https://github.com/habilwahyudi56-hash" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn" href="https://wokwi.com/makers/habil_qw" target="_blank" rel="noopener">Wokwi</a>
-      </div>
+      <p>Email: habil@example.com</p>
+      <p>Telepon: +62 812-3456-7890</p>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 HABIL QODAM WAHYUDI | Semua Hak Dilindungi</p>
+    <p>&copy; 2025 Habil. Semua Hak Dilindungi.</p>
   </footer>
 
   <script>
-    // typing effect
-    (function(){
-      const txt = 'HABIL QODAM WAHYUDI';
-      const el = document.getElementById('typing');
-      let i = 0;
-      el.style.borderRight = '2px solid var(--accent)';
-      function type(){ if(i<txt.length){ el.textContent += txt[i++]; setTimeout(type,100);} else el.style.borderRight='none'; }
-      window.addEventListener('DOMContentLoaded', ()=> setTimeout(type,160));
-    })();
-
-    // mobile menu toggle
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-    menuToggle.addEventListener('click', ()=>{
-      const open = navLinks.classList.toggle('show');
-      menuToggle.setAttribute('aria-expanded', open);
+    // Hamburger menu
+    const menuToggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('menu');
+    menuToggle.addEventListener('click', () => {
+      menu.classList.toggle('active');
     });
 
-    // IntersectionObserver: replay animation each time element enters viewport
-    const targets = document.querySelectorAll('section, .portfolio-item, .btn');
-    const io = new IntersectionObserver((entries)=>{
+    // Reveal animation
+    const sections = document.querySelectorAll('section');
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        const el = entry.target;
-        if(entry.isIntersecting){
-          // remove then re-add to force replay
-          el.classList.remove('reveal');
-          // reflow hack
-          void el.offsetWidth;
-          el.classList.add('reveal');
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal');
         } else {
-          // remove so it can replay next time
-          el.classList.remove('reveal');
+          entry.target.classList.remove('reveal');
         }
       });
-    }, {threshold: 0.2});
-    targets.forEach(t=>io.observe(t));
+    }, { threshold: 0.2 });
 
-    // Make sure nav links remain visible on light mode (if user toggles externally)
-    // If you plan to add a theme toggle, ensure to toggle body.classList.add('light') accordingly.
+    sections.forEach(sec => observer.observe(sec));
   </script>
 </body>
 </html>
