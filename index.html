@@ -3,110 +3,129 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Equalizer Mode Toggle</title>
+  <title>Portofolio Saya</title>
   <style>
     body {
       margin: 0;
+      font-family: Arial, sans-serif;
       background: #f5f5f5;
       color: #222;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       transition: background 0.4s, color 0.4s;
     }
     body.dark {
       background: #111;
       color: #f5f5f5;
     }
-    canvas {
-      background: transparent;
-      display: block;
-    }
-    .controls {
-      margin-top: 20px;
+
+    header {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      padding: 15px 30px;
+      background: #0077cc;
+      color: white;
     }
-    button {
-      padding: 8px 16px;
-      border: none;
-      border-radius: 6px;
+
+    header h1 {
+      margin: 0;
+    }
+
+    canvas {
       cursor: pointer;
-      background: #444;
-      color: #fff;
-      font-size: 14px;
-      transition: background 0.3s;
+      border-radius: 6px;
+      background: transparent;
     }
-    button:hover {
-      background: #666;
+
+    main {
+      padding: 40px;
+      text-align: center;
     }
+
+    footer {
+      margin-top: 40px;
+      padding: 20px;
+      text-align: center;
+      background: #222;
+      color: white;
+    }
+
+    /* slider brightness */
+    .brightness-control {
+      margin-top: 20px;
+      text-align: center;
+    }
+
     input[type="range"] {
-      width: 200px;
+      width: 250px;
     }
   </style>
 </head>
 <body>
-  <canvas id="equalizer" width="220" height="120"></canvas>
+  <header>
+    <h1>Portofolio Saya</h1>
+    <!-- Equalizer toggle -->
+    <canvas id="equalizer" width="120" height="50"></canvas>
+  </header>
 
-  <div class="controls">
-    <label for="brightness">Kecerahan Equalizer</label>
-    <input type="range" id="brightness" min="5" max="50" value="30">
-    <button id="toggle">🌞 Light / 🌙 Dark</button>
-  </div>
+  <main>
+    <h2>Halo, saya Developer</h2>
+    <p>Ini adalah web portofolio saya.</p>
+  </main>
+
+  <footer>
+    <p>© 2025 Portofolio Saya</p>
+
+    <!-- brightness control -->
+    <div class="brightness-control">
+      <label for="brightness">Kecerahan Equalizer</label><br>
+      <input type="range" id="brightness" min="10" max="60" value="30">
+    </div>
+  </footer>
 
   <script>
     const canvas = document.getElementById("equalizer");
     const ctx = canvas.getContext("2d");
     const body = document.body;
-    const toggleBtn = document.getElementById("toggle");
     const brightnessSlider = document.getElementById("brightness");
 
-    let bars = [10, 20, 30];
     let darkMode = false;
     let brightness = parseInt(brightnessSlider.value, 10);
+
+    // jumlah batang lebih banyak (8 batang)
+    let barCount = 8;
+    let bars = Array(barCount).fill(20);
 
     function drawEqualizer() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       ctx.fillStyle = darkMode ? "#f5f5f5" : "#222";
 
-      // teks status
-      ctx.font = "16px Arial";
-      ctx.textAlign = "center";
-      ctx.fillText(darkMode ? "Dark Mode" : "Light Mode", canvas.width / 2, 20);
+      const barWidth = 8;
+      const gap = 6;
+      const baseY = canvas.height - 5;
 
-      // batang equalizer
-      const barWidth = 20;
-      const gap = 15;
       bars.forEach((h, i) => {
-        const x = 50 + i * (barWidth + gap);
-        const y = canvas.height - h - 20;
+        const x = i * (barWidth + gap) + 10;
+        const y = baseY - h;
         ctx.fillRect(x, y, barWidth, h);
       });
     }
 
     function animate() {
-      if (darkMode) {
-        bars = bars.map(() => 10 + Math.random() * brightness);
-      }
+      // batang selalu bergerak
+      bars = bars.map(() => 10 + Math.random() * brightness);
+
       drawEqualizer();
       requestAnimationFrame(animate);
     }
 
-    // toggle dark/light
-    toggleBtn.addEventListener("click", () => {
+    // toggle dark/light saat klik canvas
+    canvas.addEventListener("click", () => {
       darkMode = !darkMode;
       body.classList.toggle("dark");
-      if (!darkMode) {
-        bars = [15, 25, 35]; // statis saat light
-      }
     });
 
-    // ubah kecerahan dari slider
+    // ubah kecerahan
     brightnessSlider.addEventListener("input", (e) => {
       brightness = parseInt(e.target.value, 10);
     });
