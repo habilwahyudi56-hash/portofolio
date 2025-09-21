@@ -20,7 +20,6 @@
       color: #fff;
       padding: 20px 15px;
       text-align: center;
-      position: relative;
     }
 
     .header-flex {
@@ -74,9 +73,9 @@
     /* Section dengan overlay */
     section {
       position: relative;
-      padding:40px 15px;
+      padding:30px 15px;
       max-width:900px;
-      margin: 30px auto;
+      margin: 20px auto;
       border-radius:10px;
       overflow: hidden;
       opacity:0;
@@ -96,10 +95,10 @@
     section.show { opacity:1; transform:translateY(0); }
 
     h2 {
-      margin-bottom:20px;
+      margin-bottom:15px;
       color:#f1c40f;
       text-align:center;
-      font-size: clamp(1.3rem, 4vw, 1.8rem);
+      font-size: clamp(1.2rem, 4vw, 1.8rem);
     }
 
     .portfolio-grid {
@@ -116,11 +115,11 @@
       cursor:pointer;
     }
     .portfolio-item:hover {
-      transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.5);
     }
     .portfolio-item img {
-      width:100%; height:180px;
+      width:100%; height:160px;
       object-fit:cover;
       border-radius:8px;
       margin-top:10px;
@@ -129,8 +128,8 @@
     #kontak { text-align:center; }
     #kontak a {
       display:inline-block;
-      margin:10px;
-      padding:10px 20px;
+      margin:8px;
+      padding:10px 18px;
       background:#f1c40f;
       color:#000;
       text-decoration:none;
@@ -139,7 +138,7 @@
       transition:0.3s;
       font-size:clamp(0.9rem, 3vw, 1rem);
     }
-    #kontak a:hover { background:#d4ac0d; color:#fff; transform:scale(1.1); }
+    #kontak a:hover { background:#d4ac0d; color:#fff; transform:scale(1.05); }
 
     .brightness-control {
       text-align:center;
@@ -147,13 +146,17 @@
       background:#000;
     }
     .brightness-control input {
-      width:80%;
+      width:90%;
+      max-width:400px;
     }
 
     /* Equalizer */
     #equalizer {
       display:block;
-      margin:30px auto;
+      margin:20px auto;
+      width:95%;
+      max-width:600px;
+      height:120px;
       background:#000;
     }
 
@@ -162,7 +165,7 @@
       padding:15px;
       text-align:center;
       color:#aaa;
-      font-size:0.9rem;
+      font-size:0.85rem;
     }
 
     @media(max-width:768px){
@@ -176,7 +179,7 @@
         flex-direction: column;
         display: none;
         margin-top:10px;
-        background: rgba(0,0,0,0.85);
+        background: rgba(0,0,0,0.9);
         padding:12px;
         border-radius:10px;
       }
@@ -209,7 +212,7 @@
   <h2>Tentang Saya</h2>
   <p>
     Halo! Saya seorang pengembang web yang lahir dengan ilmu dan pengetahuan yang cukup sedikit dan dari sini saya belajar bahwa kehidupan tidak selalu bergelut degan hal yang besar namun dimulai dari hal yang terkecil.
-    selain suka di dunia website, saya juga suka dalam dunia sound mulai dari perakitan hingga menyeting agar supaya suara yang dihasilkan enak didengar. sama seperti website, pengtahuan saya untuk perakitan dan setting sound hanya saya dapatkan di jurusan smk saya.
+    Selain suka di dunia website, saya juga suka dalam dunia sound mulai dari perakitan hingga menyeting agar supaya suara yang dihasilkan enak didengar. Sama seperti website, pengetahuan saya untuk perakitan dan setting sound hanya saya dapatkan di jurusan SMK saya.
   </p>
 </section>
 
@@ -236,10 +239,10 @@
 
 <section id="kontak">
   <h2>Kontak</h2>
-  <a href="https://www.instagram.com/habilqw_?igsh=bGhqdGN0M3hudjJki" target="_blank">Instagram</a>
-  <a href="https://www.tiktok.com/@habilwahyudi" target="_blank">tiktok</a>
+  <a href="https://www.instagram.com/habilqw_" target="_blank">Instagram</a>
+  <a href="https://www.tiktok.com/@habilwahyudi" target="_blank">Tiktok</a>
   <a href="https://github.com/habilwahyudi56-hash" target="_blank">GitHub</a>
-  <a href="https://wokwi.com/makers/habil_qw" target="_blank">wokwi</a>
+  <a href="https://wokwi.com/makers/habil_qw" target="_blank">Wokwi</a>
 </section>
 
 <div class="brightness-control">
@@ -248,7 +251,7 @@
 </div>
 
 <!-- Equalizer di tengah bawah -->
-<canvas id="equalizer" width="600" height="150"></canvas>
+<canvas id="equalizer"></canvas>
 
 <footer>
   <p>© 2025 HABIL QODAM WAHYUDI | Semua Hak Dilindungi</p>
@@ -291,9 +294,17 @@
   // Equalizer animasi
   const canvas = document.getElementById("equalizer");
   const ctx = canvas.getContext("2d");
+
+  function resizeCanvas() {
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+  }
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
+
   let barCount = 20;
   let bars = new Array(barCount).fill(20);
-  let targets = bars.map(() => 20 + Math.random() * 100);
+  let targets = bars.map(() => 20 + Math.random() * (canvas.height - 40));
 
   function drawEqualizer() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -314,8 +325,8 @@
 
   function animate() {
     bars = bars.map((h, i) => h + (targets[i] - h) * 0.05);
-    if (Math.random() < 0.05) {
-      targets = targets.map(() => 20 + Math.random() * 100);
+    if (Math.random() < 0.03) {
+      targets = targets.map(() => 20 + Math.random() * (canvas.height - 40));
     }
     drawEqualizer();
     requestAnimationFrame(animate);
