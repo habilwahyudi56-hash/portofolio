@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Habil Qodam Wahyudi</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portofolio Habil</title>
   <style>
-    * {margin:0; padding:0; box-sizing:border-box; font-family: Arial,sans-serif;}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
     body {
-      min-height:100vh;
-      color:#fff;
-      background:#000; /* solid black */
+      min-height: 100vh;
+      color: #fff;
+      background: #000; /* solid black */
       line-height: 1.6;
       scroll-behavior: smooth;
-      position: relative;
       transition: background 0.3s ease, color 0.3s ease;
     }
+
     body.light {
-      background:#f9f9f9;
-      color:#222;
+      background: #f9f9f9;
+      color: #222;
     }
 
     header {
@@ -25,7 +31,6 @@
       color: #fff;
       padding: 20px 15px;
       text-align: center;
-      position: relative;
     }
 
     .header-flex {
@@ -38,306 +43,344 @@
     header h1 {
       font-size: clamp(1.5rem, 5vw, 2.5rem);
       white-space: nowrap;
-      display:inline-block;
+      display: inline-block;
       border-right: 3px solid #fff;
-      padding-right:5px;
+      padding-right: 5px;
     }
-    header p { 
-      margin-top:5px; 
-      color:#f1c40f; 
-      font-weight:500; 
-      font-size:clamp(0.9rem, 3vw, 1.1rem); 
+
+    header p {
+      margin-top: 5px;
+      color: #f1c40f;
+      font-weight: 500;
+      font-size: clamp(0.9rem, 3vw, 1.1rem);
     }
 
     .menu-toggle {
-      display:none;
+      display: none;
       flex-direction: column;
       cursor: pointer;
-      margin-left:auto;
+      margin-left: auto;
     }
+
     .menu-toggle span {
-      height:3px; width:25px; background:#fff; margin:4px 0; border-radius:3px;
-      transition:0.3s;
+      height: 3px;
+      width: 25px;
+      background: #fff;
+      margin: 4px 0;
+      border-radius: 3px;
+      transition: 0.3s;
     }
 
     nav ul {
-      list-style:none;
-      display:flex;
-      justify-content:center;
-      gap:20px;
-      transition:all 0.5s ease;
-      flex-wrap:wrap;
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      transition: all 0.5s ease;
+      flex-wrap: wrap;
     }
+
     nav a {
-      color:#fff;
-      text-decoration:none;
-      font-weight:bold;
-      transition:0.3s;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
     }
-    nav a:hover { color:#f1c40f; }
+
+    nav a:hover {
+      color: #f1c40f;
+    }
 
     section {
       position: relative;
-      padding:40px 15px;
-      max-width:900px;
+      padding: 40px 15px;
+      max-width: 900px;
       margin: 20px auto;
-      border-radius:10px;
+      border-radius: 10px;
       overflow: hidden;
-      opacity:0;
+      opacity: 0;
       transform: translateY(50px);
       transition: all 0.8s ease;
     }
-    section.show { opacity:1; transform:translateY(0); }
+
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     section::before {
-      content:"";
-      position:absolute;
-      inset:0;
-      background: rgba(255,255,255,0.08);
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(3px);
-      border-radius:10px;
-      z-index:0;
+      border-radius: 10px;
+      z-index: 0;
     }
+
     section > * {
       position: relative;
-      z-index:1;
+      z-index: 1;
     }
 
     h2 {
-      margin-bottom:20px;
-      color:#f1c40f;
-      text-align:center;
+      margin-bottom: 20px;
+      color: #f1c40f;
+      text-align: center;
       font-size: clamp(1.3rem, 4vw, 1.8rem);
     }
 
     .portfolio-grid {
-      display:grid;
-      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-      gap:15px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 15px;
     }
+
     .portfolio-item {
-      background: rgba(255,255,255,0.1);
-      padding:15px;
-      border-radius:10px;
-      text-align:center;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
       transition: transform 0.3s, box-shadow 0.3s;
-      cursor:pointer;
+      cursor: pointer;
     }
+
     .portfolio-item:hover {
       transform: translateY(-10px) scale(1.02);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-    }
-    .portfolio-item img {
-      width:100%; height:180px;
-      object-fit:cover;
-      border-radius:8px;
-      margin-top:10px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
     }
 
-    #kontak { text-align:center; }
-    #kontak a {
-      display:inline-block;
-      margin:10px;
-      padding:10px 20px;
-      background:#f1c40f;
-      color:#000;
-      text-decoration:none;
-      border-radius:8px;
-      font-weight:bold;
-      transition:0.3s;
-      font-size:clamp(0.9rem, 3vw, 1rem);
+    .portfolio-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-top: 10px;
     }
-    #kontak a:hover { background:#d4ac0d; color:#fff; transform:scale(1.1); }
+
+    #kontak {
+      text-align: center;
+    }
+
+    #kontak a {
+      display: inline-block;
+      margin: 10px;
+      padding: 10px 20px;
+      background: #f1c40f;
+      color: #000;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.3s;
+      font-size: clamp(0.9rem, 3vw, 1rem);
+    }
+
+    #kontak a:hover {
+      background: #d4ac0d;
+      color: #fff;
+      transform: scale(1.1);
+    }
 
     footer {
-      background:#111;
-      padding:15px;
-      text-align:center;
-      margin-top:30px;
-      color:#aaa;
-      font-size:0.9rem;
+      background: #111;
+      padding: 15px;
+      text-align: center;
+      margin-top: 30px;
+      color: #aaa;
+      font-size: 0.9rem;
     }
 
     /* Controls + Equalizer */
     .controls {
-      text-align:center;
-      margin:20px 0;
+      text-align: center;
+      margin: 20px 0;
     }
+
     .controls label {
-      display:block;
-      margin-bottom:6px;
+      display: block;
+      margin-bottom: 6px;
     }
-    .controls input[type=range] {
-      width:200px;
+
+    .controls input[type="range"] {
+      width: 200px;
     }
 
     .equalizer {
-      display:flex;
-      justify-content:center;
-      align-items:flex-end;
-      height:60px;
-      margin:10px 0 20px;
-      gap:6px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      height: 70px;
+      margin: 10px 0 20px;
+      gap: 6px;
     }
+
     .equalizer .bar {
-      width:8px;
-      border-radius:3px;
-      animation: bounce 1.8s infinite ease-in-out;
-    }
-    .equalizer .bar:nth-child(1){background:red; animation-delay:0s}
-    .equalizer .bar:nth-child(2){background:orange; animation-delay:0.2s}
-    .equalizer .bar:nth-child(3){background:yellow; animation-delay:0.4s}
-    .equalizer .bar:nth-child(4){background:lime; animation-delay:0.6s}
-    .equalizer .bar:nth-child(5){background:green; animation-delay:0.8s}
-    .equalizer .bar:nth-child(6){background:yellow; animation-delay:1s}
-    .equalizer .bar:nth-child(7){background:orange; animation-delay:1.2s}
-    .equalizer .bar:nth-child(8){background:red; animation-delay:1.4s}
-    .equalizer .bar:nth-child(9){background:lime; animation-delay:1.6s}
-    .equalizer .bar:nth-child(10){background:yellow; animation-delay:1.8s}
-
-    @keyframes bounce {
-      0%,100%{height:10px}
-      50%{height:60px}
+      width: 10px;
+      height: 20px;
+      border-radius: 3px;
+      transition: height 0.3s ease;
     }
 
-    @media(max-width:768px){
+    .equalizer .bar:nth-child(1) { background: red; }
+    .equalizer .bar:nth-child(2) { background: orange; }
+    .equalizer .bar:nth-child(3) { background: yellow; }
+    .equalizer .bar:nth-child(4) { background: lime; }
+    .equalizer .bar:nth-child(5) { background: green; }
+    .equalizer .bar:nth-child(6) { background: yellow; }
+    .equalizer .bar:nth-child(7) { background: orange; }
+    .equalizer .bar:nth-child(8) { background: red; }
+    .equalizer .bar:nth-child(9) { background: lime; }
+    .equalizer .bar:nth-child(10) { background: yellow; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
       header { text-align: left; }
-      .header-flex { justify-content: space-between; align-items: center; }
-      .menu-toggle { display:flex; }
+      .header-flex {
+        justify-content: space-between;
+        align-items: center;
+      }
+      .menu-toggle { display: flex; }
       nav ul {
         flex-direction: column;
         display: none;
-        margin-top:10px;
-        background: rgba(0,0,0,0.85);
-        padding:12px;
-        border-radius:10px;
+        margin-top: 10px;
+        background: rgba(0, 0, 0, 0.85);
+        padding: 12px;
+        border-radius: 10px;
       }
-      nav ul.showing { display:flex; }
+      nav ul.showing { display: flex; }
     }
   </style>
 </head>
 <body>
-
-<header>
-  <div class="header-flex">
-    <div>
-      <h1 id="typing"></h1>
-      <p>Web Developer | Engineer | Creator</p>
+  <header>
+    <div class="header-flex">
+      <div>
+        <h1 id="typing"></h1>
+        <p>Web Developer | Engineer | Creator</p>
+      </div>
+      <div class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('showing')">
+        <span></span><span></span><span></span>
+      </div>
     </div>
+    <nav>
+      <ul>
+        <li><a href="#tentang">Tentang</a></li>
+        <li><a href="#pengalaman">Pengalaman</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <div class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('showing')">
-      <span></span><span></span><span></span>
+  <section id="tentang">
+    <h2>Tentang Saya</h2>
+    <p>
+      Halo! Saya seorang pengembang web yang lahir dengan ilmu dan pengetahuan
+      yang cukup sedikit dan dari sini saya belajar bahwa kehidupan tidak
+      selalu bergelut degan hal yang besar namun dimulai dari hal yang
+      terkecil. Selain suka di dunia website, saya juga suka dalam dunia sound
+      mulai dari perakitan hingga menyeting agar supaya suara yang dihasilkan
+      enak didengar. Sama seperti website, pengtahuan saya untuk perakitan dan
+      setting sound hanya saya dapatkan di jurusan SMK saya.
+    </p>
+  </section>
+
+  <section id="pengalaman">
+    <h2>Pengalaman</h2>
+    <div class="portfolio-grid">
+      <div class="portfolio-item">
+        <h3>Proyek 1</h3>
+        <p>Desain 3D model menggunakan Blender</p>
+        <img src="WhatsApp Image 2025-09-19 at 20.22.08.jpeg" alt="Proyek 1" />
+      </div>
+      <div class="portfolio-item">
+        <h3>Proyek 2</h3>
+        <p>Rakitan mini sound dengan 2 speaker 3 inch</p>
+        <img src="WhatsApp Image 2025-09-19 at 20.22.07 (1).jpeg" alt="Proyek 2" />
+      </div>
+      <div class="portfolio-item">
+        <h3>Proyek 3</h3>
+        <p>Perakitan PLC (Programmable Logic Controller)</p>
+        <img src="WhatsApp Image 2025-09-19 at 20.22.07.jpeg" alt="Proyek 3" />
+      </div>
     </div>
+  </section>
+
+  <section id="kontak">
+    <h2>Kontak</h2>
+    <a href="https://www.instagram.com/habilqw_?igsh=bGhqdGN0M3hudjJki" target="_blank">Instagram</a>
+    <a href="https://www.tiktok.com/@habilwahyudi" target="_blank">Tiktok</a>
+    <a href="https://github.com/habilwahyudi56-hash" target="_blank">GitHub</a>
+    <a href="https://wokwi.com/makers/habil_qw" target="_blank">Wokwi</a>
+  </section>
+
+  <!-- Controls + Equalizer -->
+  <div class="controls">
+    <label for="modeSlider">Light / Dark</label>
+    <input type="range" id="modeSlider" min="0" max="1" step="1" value="0" />
   </div>
 
-  <nav>
-    <ul>
-      <li><a href="#tentang">Tentang</a></li>
-      <li><a href="#pengalaman">Pengalaman</a></li>
-      <li><a href="#kontak">Kontak</a></li>
-    </ul>
-  </nav>
-</header>
-
-<section id="tentang">
-  <h2>Tentang Saya</h2>
-  <p>
-    Halo! Saya seorang pengembang web yang lahir dengan ilmu dan pengetahuan yang cukup sedikit dan dari sini saya belajar bahwa kehidupan tidak selalu bergelut degan hal yang besar namun dimulai dari hal yang terkecil.
-    selain suka di dunia website, saya juga suka dalam dunia sound mulai dari perakitan hingga menyeting agar supaya suara yang dihasilkan enak didengar. sama seperti website, pengtahuan saya untuk perakitan dan setting sound hanya saya dapatkan di jurusan smk saya.
-  </p>
-</section>
-
-<section id="pengalaman">
-  <h2>Pengalaman</h2>
-  <div class="portfolio-grid">
-    <div class="portfolio-item">
-      <h3>Proyek 1</h3>
-      <p>Desain 3D model menggunakan Blender</p>
-      <img src="WhatsApp Image 2025-09-19 at 20.22.08.jpeg" alt="Proyek 1">
-    </div>
-    <div class="portfolio-item">
-      <h3>Proyek 2</h3>
-      <p>Rakitan mini sound dengan 2 speaker 3 inch</p>
-      <img src="WhatsApp Image 2025-09-19 at 20.22.07 (1).jpeg" alt="Proyek 2">
-    </div>
-    <div class="portfolio-item">
-      <h3>Proyek 3</h3>
-      <p>Perakitan PLC (Programmable Logic Controller)</p>
-      <img src="WhatsApp Image 2025-09-19 at 20.22.07.jpeg" alt="Proyek 3">
-    </div>
+  <div class="equalizer" id="equalizer">
+    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+    <div class="bar"></div>
   </div>
-</section>
 
-<section id="kontak">
-  <h2>Kontak</h2>
-  <a href="https://www.instagram.com/habilqw_?igsh=bGhqdGN0M3hudjJki" target="_blank">Instagram</a>
-  <a href="https://www.tiktok.com/@habilwahyudi" target="_blank">tiktok</a>
-  <a href="https://github.com/habilwahyudi56-hash" target="_blank">GitHub</a>
-  <a href="https://wokwi.com/makers/habil_qw" target="_blank">wokwi</a>
-</section>
+  <footer>
+    <p>© 2025 HABIL QODAM WAHYUDI | Semua Hak Dilindungi</p>
+  </footer>
 
-<!-- Tambahan Controls + Equalizer -->
-<div class="controls">
-  <label for="modeSlider">Light / Dark</label>
-  <input type="range" id="modeSlider" min="0" max="1" step="1" value="0">
-</div>
-
-<div class="equalizer">
-  <div class="bar"></div>
-  <div class="bar"></div>
-  <div class="bar"></div>
-  <div class="bar"></div>
-  <div class="bar"></div>
-  <div class="bar"></div>
-  <div class="bar"></div>
-  <div class="bar"></div>
-  <div class="bar"></div>
-  <div class="bar"></div>
-</div>
-
-<footer>
-  <p>© 2025 HABIL QODAM WAHYUDI | Semua Hak Dilindungi</p>
-</footer>
-
-<script>
-  // Efek ketik otomatis
-  const text = "HABIL QODAM WAHYUDI";
-  const typingElement = document.getElementById("typing");
-  let index = 0;
-  function typeWriter() {
-    if(index < text.length){
-      typingElement.textContent += text.charAt(index);
-      index++;
-      setTimeout(typeWriter, 150);
-    } else {
-      typingElement.style.borderRight = "none";
-    }
-  }
-  window.onload = typeWriter;
-
-  // Animasi scroll muncul setiap kali section terlihat
-  const sections = document.querySelectorAll("section");
-  const observer = new IntersectionObserver(entries=>{
-    entries.forEach(entry=>{
-      if(entry.isIntersecting){
-        entry.target.classList.add("show");
+  <script>
+    // Efek ketik otomatis
+    const text = "HABIL QODAM WAHYUDI";
+    const typingElement = document.getElementById("typing");
+    let index = 0;
+    function typeWriter() {
+      if (index < text.length) {
+        typingElement.textContent += text.charAt(index);
+        index++;
+        setTimeout(typeWriter, 150);
       } else {
-        entry.target.classList.remove("show");
+        typingElement.style.borderRight = "none";
+      }
+    }
+    window.onload = typeWriter;
+
+    // Animasi scroll naik/turun
+    const sections = document.querySelectorAll("section");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          } else {
+            entry.target.classList.remove("show");
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
+    sections.forEach((section) => observer.observe(section));
+
+    // Light/Dark toggle slider
+    const slider = document.getElementById("modeSlider");
+    slider.addEventListener("input", () => {
+      if (slider.value == "1") {
+        document.body.classList.add("light");
+      } else {
+        document.body.classList.remove("light");
       }
     });
-  }, { threshold:0.2 });
-  sections.forEach(section => observer.observe(section));
 
-  // Light/Dark toggle slider
-  const slider = document.getElementById("modeSlider");
-  slider.addEventListener("input", ()=>{
-    if(slider.value == "1"){
-      document.body.classList.add("light");
-    } else {
-      document.body.classList.remove("light");
-    }
-  });
-</script>
-
+    // Equalizer realistis
+    const bars = document.querySelectorAll(".equalizer .bar");
+    setInterval(() => {
+      bars.forEach((bar) => {
+        const height = Math.floor(Math.random() * 60) + 10; // tinggi random
+        bar.style.height = height + "px";
+      });
+    }, 300); // update tiap 0.3 detik
+  </script>
 </body>
 </html>
