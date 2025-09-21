@@ -3,82 +3,311 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dark/Light Mode dengan Equalizer</title>
+  <title>Portofolio Habil</title>
   <style>
+    * {margin:0; padding:0; box-sizing:border-box; font-family: Arial,sans-serif;}
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
+      min-height:100vh;
+      color:#fff;
+      background: url("back.jpg") no-repeat center center;
+      background-size: cover;
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      position: relative;
       transition: background 0.4s, color 0.4s;
-      background: #f5f5f5;
-      color: #222;
+    }
+    body::before {
+      content:"";
+      position: fixed;
+      top:0; left:0;
+      width:100%; height:100%;
+      background: rgba(0,0,0,0.7);
+      z-index:-1;
+    }
+    body.light { color:#000; }
+    body.light::before { background: rgba(255,255,255,0.6); }
+
+    header {
+      background: #2c3e50;
+      color: #fff;
+      padding: 20px 15px;
+      text-align: center;
+      position: relative;
     }
 
-    body.dark {
-      background: #111;
-      color: #f5f5f5;
-    }
-
-    .container {
+    .header-flex {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
-    }
-
-    /* Tombol Equalizer */
-    .equalizer-btn {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: flex-end;
       justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      font-size: clamp(1.5rem, 5vw, 2.5rem);
+      white-space: nowrap;
+      display:inline-block;
+      border-right: 3px solid #fff;
+      padding-right:5px;
+    }
+    header p { 
+      margin-top:5px; 
+      color:#f1c40f; 
+      font-weight:500; 
+      font-size:clamp(0.9rem, 3vw, 1.1rem); 
+    }
+
+    /* Hamburger menu */
+    .menu-toggle {
+      display:none;
+      flex-direction: column;
       cursor: pointer;
+      margin-left:15px;
+    }
+    .menu-toggle span {
+      height:3px; width:25px; background:#fff; margin:4px 0; border-radius:3px;
+      transition:0.3s;
     }
 
-    .bar {
-      width: 6px;
-      background: #222;
-      border-radius: 3px;
-      animation: bounce 1s infinite;
-      transition: background 0.4s;
+    nav ul {
+      list-style:none;
+      display:flex;
+      justify-content:center;
+      gap:20px;
+      transition:all 0.5s ease;
+      flex-wrap:wrap;
+    }
+    nav a {
+      color:#fff;
+      text-decoration:none;
+      font-weight:bold;
+      transition:0.3s;
+    }
+    nav a:hover { color:#f1c40f; }
+
+    section {
+      padding:40px 15px;
+      max-width:900px;
+      margin: 20px auto;
+      background: rgba(0,0,0,0.5);
+      border-radius:10px;
+      opacity:0;
+      transform: translateY(50px);
+      transition: all 0.8s ease;
+    }
+    body.light section { background: rgba(255,255,255,0.8); }
+    section.show { opacity:1; transform:translateY(0); }
+
+    h2 {
+      margin-bottom:20px;
+      color:#f1c40f;
+      text-align:center;
+      font-size: clamp(1.3rem, 4vw, 1.8rem);
     }
 
-    body.dark .bar {
-      background: #f5f5f5;
+    .portfolio-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+      gap:15px;
+    }
+    .portfolio-item {
+      background: rgba(255,255,255,0.1);
+      padding:15px;
+      border-radius:10px;
+      text-align:center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor:pointer;
+    }
+    .portfolio-item:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+    .portfolio-item img {
+      width:100%; height:180px;
+      object-fit:cover;
+      border-radius:8px;
+      margin-top:10px;
     }
 
-    .bar:nth-child(1) { height: 10px; animation-delay: 0s; }
-    .bar:nth-child(2) { height: 18px; animation-delay: 0.2s; }
-    .bar:nth-child(3) { height: 25px; animation-delay: 0.4s; }
+    #kontak { text-align:center; }
+    #kontak a {
+      display:inline-block;
+      margin:10px;
+      padding:10px 20px;
+      background:#f1c40f;
+      color:#000;
+      text-decoration:none;
+      border-radius:8px;
+      font-weight:bold;
+      transition:0.3s;
+      font-size:clamp(0.9rem, 3vw, 1rem);
+    }
+    #kontak a:hover { background:#d4ac0d; color:#fff; transform:scale(1.1); }
 
-    @keyframes bounce {
-      0%, 100% { transform: scaleY(0.5); }
-      50% { transform: scaleY(1.5); }
+    footer {
+      background:#111;
+      padding:15px;
+      text-align:center;
+      margin-top:30px;
+      color:#aaa;
+      font-size:0.9rem;
+    }
+    body.light footer { background:#eee; color:#333; }
+
+    /* MOBILE MODE */
+    @media(max-width:768px){
+      header { text-align: left; }
+      .header-flex { flex-direction: row; }
+      .menu-toggle { display:flex; }
+      nav ul {
+        flex-direction: column;
+        display: none;
+        margin-top:10px;
+        background: rgba(0,0,0,0.85);
+        padding:12px;
+        border-radius:10px;
+      }
+      nav ul.showing { display:flex; }
     }
 
-    h1 {
-      margin-top: 20px;
+    /* canvas button */
+    #equalizer {
+      cursor:pointer;
+      border-radius:6px;
+      background: transparent;
+      margin-left:15px;
     }
   </style>
 </head>
-<body>
-  <div class="container">
-    <div class="equalizer-btn" id="toggleMode">
-      <div class="bar"></div>
-      <div class="bar"></div>
-      <div class="bar"></div>
+<body class="dark">
+
+<header>
+  <div class="header-flex">
+    <div>
+      <h1 id="typing"></h1>
+      <p>Web Developer | Engineer | Creator</p>
     </div>
-    <h1>Halo, ini Portofolio Saya</h1>
+
+    <!-- canvas equalizer button -->
+    <canvas id="equalizer" width="100" height="60"></canvas>
+
+    <div class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('showing')">
+      <span></span><span></span><span></span>
+    </div>
   </div>
 
-  <script>
-    const toggleBtn = document.getElementById("toggleMode");
-    const body = document.body;
+  <nav>
+    <ul>
+      <li><a href="#tentang">Tentang</a></li>
+      <li><a href="#pengalaman">Pengalaman</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+  </nav>
+</header>
 
-    toggleBtn.addEventListener("click", () => {
-      body.classList.toggle("dark");
+<section id="tentang">
+  <h2>Tentang Saya</h2>
+  <p>
+    Halo! Saya seorang pengembang web ...
+  </p>
+</section>
+
+<section id="pengalaman">
+  <h2>Pengalaman</h2>
+  <div class="portfolio-grid">
+    <div class="portfolio-item">
+      <h3>Proyek 1</h3>
+      <p>Desain 3D model menggunakan Blender</p>
+      <img src="WhatsApp Image 2025-09-19 at 20.22.08.jpeg" alt="Proyek 1">
+    </div>
+    <div class="portfolio-item">
+      <h3>Proyek 2</h3>
+      <p>Rakitan mini sound dengan 2 speaker 3 inch</p>
+      <img src="WhatsApp Image 2025-09-19 at 20.22.07 (1).jpeg" alt="Proyek 2">
+    </div>
+    <div class="portfolio-item">
+      <h3>Proyek 3</h3>
+      <p>Perakitan PLC</p>
+      <img src="WhatsApp Image 2025-09-19 at 20.22.07.jpeg" alt="Proyek 3">
+    </div>
+  </div>
+</section>
+
+<section id="kontak">
+  <h2>Kontak</h2>
+  <a href="https://www.instagram.com/habilqw_" target="_blank">Instagram</a>
+  <a href="https://www.tiktok.com/@habilwahyudi" target="_blank">tiktok</a>
+  <a href="https://github.com/habilwahyudi56-hash" target="_blank">GitHub</a>
+  <a href="https://wokwi.com/makers/habil_qw" target="_blank">wokwi</a>
+</section>
+
+<footer>
+  <p>© 2025 HABIL QODAM WAHYUDI | Semua Hak Dilindungi</p>
+</footer>
+
+<script>
+  // Efek ketik otomatis
+  const text = "HABIL QODAM WAHYUDI";
+  const typingElement = document.getElementById("typing");
+  let index = 0;
+  function typeWriter() {
+    if(index < text.length){
+      typingElement.textContent += text.charAt(index);
+      index++;
+      setTimeout(typeWriter, 150);
+    } else {
+      typingElement.style.borderRight = "none";
+    }
+  }
+  window.onload = typeWriter;
+
+  // Animasi scroll masuk section
+  const sections = document.querySelectorAll("section");
+  const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add("show");
+      }
     });
-  </script>
+  }, { threshold:0.2 });
+  sections.forEach(section => observer.observe(section));
+
+  // Canvas equalizer dark/light toggle
+  const canvas = document.getElementById("equalizer");
+  const ctx = canvas.getContext("2d");
+  const body = document.body;
+  let bars = [15, 25, 35];
+  let darkMode = true;
+
+  function drawEqualizer() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle = darkMode ? "#f1c40f" : "#222";
+    const barWidth = 15, gap = 10;
+    bars.forEach((h,i)=>{
+      const x = 20 + i*(barWidth+gap);
+      const y = 50 - h;
+      ctx.fillRect(x,y,barWidth,h);
+    });
+    ctx.font = "14px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText(darkMode?"Dark Mode":"Light Mode", canvas.width/2, canvas.height-5);
+  }
+
+  function animate() {
+    if(darkMode){
+      bars = bars.map(()=>10+Math.random()*40);
+    }
+    drawEqualizer();
+    requestAnimationFrame(animate);
+  }
+
+  canvas.addEventListener("click", ()=>{
+    darkMode = !darkMode;
+    body.classList.toggle("light");
+    if(!darkMode){ bars=[15,25,35]; }
+  });
+
+  animate();
+</script>
+
 </body>
 </html>
