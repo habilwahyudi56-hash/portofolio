@@ -4,166 +4,173 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portofolio Habil</title>
+  <meta name="description" content="Portofolio Habil Qodam Wahyudi - Web Developer & Sound Enthusiast" />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+    :root{--bg:#050506;--card:rgba(255,255,255,0.04);--accent:#f1c40f;--muted:#9aa3ad;--max-width:1100px;--radius:12px}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{min-height:100vh;background:var(--bg);color:#fff;font-family:Inter,system-ui,Arial,sans-serif}
 
-    body {
-      min-height: 100vh;
-      color: #fff;
-      background: #000;
-      line-height: 1.6;
-      scroll-behavior: smooth;
-      transition: background 0.3s ease, color 0.3s ease;
-    }
-    body.light { background: #f9f9f9; color: #222; }
+    /* Header */
+    header{position:sticky;top:0;z-index:60;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.35));backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.04)}
+    .container{max-width:var(--max-width);margin:0 auto;padding:12px 18px}
+    .header-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#ff8a1f);display:flex;align-items:center;justify-content:center;color:#111;font-weight:800}
+    .brand-text h1{font-size:1.05rem;white-space:nowrap}
+    .brand-text p{font-size:0.84rem;color:var(--muted)}
 
-    header {
-      background: #2c3e50;
-      color: #fff;
-      padding: 20px 15px;
-    }
-    .header-flex { display: flex; justify-content: space-between; align-items: center; }
-    header h1 {
-      font-size: clamp(1.5rem, 5vw, 2.5rem);
-      border-right: 3px solid #fff;
-      padding-right: 5px;
-      white-space: nowrap;
-    }
-    header p { margin-top: 5px; color: #f1c40f; font-weight: 500; font-size: clamp(0.9rem, 3vw, 1.1rem); }
+    /* Nav */
+    nav{display:flex;align-items:center;gap:14px}
+    .nav-links{display:flex;gap:12px}
+    .nav-links a{color:#ddd;text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:700;transition:all .18s}
+    .nav-links a:hover{background:var(--accent);color:#111}
 
-    /* Hamburger */
-    .menu-toggle { display: none; flex-direction: column; cursor: pointer; }
-    .menu-toggle span {
-      height: 3px; width: 25px; margin: 4px 0;
-      background: #fff; border-radius: 3px; transition: 0.3s;
-    }
-    body.light .menu-toggle span { background: #000; }
+    /* Hamburger (garis 3) */
+    .menu-toggle{display:none;border:none;background:transparent;cursor:pointer;padding:8px}
+    .menu-toggle .bar{display:block;width:26px;height:3px;border-radius:3px;background:#fff;margin:5px 0;transition:transform .25s,opacity .25s}
+    body.light .menu-toggle .bar{background:#111}
 
-    nav ul { list-style: none; display: flex; gap: 20px; transition: all 0.5s ease; }
-    nav a {
-      color: #fff; text-decoration: none; font-weight: bold; transition: 0.3s;
-    }
-    nav a:hover { color: #f1c40f; }
-    body.light nav a { color: #000; }
-    body.light nav a:hover { color: #f39c12; }
-
-    /* Section base + animasi */
-    section {
-      position: relative;
-      padding: 50px 15px;
-      max-width: 900px;
-      margin: 40px auto;
-      border-radius: 10px;
-      overflow: hidden;
-      background: rgba(255,255,255,0.05);
-      opacity: 0;
-      transform: translateY(60px);
-    }
-    section.animate {
-      animation: fadeInUp 0.8s ease forwards;
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(60px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* Responsive nav */
+    @media (max-width:768px){
+      .menu-toggle{display:block}
+      .nav-links{position:fixed;right:16px;top:68px;flex-direction:column;background:rgba(0,0,0,0.86);padding:10px;border-radius:10px;display:none}
+      .nav-links.show{display:flex}
+      body.light .nav-links{background:rgba(255,255,255,0.95)}
     }
 
-    h2 { margin-bottom: 20px; color: #f1c40f; text-align: center; font-size: clamp(1.3rem, 4vw, 1.8rem); }
+    /* Main content */
+    main{max-width:var(--max-width);margin:24px auto;padding:0 18px}
+    section{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:34px;border-radius:var(--radius);margin:20px 0;overflow:hidden}
 
-    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
-    .portfolio-item {
-      background: rgba(255,255,255,0.1);
-      padding: 15px; border-radius: 10px; text-align: center;
-      transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;
-    }
-    .portfolio-item:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
-    .portfolio-item img { width: 100%; height: 180px; object-fit: cover; border-radius: 8px; margin-top: 10px; }
+    /* IMPORTANT: make sections visible by default so nothing disappears */
+    section{opacity:1;transform:none}
 
-    #kontak { text-align: center; }
-    #kontak a {
-      display: inline-block; margin: 10px; padding: 10px 20px;
-      background: #f1c40f; color: #000; border-radius: 8px; font-weight: bold;
-      transition: 0.3s; font-size: clamp(0.9rem,3vw,1rem);
-    }
-    #kontak a:hover { background: #d4ac0d; color: #fff; transform: scale(1.1); }
+    /* 'replay' animation applied when element gets .reveal */
+    .reveal{animation:revealUp .7s cubic-bezier(.2,.9,.3,1) both}
+    @keyframes revealUp{from{opacity:0;transform:translateY(26px);}to{opacity:1;transform:translateY(0);}}
 
-    footer { background: #111; padding: 15px; text-align: center; margin-top: 30px; color: #aaa; font-size: 0.9rem; }
+    h2{text-align:center;color:var(--accent);margin-bottom:12px}
+    p{color:#d6dbe0}
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      .menu-toggle { display: flex; }
-      nav ul { flex-direction: column; display: none; background: rgba(0,0,0,0.85); padding: 12px; border-radius: 10px; }
-      nav ul.showing { display: flex; }
-      body.light nav ul { background: rgba(255,255,255,0.9); }
-    }
+    .portfolio-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+    .portfolio-item{background:var(--card);padding:12px;border-radius:10px;text-align:center;transition:transform .25s,box-shadow .25s}
+    .portfolio-item:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,0.5)}
+    .portfolio-item img{width:100%;height:160px;object-fit:cover;border-radius:8px;margin-top:10px}
+
+    .links-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+    .btn{display:inline-block;padding:10px 16px;border-radius:10px;background:var(--accent);color:#111;font-weight:800;text-decoration:none;transition:transform .18s}
+    .btn:hover{transform:translateY(-6px)}
+
+    footer{max-width:var(--max-width);margin:24px auto;padding:16px;text-align:center;color:var(--muted)}
+
+    /* Light theme tweaks */
+    body.light{background:#f8f8fa;color:#111}
+    body.light .brand-text p{color:#444}
+    body.light .nav-links a{color:#111}
+
+    /* reduced motion: disable animations */
+    @media (prefers-reduced-motion: reduce){.reveal{animation:none}}
   </style>
 </head>
 <body>
   <header>
-    <div class="header-flex">
-      <div>
-        <h1 id="typing"></h1>
-        <p>Web Developer | Engineer | Creator</p>
-      </div>
-      <div class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('showing')">
-        <span></span><span></span><span></span>
+    <div class="container">
+      <div class="header-row">
+        <div class="brand">
+          <div class="logo" aria-hidden="true">HQ</div>
+          <div class="brand-text">
+            <h1 id="typing" aria-label="Nama: Habil Qodam Wahyudi"></h1>
+            <p>Web Developer | Engineer | Creator</p>
+          </div>
+        </div>
+
+        <nav aria-label="Main navigation">
+          <div class="nav-links" id="navLinks">
+            <a href="#tentang">Tentang</a>
+            <a href="#pengalaman">Pengalaman</a>
+            <a href="#kontak">Kontak</a>
+          </div>
+          <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Buka menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+        </nav>
       </div>
     </div>
-    <nav>
-      <ul>
-        <li><a href="#tentang">Tentang</a></li>
-        <li><a href="#pengalaman">Pengalaman</a></li>
-        <li><a href="#kontak">Kontak</a></li>
-      </ul>
-    </nav>
   </header>
 
-  <section id="tentang">
-    <h2>Tentang Saya</h2>
-    <p>Halo! Saya seorang pengembang web ...</p>
-  </section>
+  <main>
+    <section id="tentang">
+      <h2>Tentang Saya</h2>
+      <p>Halo! Saya seorang pengembang web yang lahir dengan ilmu dan pengetahuan yang terus berkembang. Saya percaya bahwa proses besar berawal dari langkah kecil. Selain pengembangan web, saya juga tertarik pada dunia audio — dari perakitan hingga tuning suara.</p>
+    </section>
 
-  <section id="pengalaman">
-    <h2>Pengalaman</h2>
-    <div class="portfolio-grid">
-      <div class="portfolio-item"><h3>Proyek 1</h3><p>Desain 3D model</p><img src="img1.jpg" alt="Proyek 1"></div>
-      <div class="portfolio-item"><h3>Proyek 2</h3><p>Rakitan mini sound</p><img src="img2.jpg" alt="Proyek 2"></div>
-      <div class="portfolio-item"><h3>Proyek 3</h3><p>Perakitan PLC</p><img src="img3.jpg" alt="Proyek 3"></div>
-    </div>
-  </section>
+    <section id="pengalaman">
+      <h2>Pengalaman</h2>
+      <div class="portfolio-grid">
+        <div class="portfolio-item"><h3>Proyek 1</h3><p>Desain 3D model menggunakan Blender</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.08.jpeg" alt="Proyek 1"></div>
+        <div class="portfolio-item"><h3>Proyek 2</h3><p>Rakitan mini sound dengan 2 speaker 3 inch</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.07 (1).jpeg" alt="Proyek 2"></div>
+        <div class="portfolio-item"><h3>Proyek 3</h3><p>Perakitan PLC (Programmable Logic Controller)</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.07.jpeg" alt="Proyek 3"></div>
+      </div>
+    </section>
 
-  <section id="kontak">
-    <h2>Kontak</h2>
-    <a href="#">Instagram</a>
-    <a href="#">Tiktok</a>
-    <a href="#">GitHub</a>
-    <a href="#">Wokwi</a>
-  </section>
+    <section id="kontak">
+      <h2>Kontak</h2>
+      <div class="links-row">
+        <a class="btn" href="https://www.instagram.com/habilqw_?igsh=bGhqdGN0M3hudjJki" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn" href="https://www.tiktok.com/@habilwahyudi" target="_blank" rel="noopener">Tiktok</a>
+        <a class="btn" href="https://github.com/habilwahyudi56-hash" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://wokwi.com/makers/habil_qw" target="_blank" rel="noopener">Wokwi</a>
+      </div>
+    </section>
+  </main>
 
-  <footer><p>© 2025 HABIL QODAM WAHYUDI</p></footer>
+  <footer>
+    <p>© 2025 HABIL QODAM WAHYUDI | Semua Hak Dilindungi</p>
+  </footer>
 
   <script>
-    // Efek ketik
-    const text = "HABIL QODAM WAHYUDI";
-    const typingElement = document.getElementById("typing");
-    let i=0;
-    function typeWriter(){
-      if(i<text.length){ typingElement.textContent+=text.charAt(i); i++; setTimeout(typeWriter,150);}
-      else typingElement.style.borderRight="none";
-    }
-    window.onload = typeWriter;
+    // typing effect
+    (function(){
+      const txt = 'HABIL QODAM WAHYUDI';
+      const el = document.getElementById('typing');
+      let i = 0;
+      el.style.borderRight = '2px solid var(--accent)';
+      function type(){ if(i<txt.length){ el.textContent += txt[i++]; setTimeout(type,100);} else el.style.borderRight='none'; }
+      window.addEventListener('DOMContentLoaded', ()=> setTimeout(type,160));
+    })();
 
-    // Animasi scroll looping
-    const sections=document.querySelectorAll("section");
-    const observer=new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
+    // mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', ()=>{
+      const open = navLinks.classList.toggle('show');
+      menuToggle.setAttribute('aria-expanded', open);
+    });
+
+    // IntersectionObserver: replay animation each time element enters viewport
+    const targets = document.querySelectorAll('section, .portfolio-item, .btn');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry => {
+        const el = entry.target;
         if(entry.isIntersecting){
-          entry.target.classList.remove("animate"); // reset
-          void entry.target.offsetWidth; // reflow hack
-          entry.target.classList.add("animate");
+          // remove then re-add to force replay
+          el.classList.remove('reveal');
+          // reflow hack
+          void el.offsetWidth;
+          el.classList.add('reveal');
+        } else {
+          // remove so it can replay next time
+          el.classList.remove('reveal');
         }
       });
-    },{threshold:0.2});
-    sections.forEach(sec=>observer.observe(sec));
+    }, {threshold: 0.2});
+    targets.forEach(t=>io.observe(t));
+
+    // Make sure nav links remain visible on light mode (if user toggles externally)
+    // If you plan to add a theme toggle, ensure to toggle body.classList.add('light') accordingly.
   </script>
 </body>
 </html>
