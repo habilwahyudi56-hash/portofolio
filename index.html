@@ -7,45 +7,47 @@
   <meta name="description" content="Portofolio Habil Qodam Wahyudi - Web Developer & Sound Enthusiast" />
   <style>
     :root{
+      --bg:#050506;
+      --card:rgba(255,255,255,0.04);
       --accent:#f1c40f;
       --muted:#9aa3ad;
       --max-width:1100px;
       --radius:12px;
     }
     *{box-sizing:border-box;margin:0;padding:0}
-
     html,body{
       height:100%;
       min-height:100%;
-      margin:0;
+      background:#000;
       color:#fff;
       font-family:Inter,system-ui,Arial,sans-serif;
       scroll-behavior:smooth;
-      background:url('sirquit.jpg') no-repeat center center fixed;
+    }
+
+    /* Background image + overlay */
+    body {
+      background:url("sirquit.jpg") no-repeat center center fixed;
       background-size:cover;
       position:relative;
     }
-
-    /* Overlay hitam full screen */
-    body::before{
+    body::before {
       content:"";
       position:fixed;
-      inset:0;
-      background:rgba(0,0,0,0.6);
+      top:0;left:0;right:0;bottom:0;
+      background:rgba(0,0,0,0.55);
       z-index:-1;
     }
 
     /* Header */
     header{
       position:sticky;top:0;z-index:60;
-      background:rgba(0,0,0,0.7);
+      background:linear-gradient(180deg, rgba(0,0,0,0.65), rgba(0,0,0,0));
       backdrop-filter:blur(6px);
-      border-bottom:1px solid rgba(255,255,255,0.04);
+      border-bottom:1px solid rgba(255,255,255,0.08);
     }
     .container{max-width:var(--max-width);margin:0 auto;padding:12px 18px}
     .header-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
     .brand{display:flex;align-items:center;gap:12px}
-
     /* Logo with shine animation */
     .logo{
       width:52px;height:52px;
@@ -78,7 +80,7 @@
     .nav-links a{color:#ddd;text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:700;transition:all .18s}
     .nav-links a:hover{background:var(--accent);color:#111}
 
-    /* Hamburger */
+    /* Hamburger (garis 3) */
     .menu-toggle{display:none;border:none;background:transparent;cursor:pointer;padding:8px}
     .menu-toggle .bar{display:block;width:26px;height:3px;border-radius:3px;background:#fff;margin:5px 0;transition:transform .25s,opacity .25s}
 
@@ -92,7 +94,7 @@
     /* Main content */
     main{max-width:var(--max-width);margin:24px auto;padding:0 18px}
     section{
-      background:rgba(0,0,0,0.45); /* transparan tipis */
+      background:rgba(0,0,0,0.55);
       padding:34px;
       border-radius:var(--radius);
       margin:20px 0;
@@ -104,25 +106,21 @@
     section.show{opacity:1;transform:none}
 
     h2{text-align:center;color:var(--accent);margin-bottom:12px}
-    p{color:#d6dbe0;line-height:1.6}
+    p{color:#d6dbe0}
 
-    /* Portfolio */
     .portfolio-grid{
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:16px;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:18px
     }
     .portfolio-item{
-      background:rgba(255,255,255,0.06);
+      background:var(--card);
       padding:14px;
       border-radius:10px;
       text-align:center;
       transition:transform .25s,box-shadow .25s
     }
-    .portfolio-item:hover{
-      transform:translateY(-6px);
-      box-shadow:0 12px 30px rgba(0,0,0,0.5)
-    }
+    .portfolio-item:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,0.5)}
     .portfolio-item img{
       width:100%;
       height:180px;
@@ -132,10 +130,29 @@
     }
 
     .links-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-    .btn{display:inline-block;padding:10px 16px;border-radius:10px;background:var(--accent);color:#111;font-weight:800;text-decoration:none;transition:transform .18s}
+    .btn{
+      display:inline-block;
+      padding:10px 16px;
+      border-radius:10px;
+      background:var(--accent);
+      color:#111;
+      font-weight:800;
+      text-decoration:none;
+      transition:transform .18s
+    }
     .btn:hover{transform:translateY(-6px)}
 
-    footer{max-width:var(--max-width);margin:24px auto;padding:16px;text-align:center;color:var(--muted)}
+    footer{
+      max-width:var(--max-width);
+      margin:24px auto;
+      padding:16px;
+      text-align:center;
+      color:var(--muted);
+      background:rgba(0,0,0,0.55);
+      border-radius:12px;
+    }
+
+    @media (prefers-reduced-motion: reduce){section{transition:none}}
   </style>
 </head>
 <body>
@@ -171,11 +188,11 @@
       <h2>Tentang Saya</h2>
       <p>
         Halo! Nama saya Habil Qodam Wahyudi, seorang pengembang web yang selalu bersemangat menciptakan pengalaman digital yang interaktif, sederhana, dan bermanfaat.
-        <br><br>
+
         Saya percaya bahwa teknologi bukan hanya soal kode, tapi juga tentang membawa ide menjadi nyata. Dari merancang antarmuka yang elegan, membangun sistem yang efisien, hingga mengutak-atik dunia audio dan elektronik, saya selalu terdorong untuk terus bereksperimen.
-        <br><br>
+
         Di luar dunia coding, saya juga mendalami audio engineering dan perakitan perangkat elektronik. Ketertarikan saya terhadap suara membuat saya senang merakit, memodifikasi, bahkan men-tuning sistem audio agar menghasilkan kualitas terbaik.
-        <br><br>
+
         Bagi saya, setiap proyek adalah perjalanan—belajar, berkreasi, lalu membagikannya kepada orang lain. Dengan perpaduan keterampilan teknis dan rasa ingin tahu yang besar, saya siap menghadapi tantangan baru dan terus berkembang.
       </p>
     </section>
