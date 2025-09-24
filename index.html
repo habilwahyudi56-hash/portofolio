@@ -7,7 +7,6 @@
   <meta name="description" content="Portofolio Habil Qodam Wahyudi - Web Developer & Sound Enthusiast" />
   <style>
     :root{
-      --card:rgba(0,0,0,0.55);
       --accent:#f1c40f;
       --muted:#9aa3ad;
       --max-width:1100px;
@@ -27,7 +26,7 @@
       position:relative;
     }
 
-    /* Overlay */
+    /* Overlay hitam full screen */
     body::before{
       content:"";
       position:fixed;
@@ -79,7 +78,7 @@
     .nav-links a{color:#ddd;text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:700;transition:all .18s}
     .nav-links a:hover{background:var(--accent);color:#111}
 
-    /* Hamburger (garis 3) */
+    /* Hamburger */
     .menu-toggle{display:none;border:none;background:transparent;cursor:pointer;padding:8px}
     .menu-toggle .bar{display:block;width:26px;height:3px;border-radius:3px;background:#fff;margin:5px 0;transition:transform .25s,opacity .25s}
 
@@ -93,7 +92,7 @@
     /* Main content */
     main{max-width:var(--max-width);margin:24px auto;padding:0 18px}
     section{
-      background:var(--card);
+      background:rgba(0,0,0,0.45); /* transparan tipis */
       padding:34px;
       border-radius:var(--radius);
       margin:20px 0;
@@ -184,7 +183,7 @@
     <section id="pengalaman">
       <h2>Pengalaman</h2>
       <div class="portfolio-grid">
-        <div class="portfolio-item"><h3>Proyek 1</h3><p>Desain 3D model menggunakan Blender menggunakan aplikasi 3D blender</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.08.jpeg" alt="Proyek 1"></div>
+        <div class="portfolio-item"><h3>Proyek 1</h3><p>Desain 3D model menggunakan Blender</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.08.jpeg" alt="Proyek 1"></div>
         <div class="portfolio-item"><h3>Proyek 2</h3><p>Rakitan mini sound dengan 2 speaker 3 inch</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.07 (1).jpeg" alt="Proyek 2"></div>
         <div class="portfolio-item"><h3>Proyek 3</h3><p>Perakitan PLC (Programmable Logic Controller)</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.07.jpeg" alt="Proyek 3"></div>
       </div>
