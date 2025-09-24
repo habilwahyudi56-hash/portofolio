@@ -5,10 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Portofolio Habil</title>
   <meta name="description" content="Portofolio Habil Qodam Wahyudi - Web Developer & Sound Enthusiast" />
-
-  <!-- Tambahkan AOS CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-
   <style>
     :root{
       --bg:#050506;
@@ -26,6 +22,13 @@
       color:#fff;
       font-family:Inter,system-ui,Arial,sans-serif;
       scroll-behavior:smooth;
+    }
+
+    /* Background gradient biru */
+    body {
+      background: linear-gradient(135deg, #001f3f, #0074D9, #00c6ff);
+      background-attachment: fixed;
+      background-size: cover;
     }
 
     /* Header */
@@ -48,13 +51,18 @@
       overflow:hidden;
     }
     .logo::after{
-      content:'';position:absolute;top:0;left:-75%;
+      content:'';
+      position:absolute;
+      top:0;left:-75%;
       width:50%;height:100%;
       background:linear-gradient(120deg,rgba(255,255,255,0.3),rgba(255,255,255,0));
       transform:skewX(-25deg);
       animation:shine 2s infinite;
     }
-    @keyframes shine{0%{left:-75%}100%{left:125%}}
+    @keyframes shine{
+      0%{left:-75%}
+      100%{left:125%}
+    }
 
     .brand-text h1{font-size:1.05rem;white-space:nowrap}
     .brand-text p{font-size:0.84rem;color:var(--muted)}
@@ -69,7 +77,6 @@
     .menu-toggle{display:none;border:none;background:transparent;cursor:pointer;padding:8px}
     .menu-toggle .bar{display:block;width:26px;height:3px;border-radius:3px;background:#fff;margin:5px 0;transition:transform .25s,opacity .25s}
 
-    /* Responsive nav */
     @media (max-width:768px){
       .menu-toggle{display:block}
       .nav-links{position:fixed;right:16px;top:68px;flex-direction:column;background:rgba(0,0,0,0.9);padding:10px;border-radius:10px;display:none}
@@ -83,7 +90,12 @@
       padding:34px;
       border-radius:var(--radius);
       margin:20px 0;
+      overflow:hidden;
+      opacity:0;
+      transform:translateY(36px);
+      transition:all .8s cubic-bezier(.2,.9,.3,1);
     }
+    section.show{opacity:1;transform:none}
 
     h2{text-align:center;color:var(--accent);margin-bottom:12px}
     p{color:#d6dbe0}
@@ -131,10 +143,12 @@
       background:rgba(0,0,0,0.55);
       border-radius:12px;
     }
+
+    @media (prefers-reduced-motion: reduce){section{transition:none}}
   </style>
 </head>
 <body>
-  <header data-aos="fade-down" data-aos-once="false">
+  <header>
     <div class="container">
       <div class="header-row">
         <div class="brand">
@@ -162,7 +176,7 @@
   </header>
 
   <main>
-    <section id="tentang" data-aos="fade-up" data-aos-once="false">
+    <section id="tentang">
       <h2>Tentang Saya</h2>
       <p>
         Halo! Nama saya Habil Qodam Wahyudi, seorang pengembang web yang selalu bersemangat menciptakan pengalaman digital yang interaktif, sederhana, dan bermanfaat.
@@ -175,38 +189,31 @@
       </p>
     </section>
 
-    <section id="pengalaman" data-aos="fade-right" data-aos-once="false">
+    <section id="pengalaman">
       <h2>Pengalaman</h2>
       <div class="portfolio-grid">
-        <div class="portfolio-item" data-aos="zoom-in" data-aos-once="false"><h3>Proyek 1</h3><p>Desain 3D model menggunakan Blender</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.08.jpeg" alt="Proyek 1"></div>
-        <div class="portfolio-item" data-aos="zoom-in" data-aos-once="false"><h3>Proyek 2</h3><p>Rakitan mini sound dengan 2 speaker 3 inch</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.07 (1).jpeg" alt="Proyek 2"></div>
-        <div class="portfolio-item" data-aos="zoom-in" data-aos-once="false"><h3>Proyek 3</h3><p>Perakitan PLC (Programmable Logic Controller)</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.07.jpeg" alt="Proyek 3"></div>
+        <div class="portfolio-item"><h3>Proyek 1</h3><p>Desain 3D model menggunakan Blender</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.08.jpeg" alt="Proyek 1"></div>
+        <div class="portfolio-item"><h3>Proyek 2</h3><p>Rakitan mini sound dengan 2 speaker 3 inch</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.07 (1).jpeg" alt="Proyek 2"></div>
+        <div class="portfolio-item"><h3>Proyek 3</h3><p>Perakitan PLC (Programmable Logic Controller)</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.07.jpeg" alt="Proyek 3"></div>
       </div>
     </section>
 
-    <section id="kontak" data-aos="fade-up" data-aos-once="false">
+    <section id="kontak">
       <h2>Kontak</h2>
       <div class="links-row">
-        <a class="btn" href="https://www.instagram.com/habilqw_?igsh=bGhqdGN0M3hudjJki" target="_blank" rel="noopener" data-aos="flip-left" data-aos-once="false">Instagram</a>
-        <a class="btn" href="https://www.tiktok.com/@habilwahyudi" target="_blank" rel="noopener" data-aos="flip-left" data-aos-once="false">Tiktok</a>
-        <a class="btn" href="https://github.com/habilwahyudi56-hash" target="_blank" rel="noopener" data-aos="flip-left" data-aos-once="false">GitHub</a>
-        <a class="btn" href="https://wokwi.com/makers/habil_qw" target="_blank" rel="noopener" data-aos="flip-left" data-aos-once="false">Wokwi</a>
+        <a class="btn" href="https://www.instagram.com/habilqw_?igsh=bGhqdGN0M3hudjJki" target="_blank" rel="noopener">Instagram</a>
+        <a class="btn" href="https://www.tiktok.com/@habilwahyudi" target="_blank" rel="noopener">Tiktok</a>
+        <a class="btn" href="https://github.com/habilwahyudi56-hash" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://wokwi.com/makers/habil_qw" target="_blank" rel="noopener">Wokwi</a>
       </div>
     </section>
   </main>
 
-  <footer data-aos="fade-up" data-aos-once="false">
+  <footer>
     <p>© 2025 HABIL QODAM WAHYUDI | Semua Hak Dilindungi</p>
   </footer>
 
-  <!-- Tambahkan AOS JS -->
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
-    AOS.init({
-      duration: 1000,
-      once: false // animasi bisa berulang terus setiap discroll
-    });
-
     // typing effect without cursor
     (function(){
       const txt = 'HABIL QODAM WAHYUDI';
@@ -223,6 +230,18 @@
       const open = navLinks.classList.toggle('show');
       menuToggle.setAttribute('aria-expanded', open);
     });
+
+    // scroll reveal with replay
+    const targets = document.querySelectorAll('section, .portfolio-item, .btn');
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        const el=entry.target;
+        if(entry.isIntersecting){
+          el.classList.remove('show'); void el.offsetWidth; el.classList.add('show');
+        }
+      });
+    }, {threshold:0.2});
+    targets.forEach(t=>io.observe(t));
   </script>
 </body>
 </html>
