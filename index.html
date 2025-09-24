@@ -14,8 +14,8 @@
     html, body {
       height: 100%;
       width: 100%;
-      overflow-x: hidden;
       font-family: Arial, sans-serif;
+      overflow-x: hidden;
     }
 
     body {
@@ -24,7 +24,7 @@
       color: white;
     }
 
-    /* Background Image */
+    /* Background gambar */
     body::before {
       content: "";
       position: fixed;
@@ -36,7 +36,7 @@
       z-index: -2;
     }
 
-    /* Overlay Transparan 30% */
+    /* Overlay transparan 30% */
     body::after {
       content: "";
       position: fixed;
@@ -44,16 +44,16 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.3); /* hitam transparan */
+      background: rgba(0, 0, 0, 0.3);
       z-index: -1;
     }
 
     header {
-      background: rgba(0, 0, 0, 0.6);
+      background: rgba(0,0,0,0.6);
       padding: 15px;
       text-align: center;
+      font-size: 22px;
       font-weight: bold;
-      font-size: 20px;
       position: sticky;
       top: 0;
       z-index: 10;
@@ -64,21 +64,20 @@
     }
 
     h2 {
-      text-align: center;
       color: #ffcc00;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
+      text-align: center;
     }
 
     .card {
       background: rgba(0, 0, 0, 0.7);
       border-radius: 12px;
       padding: 15px;
-      margin: 15px 0;
+      margin-bottom: 20px;
     }
 
     .card h3 {
       margin-bottom: 10px;
-      color: #fff;
     }
 
     img {
@@ -105,12 +104,6 @@
       <h3>Proyek 2</h3>
       <p>Rakitan mini sound dengan 2 speaker</p>
       <img src="contoh2.jpg" alt="Proyek 2">
-    </div>
-
-    <div class="card">
-      <h3>Proyek 3</h3>
-      <p>Eksperimen audio engineering dan modifikasi sistem suara</p>
-      <img src="contoh3.jpg" alt="Proyek 3">
     </div>
 
   </section>
