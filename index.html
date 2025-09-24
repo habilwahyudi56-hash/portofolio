@@ -13,7 +13,6 @@
       --radius: 12px;
     }
 
-    /* Reset dasar */
     * { box-sizing: border-box; margin: 0; padding: 0 }
     html, body {
       height: 100%;
@@ -41,6 +40,8 @@
     .container { max-width: var(--max-width); margin: 0 auto; padding: 12px 18px }
     .header-row { display: flex; align-items: center; justify-content: space-between; gap: 12px }
     .brand { display: flex; align-items: center; gap: 12px }
+
+    /* Logo dengan shine */
     .logo {
       width: 52px; height: 52px;
       border-radius: 12px;
@@ -58,14 +59,12 @@
       transform: skewX(-25deg);
       animation: shine 2s infinite;
     }
-    @keyframes shine {
-      0% { left: -75% }
-      100% { left: 125% }
-    }
+    @keyframes shine { 0%{left:-75%} 100%{left:125%} }
 
     .brand-text h1 { font-size: 1.05rem; white-space: nowrap }
     .brand-text p { font-size: 0.84rem; color: var(--muted) }
 
+    /* Nav */
     nav { display: flex; align-items: center; gap: 14px }
     .nav-links { display: flex; gap: 12px }
     .nav-links a {
@@ -75,6 +74,7 @@
     }
     .nav-links a:hover { background: var(--accent); color: #111 }
 
+    /* Hamburger */
     .menu-toggle { display: none; border: none; background: transparent; cursor: pointer; padding: 8px }
     .menu-toggle .bar {
       display: block; width: 26px; height: 3px; border-radius: 3px;
@@ -93,9 +93,10 @@
       .nav-links.show { display: flex }
     }
 
+    /* Main content */
     main { max-width: var(--max-width); margin: 24px auto; padding: 0 18px }
     section {
-      background: rgba(0,0,0,0.25); /* transparan biar gradient tetap kelihatan */
+      background: rgba(0,0,0,0.25); /* transparan biar gradient kelihatan */
       padding: 34px;
       border-radius: var(--radius);
       margin: 20px 0;
@@ -153,70 +154,88 @@
     <div class="container">
       <div class="header-row">
         <div class="brand">
-          <div class="logo">H</div>
+          <div class="logo" aria-hidden="true">HQ</div>
           <div class="brand-text">
-            <h1>Habil Qodam Wahyudi</h1>
-            <p>Web Developer</p>
+            <h1 id="typing"></h1>
+            <p>Web Developer | Engineer | Creator</p>
           </div>
         </div>
+
         <nav>
-          <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('show')">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-          </button>
-          <div class="nav-links">
-            <a href="#about">Tentang</a>
-            <a href="#portfolio">Portofolio</a>
-            <a href="#contact">Kontak</a>
+          <div class="nav-links" id="navLinks">
+            <a href="#tentang">Tentang</a>
+            <a href="#pengalaman">Pengalaman</a>
+            <a href="#kontak">Kontak</a>
           </div>
+          <button class="menu-toggle" id="menuToggle">
+            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+          </button>
         </nav>
       </div>
     </div>
   </header>
 
   <main>
-    <section id="about">
+    <section id="tentang">
       <h2>Tentang Saya</h2>
-      <p>Saya Habil Qodam Wahyudi, seorang web developer yang suka membangun website modern, interaktif, dan responsif. Juga aktif dalam dunia sound system.</p>
+      <p>
+        Halo! Nama saya Habil Qodam Wahyudi, seorang pengembang web yang selalu bersemangat menciptakan pengalaman digital yang interaktif, sederhana, dan bermanfaat.
+        <br><br>
+        Saya percaya bahwa teknologi bukan hanya soal kode, tapi juga tentang membawa ide menjadi nyata...
+      </p>
     </section>
 
-    <section id="portfolio">
-      <h2>Portofolio</h2>
+    <section id="pengalaman">
+      <h2>Pengalaman</h2>
       <div class="portfolio-grid">
-        <div class="portfolio-item">
-          <h3>Proyek 1</h3>
-          <img src="https://via.placeholder.com/400x250" alt="Proyek 1">
-        </div>
-        <div class="portfolio-item">
-          <h3>Proyek 2</h3>
-          <img src="https://via.placeholder.com/400x250" alt="Proyek 2">
-        </div>
+        <div class="portfolio-item"><h3>Proyek 1</h3><p>Desain 3D model menggunakan Blender</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.08.jpeg" alt="Proyek 1"></div>
+        <div class="portfolio-item"><h3>Proyek 2</h3><p>Rakitan mini sound dengan 2 speaker 3 inch</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.07 (1).jpeg" alt="Proyek 2"></div>
+        <div class="portfolio-item"><h3>Proyek 3</h3><p>Perakitan PLC (Programmable Logic Controller)</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.07.jpeg" alt="Proyek 3"></div>
       </div>
     </section>
 
-    <section id="contact">
+    <section id="kontak">
       <h2>Kontak</h2>
       <div class="links-row">
-        <a href="mailto:habil@example.com" class="btn">Email</a>
-        <a href="https://github.com" class="btn">GitHub</a>
-        <a href="https://linkedin.com" class="btn">LinkedIn</a>
+        <a class="btn" href="https://www.instagram.com/habilqw_" target="_blank">Instagram</a>
+        <a class="btn" href="https://www.tiktok.com/@habilwahyudi" target="_blank">Tiktok</a>
+        <a class="btn" href="https://github.com/habilwahyudi56-hash" target="_blank">GitHub</a>
+        <a class="btn" href="https://wokwi.com/makers/habil_qw" target="_blank">Wokwi</a>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 Habil Qodam Wahyudi</p>
+    <p>© 2025 HABIL QODAM WAHYUDI | Semua Hak Dilindungi</p>
   </footer>
 
   <script>
-    // animasi muncul tiap section
-    const observer = new IntersectionObserver((entries)=>{
+    // typing effect tanpa cursor
+    (function(){
+      const txt = 'HABIL QODAM WAHYUDI';
+      const el = document.getElementById('typing');
+      let i=0;
+      function type(){ if(i<txt.length){ el.textContent+=txt[i++]; setTimeout(type,100); } }
+      window.addEventListener('DOMContentLoaded', ()=> setTimeout(type,160));
+    })();
+
+    // mobile menu
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', ()=>{
+      navLinks.classList.toggle('show');
+    });
+
+    // scroll reveal
+    const targets = document.querySelectorAll('section, .portfolio-item, .btn');
+    const io = new IntersectionObserver(entries=>{
       entries.forEach(entry=>{
-        if(entry.isIntersecting){ entry.target.classList.add('show'); }
-      })
-    },{threshold:0.1});
-    document.querySelectorAll('section').forEach(s=>observer.observe(s));
+        if(entry.isIntersecting){
+          entry.target.classList.remove('show'); void entry.target.offsetWidth; entry.target.classList.add('show');
+        }
+      });
+    }, {threshold:0.2});
+    targets.forEach(t=>io.observe(t));
   </script>
 </body>
 </html>
