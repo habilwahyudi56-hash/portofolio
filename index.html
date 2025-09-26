@@ -26,7 +26,7 @@
 
     /* Background gradient biru */
     body {
-      background: linear-gradient(135deg, #001f3f, #0074D9, #00c6ff);
+      background: linear-gradient(135deg, #001f3f, #00c6ff);
       background-attachment: fixed;
       background-size: cover;
     }
@@ -81,6 +81,9 @@
       .menu-toggle{display:block}
       .nav-links{position:fixed;right:16px;top:68px;flex-direction:column;background:rgba(0,0,0,0.9);padding:10px;border-radius:10px;display:none}
       .nav-links.show{display:flex}
+      .brand-text h1{font-size:0.9rem}
+      .brand-text p{font-size:0.72rem}
+      .logo{width:42px;height:42px}
     }
 
     /* Main content */
@@ -98,7 +101,10 @@
     section.show{opacity:1;transform:none}
 
     h2{text-align:center;color:var(--accent);margin-bottom:12px}
-    p{color:#d6dbe0}
+    p{color:#d6dbe0;line-height:1.6}
+
+    ul.skills{margin-top:12px;padding-left:20px;color:#d6dbe0}
+    ul.skills li{margin-bottom:6px}
 
     .portfolio-grid{
       display:grid;
@@ -115,8 +121,8 @@
     .portfolio-item:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,0.5)}
     .portfolio-item img{
       width:100%;
-      height:180px;
-      object-fit:cover;
+      max-height:200px;
+      object-fit:contain;
       border-radius:8px;
       margin-top:10px
     }
@@ -130,9 +136,12 @@
       color:#111;
       font-weight:800;
       text-decoration:none;
-      transition:transform .18s
+      transition:transform .2s, box-shadow .2s;
     }
-    .btn:hover{transform:translateY(-6px)}
+    .btn:hover{
+      transform:scale(1.05);
+      box-shadow:0 6px 18px rgba(0,0,0,0.5);
+    }
 
     footer{
       max-width:var(--max-width);
@@ -152,7 +161,7 @@
     <div class="container">
       <div class="header-row">
         <div class="brand">
-          <div class="logo" aria-hidden="true">HQ</div>
+          <div class="logo" role="img" aria-label="Logo HQ">HQ</div>
           <div class="brand-text">
             <h1 id="typing" aria-label="Nama: Habil Qodam Wahyudi"></h1>
             <p>Web Developer | Engineer | Creator</p>
@@ -161,9 +170,9 @@
 
         <nav aria-label="Main navigation">
           <div class="nav-links" id="navLinks">
-            <a href="#tentang">Tentang</a>
-            <a href="#pengalaman">Pengalaman</a>
-            <a href="#kontak">Kontak</a>
+            <a href="#tentang" title="Tentang Saya">Tentang</a>
+            <a href="#pengalaman" title="Pengalaman">Pengalaman</a>
+            <a href="#kontak" title="Kontak">Kontak</a>
           </div>
           <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Buka menu">
             <span class="bar"></span>
@@ -184,17 +193,33 @@
         Saya percaya bahwa teknologi bukan hanya soal kode, tapi juga tentang membawa ide menjadi nyata. Dari merancang antarmuka yang elegan, membangun sistem yang efisien, hingga mengutak-atik dunia audio dan elektronik, saya selalu terdorong untuk terus bereksperimen.
         <br><br>
         Di luar dunia coding, saya juga mendalami audio engineering dan perakitan perangkat elektronik. Ketertarikan saya terhadap suara membuat saya senang merakit, memodifikasi, bahkan men-tuning sistem audio agar menghasilkan kualitas terbaik.
-        <br><br>
-        Bagi saya, setiap proyek adalah perjalanan—belajar, berkreasi, lalu membagikannya kepada orang lain. Dengan perpaduan keterampilan teknis dan rasa ingin tahu yang besar, saya siap menghadapi tantangan baru dan terus berkembang.
       </p>
+      <ul class="skills">
+        <li>Web Development (HTML, CSS, JS)</li>
+        <li>Audio Engineering & Sound System</li>
+        <li>Elektronika & Perakitan</li>
+        <li>PLC & Automation</li>
+      </ul>
     </section>
 
     <section id="pengalaman">
       <h2>Pengalaman</h2>
       <div class="portfolio-grid">
-        <div class="portfolio-item"><h3>Proyek 1</h3><p>Desain 3D model menggunakan Blender</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.08.jpeg" alt="Proyek 1"></div>
-        <div class="portfolio-item"><h3>Proyek 2</h3><p>Rakitan mini sound dengan 2 speaker 3 inch</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.07 (1).jpeg" alt="Proyek 2"></div>
-        <div class="portfolio-item"><h3>Proyek 3</h3><p>Perakitan PLC (Programmable Logic Controller)</p><img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.07.jpeg" alt="Proyek 3"></div>
+        <div class="portfolio-item">
+          <h3>Proyek 1</h3>
+          <p>Desain 3D model menggunakan Blender</p>
+          <img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.08.jpeg" alt="Proyek 1">
+        </div>
+        <div class="portfolio-item">
+          <h3>Proyek 2</h3>
+          <p>Rakitan mini sound dengan 2 speaker 3 inch</p>
+          <img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.07 (1).jpeg" alt="Proyek 2">
+        </div>
+        <div class="portfolio-item">
+          <h3>Proyek 3</h3>
+          <p>Perakitan PLC (Programmable Logic Controller)</p>
+          <img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.07.jpeg" alt="Proyek 3">
+        </div>
       </div>
     </section>
 
@@ -223,12 +248,15 @@
       window.addEventListener('DOMContentLoaded', ()=> setTimeout(type,160));
     })();
 
-    // mobile menu toggle
+    // mobile menu toggle + auto close
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
     menuToggle.addEventListener('click', ()=>{
       const open = navLinks.classList.toggle('show');
       menuToggle.setAttribute('aria-expanded', open);
+    });
+    navLinks.querySelectorAll('a').forEach(link=>{
+      link.addEventListener('click', ()=> navLinks.classList.remove('show'));
     });
 
     // scroll reveal with replay
