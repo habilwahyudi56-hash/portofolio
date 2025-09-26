@@ -1,275 +1,216 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portofolio Habil</title>
-  <meta name="description" content="Portofolio Habil Qodam Wahyudi - Web Developer & Sound Enthusiast" />
   <style>
-    :root{
-      --bg:#050506;
-      --card:rgba(255,255,255,0.04);
+    :root {
       --accent:#f1c40f;
-      --muted:#9aa3ad;
-      --max-width:1100px;
-      --radius:12px;
+      --bg-dark:#0a0a0f;
+      --glass:rgba(255,255,255,0.08);
+      --radius:16px;
     }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{
-      height:100%;
-      min-height:100%;
-      background:#000;
+    *{margin:0;padding:0;box-sizing:border-box}
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg,#0a0a0f,#1a1a2e,#16213e);
       color:#fff;
-      font-family:Inter,system-ui,Arial,sans-serif;
+      line-height:1.6;
       scroll-behavior:smooth;
     }
 
-    /* Background gradient biru */
-    body {
-      background: linear-gradient(135deg, #001f3f, #00c6ff);
-      background-attachment: fixed;
-      background-size: cover;
-    }
-
     /* Header */
-    header{
-      position:sticky;top:0;z-index:60;
-      background:linear-gradient(180deg, rgba(0,0,0,0.65), rgba(0,0,0,0));
-      backdrop-filter:blur(6px);
+    header {
+      position:sticky;top:0;z-index:100;
+      background:rgba(0,0,0,0.6);
+      backdrop-filter:blur(8px);
       border-bottom:1px solid rgba(255,255,255,0.08);
     }
-    .container{max-width:var(--max-width);margin:0 auto;padding:12px 18px}
-    .header-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{display:flex;align-items:center;gap:12px}
-    /* Logo with shine animation */
-    .logo{
-      width:52px;height:52px;
-      border-radius:12px;
+    .container {
+      max-width:1100px;margin:auto;
+      padding:14px 24px;
+      display:flex;align-items:center;justify-content:space-between;
+    }
+    .brand {
+      display:flex;align-items:center;gap:12px;
+    }
+    .logo {
+      width:52px;height:52px;border-radius:14px;
       background:linear-gradient(135deg,var(--accent),#ff8a1f);
       display:flex;align-items:center;justify-content:center;
-      color:#111;font-weight:800;position:relative;
-      overflow:hidden;
+      font-weight:800;color:#111;overflow:hidden;position:relative;
     }
-    .logo::after{
-      content:'';
-      position:absolute;
-      top:0;left:-75%;
+    .logo::after {
+      content:"";position:absolute;top:0;left:-80%;
       width:50%;height:100%;
-      background:linear-gradient(120deg,rgba(255,255,255,0.3),rgba(255,255,255,0));
+      background:linear-gradient(120deg,rgba(255,255,255,.4),transparent);
       transform:skewX(-25deg);
-      animation:shine 2s infinite;
+      animation:shine 2.5s infinite;
     }
-    @keyframes shine{
-      0%{left:-75%}
-      100%{left:125%}
+    @keyframes shine {0%{left:-80%}100%{left:120%}}
+    .brand-text h1 {font-size:1.2rem;font-weight:700}
+    .brand-text p {font-size:.85rem;color:#aaa}
+
+    nav a {
+      color:#ddd;text-decoration:none;
+      margin-left:20px;font-weight:600;
+      transition:.2s;
     }
+    nav a:hover {color:var(--accent)}
 
-    .brand-text h1{font-size:1.05rem;white-space:nowrap}
-    .brand-text p{font-size:0.84rem;color:var(--muted)}
-
-    /* Nav */
-    nav{display:flex;align-items:center;gap:14px}
-    .nav-links{display:flex;gap:12px}
-    .nav-links a{color:#ddd;text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:700;transition:all .18s}
-    .nav-links a:hover{background:var(--accent);color:#111}
-
-    /* Hamburger */
-    .menu-toggle{display:none;border:none;background:transparent;cursor:pointer;padding:8px}
-    .menu-toggle .bar{display:block;width:26px;height:3px;border-radius:3px;background:#fff;margin:5px 0;transition:transform .25s,opacity .25s}
-
-    @media (max-width:768px){
-      .menu-toggle{display:block}
-      .nav-links{position:fixed;right:16px;top:68px;flex-direction:column;background:rgba(0,0,0,0.9);padding:10px;border-radius:10px;display:none}
-      .nav-links.show{display:flex}
-      .brand-text h1{font-size:0.9rem}
-      .brand-text p{font-size:0.72rem}
-      .logo{width:42px;height:42px}
-    }
-
-    /* Main content */
-    main{max-width:var(--max-width);margin:24px auto;padding:0 18px}
-    section{
-      background:rgba(0,0,0,0.55);
-      padding:34px;
+    /* Sections */
+    section {
+      max-width:1100px;margin:60px auto;
+      padding:40px 24px;
+      background:var(--glass);
       border-radius:var(--radius);
-      margin:20px 0;
-      overflow:hidden;
-      opacity:0;
-      transform:translateY(36px);
-      transition:all .8s cubic-bezier(.2,.9,.3,1);
+      opacity:0;transform:translateY(40px);
+      transition:.8s ease;
     }
-    section.show{opacity:1;transform:none}
+    section.show {opacity:1;transform:none}
+    h2 {text-align:center;margin-bottom:20px;color:var(--accent)}
 
-    h2{text-align:center;color:var(--accent);margin-bottom:12px}
-    p{color:#d6dbe0;line-height:1.6}
-
-    ul.skills{margin-top:12px;padding-left:20px;color:#d6dbe0}
-    ul.skills li{margin-bottom:6px}
-
-    .portfolio-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-      gap:18px
+    /* About */
+    #tentang p {text-align:center;max-width:800px;margin:auto}
+    .skills {
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:16px;margin-top:24px;
     }
-    .portfolio-item{
-      background:var(--card);
-      padding:14px;
-      border-radius:10px;
+    .skill-card {
+      background:rgba(255,255,255,0.05);
+      padding:20px;border-radius:12px;
       text-align:center;
-      transition:transform .25s,box-shadow .25s
+      transition:.3s;
     }
-    .portfolio-item:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,0.5)}
-    .portfolio-item img{
-      width:100%;
-      max-height:200px;
-      object-fit:contain;
-      border-radius:8px;
-      margin-top:10px
+    .skill-card:hover {transform:translateY(-6px);background:rgba(255,255,255,0.1)}
+
+    /* Portfolio */
+    .portfolio-grid {
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:20px;
+    }
+    .portfolio-item {
+      background:rgba(255,255,255,0.05);
+      border-radius:12px;overflow:hidden;
+      transition:.3s;
+    }
+    .portfolio-item:hover {transform:translateY(-6px);box-shadow:0 10px 25px rgba(0,0,0,0.5)}
+    .portfolio-item img {
+      width:100%;height:180px;object-fit:cover;
+    }
+    .portfolio-item div {padding:16px}
+
+    /* Contact */
+    .links-row {
+      display:flex;gap:14px;flex-wrap:wrap;justify-content:center;
+      margin-top:20px;
+    }
+    .btn {
+      padding:10px 18px;border-radius:10px;
+      background:var(--accent);color:#111;
+      font-weight:700;text-decoration:none;
+      transition:.25s;
+    }
+    .btn:hover {transform:scale(1.07)}
+
+    /* Footer */
+    footer {
+      text-align:center;padding:20px;margin-top:60px;
+      background:rgba(0,0,0,0.6);
+      color:#aaa;font-size:.9rem;
     }
 
-    .links-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-    .btn{
-      display:inline-block;
-      padding:10px 16px;
-      border-radius:10px;
-      background:var(--accent);
-      color:#111;
-      font-weight:800;
-      text-decoration:none;
-      transition:transform .2s, box-shadow .2s;
+    /* Responsive nav simple */
+    @media(max-width:768px){
+      nav{display:none}
     }
-    .btn:hover{
-      transform:scale(1.05);
-      box-shadow:0 6px 18px rgba(0,0,0,0.5);
-    }
-
-    footer{
-      max-width:var(--max-width);
-      margin:24px auto;
-      padding:16px;
-      text-align:center;
-      color:var(--muted);
-      background:rgba(0,0,0,0.55);
-      border-radius:12px;
-    }
-
-    @media (prefers-reduced-motion: reduce){section{transition:none}}
   </style>
 </head>
 <body>
   <header>
     <div class="container">
-      <div class="header-row">
-        <div class="brand">
-          <div class="logo" role="img" aria-label="Logo HQ">HQ</div>
-          <div class="brand-text">
-            <h1 id="typing" aria-label="Nama: Habil Qodam Wahyudi"></h1>
-            <p>Web Developer | Engineer | Creator</p>
-          </div>
+      <div class="brand">
+        <div class="logo" aria-label="Logo HQ">HQ</div>
+        <div class="brand-text">
+          <h1 id="typing"></h1>
+          <p>Web Developer | Engineer | Creator</p>
         </div>
-
-        <nav aria-label="Main navigation">
-          <div class="nav-links" id="navLinks">
-            <a href="#tentang" title="Tentang Saya">Tentang</a>
-            <a href="#pengalaman" title="Pengalaman">Pengalaman</a>
-            <a href="#kontak" title="Kontak">Kontak</a>
-          </div>
-          <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Buka menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-          </button>
-        </nav>
       </div>
+      <nav>
+        <a href="#tentang">Tentang</a>
+        <a href="#pengalaman">Pengalaman</a>
+        <a href="#kontak">Kontak</a>
+      </nav>
     </div>
   </header>
 
   <main>
     <section id="tentang">
       <h2>Tentang Saya</h2>
-      <p>
-        Halo! Nama saya Habil Qodam Wahyudi, seorang pengembang web yang selalu bersemangat menciptakan pengalaman digital yang interaktif, sederhana, dan bermanfaat.
-        <br><br>
-        Saya percaya bahwa teknologi bukan hanya soal kode, tapi juga tentang membawa ide menjadi nyata. Dari merancang antarmuka yang elegan, membangun sistem yang efisien, hingga mengutak-atik dunia audio dan elektronik, saya selalu terdorong untuk terus bereksperimen.
-        <br><br>
-        Di luar dunia coding, saya juga mendalami audio engineering dan perakitan perangkat elektronik. Ketertarikan saya terhadap suara membuat saya senang merakit, memodifikasi, bahkan men-tuning sistem audio agar menghasilkan kualitas terbaik.
-      </p>
-      <ul class="skills">
-        <li>Web Development (HTML, CSS, JS)</li>
-        <li>Audio Engineering & Sound System</li>
-        <li>Elektronika & Perakitan</li>
-        <li>PLC & Automation</li>
-      </ul>
+      <p>Halo, saya Habil Qodam Wahyudi! Seorang pengembang web sekaligus audio & elektronika enthusiast. Saya suka mengubah ide jadi nyata, entah lewat website, sistem elektronik, atau sound system custom.</p>
+      <div class="skills">
+        <div class="skill-card">💻 Web Development</div>
+        <div class="skill-card">🎧 Audio Engineering</div>
+        <div class="skill-card">🔧 Elektronika</div>
+        <div class="skill-card">⚡ PLC & Automation</div>
+      </div>
     </section>
 
     <section id="pengalaman">
       <h2>Pengalaman</h2>
       <div class="portfolio-grid">
         <div class="portfolio-item">
-          <h3>Proyek 1</h3>
-          <p>Desain 3D model menggunakan Blender</p>
-          <img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.08.jpeg" alt="Proyek 1">
+          <img src="WhatsApp Image 2025-09-19 at 20.22.08.jpeg" alt="Proyek 1">
+          <div><h3>Desain 3D Model</h3><p>Membuat model dengan Blender.</p></div>
         </div>
         <div class="portfolio-item">
-          <h3>Proyek 2</h3>
-          <p>Rakitan mini sound dengan 2 speaker 3 inch</p>
-          <img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.07 (1).jpeg" alt="Proyek 2">
+          <img src="WhatsApp Image 2025-09-19 at 20.22.07 (1).jpeg" alt="Proyek 2">
+          <div><h3>Mini Sound System</h3><p>Rakitan audio portable dengan 2 speaker.</p></div>
         </div>
         <div class="portfolio-item">
-          <h3>Proyek 3</h3>
-          <p>Perakitan PLC (Programmable Logic Controller)</p>
-          <img loading="lazy" src="WhatsApp Image 2025-09-19 at 20.22.07.jpeg" alt="Proyek 3">
+          <img src="WhatsApp Image 2025-09-19 at 20.22.07.jpeg" alt="Proyek 3">
+          <div><h3>Perakitan PLC</h3><p>Membangun sistem kontrol berbasis PLC.</p></div>
         </div>
       </div>
     </section>
 
     <section id="kontak">
       <h2>Kontak</h2>
+      <p style="text-align:center">Temukan saya di platform berikut:</p>
       <div class="links-row">
-        <a class="btn" href="https://www.instagram.com/habilqw_?igsh=bGhqdGN0M3hudjJki" target="_blank" rel="noopener">Instagram</a>
-        <a class="btn" href="https://www.tiktok.com/@habilwahyudi" target="_blank" rel="noopener">Tiktok</a>
-        <a class="btn" href="https://github.com/habilwahyudi56-hash" target="_blank" rel="noopener">GitHub</a>
-        <a class="btn" href="https://wokwi.com/makers/habil_qw" target="_blank" rel="noopener">Wokwi</a>
+        <a class="btn" href="https://www.instagram.com/habilqw_" target="_blank">Instagram</a>
+        <a class="btn" href="https://www.tiktok.com/@habilwahyudi" target="_blank">TikTok</a>
+        <a class="btn" href="https://github.com/habilwahyudi56-hash" target="_blank">GitHub</a>
+        <a class="btn" href="https://wokwi.com/makers/habil_qw" target="_blank">Wokwi</a>
       </div>
     </section>
   </main>
 
   <footer>
-    <p>© 2025 HABIL QODAM WAHYUDI | Semua Hak Dilindungi</p>
+    © 2025 Habil Qodam Wahyudi | Semua Hak Dilindungi
   </footer>
 
   <script>
-    // typing effect without cursor
-    (function(){
-      const txt = 'HABIL QODAM WAHYUDI';
-      const el = document.getElementById('typing');
-      let i=0;
-      function type(){ if(i<txt.length){ el.textContent+=txt[i++]; setTimeout(type,100); } }
-      window.addEventListener('DOMContentLoaded', ()=> setTimeout(type,160));
-    })();
+    // Typing effect
+    const text = "HABIL QODAM WAHYUDI";
+    let i=0;
+    function type(){
+      if(i<text.length){
+        document.getElementById("typing").textContent += text.charAt(i);
+        i++;setTimeout(type,100);
+      }
+    }
+    window.addEventListener("DOMContentLoaded",()=>setTimeout(type,200));
 
-    // mobile menu toggle + auto close
-    const menuToggle = document.getElementById('menuToggle');
-    const navLinks = document.getElementById('navLinks');
-    menuToggle.addEventListener('click', ()=>{
-      const open = navLinks.classList.toggle('show');
-      menuToggle.setAttribute('aria-expanded', open);
-    });
-    navLinks.querySelectorAll('a').forEach(link=>{
-      link.addEventListener('click', ()=> navLinks.classList.remove('show'));
-    });
-
-    // scroll reveal with replay
-    const targets = document.querySelectorAll('section, .portfolio-item, .btn');
-    const io = new IntersectionObserver(entries=>{
-      entries.forEach(entry=>{
-        const el=entry.target;
-        if(entry.isIntersecting){
-          el.classList.remove('show'); void el.offsetWidth; el.classList.add('show');
-        }
-      });
-    }, {threshold:0.2});
-    targets.forEach(t=>io.observe(t));
+    // Scroll reveal
+    const sections=document.querySelectorAll("section");
+    const io=new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){e.target.classList.add("show");}
+      })
+    },{threshold:0.2});
+    sections.forEach(s=>io.observe(s));
   </script>
 </body>
 </html>
