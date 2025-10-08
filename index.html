@@ -1,216 +1,243 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portofolio Habil</title>
-  <style>
-    :root {
-      --accent:#f1c40f;
-      --bg-dark:#0a0a0f;
-      --glass:rgba(255,255,255,0.08);
-      --radius:16px;
-    }
-    *{margin:0;padding:0;box-sizing:border-box}
-    body {
-      font-family: "Poppins", sans-serif;
-      background: linear-gradient(135deg,#0a0a0f,#1a1a2e,#16213e);
-      color:#fff;
-      line-height:1.6;
-      scroll-behavior:smooth;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paslon 01</title>
+<style>
+/* Reset & base */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background:#0d1b2a; color:#fff; line-height:1.6; overflow-x:hidden; }
 
-    /* Header */
-    header {
-      position:sticky;top:0;z-index:100;
-      background:rgba(0,0,0,0.6);
-      backdrop-filter:blur(8px);
-      border-bottom:1px solid rgba(255,255,255,0.08);
-    }
-    .container {
-      max-width:1100px;margin:auto;
-      padding:14px 24px;
-      display:flex;align-items:center;justify-content:space-between;
-    }
-    .brand {
-      display:flex;align-items:center;gap:12px;
-    }
-    .logo {
-      width:52px;height:52px;border-radius:14px;
-      background:linear-gradient(135deg,var(--accent),#ff8a1f);
-      display:flex;align-items:center;justify-content:center;
-      font-weight:800;color:#111;overflow:hidden;position:relative;
-    }
-    .logo::after {
-      content:"";position:absolute;top:0;left:-80%;
-      width:50%;height:100%;
-      background:linear-gradient(120deg,rgba(255,255,255,.4),transparent);
-      transform:skewX(-25deg);
-      animation:shine 2.5s infinite;
-    }
-    @keyframes shine {0%{left:-80%}100%{left:120%}}
-    .brand-text h1 {font-size:1.2rem;font-weight:700}
-    .brand-text p {font-size:.85rem;color:#aaa}
+/* Neon animation */
+@keyframes neonGlow {
+  0%,100% { text-shadow:0 0 5px #00f,0 0 10px #00f,0 0 20px #00f; }
+  50% { text-shadow:0 0 10px #0ff,0 0 20px #0ff,0 0 40px #00f; }
+}
 
-    nav a {
-      color:#ddd;text-decoration:none;
-      margin-left:20px;font-weight:600;
-      transition:.2s;
-    }
-    nav a:hover {color:var(--accent)}
+/* Header */
+header {
+    background: linear-gradient(135deg,#001f3f,#004080);
+    text-align:center;
+    padding:60px 20px;
+    border-bottom-left-radius:30px;
+    border-bottom-right-radius:30px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.5);
+}
+header h1 { font-size:3em; margin-bottom:10px; color:#fff; animation:neonGlow 2s infinite alternate; }
+header p { font-size:1.2em; color:#cce6ff; }
 
-    /* Sections */
-    section {
-      max-width:1100px;margin:60px auto;
-      padding:40px 24px;
-      background:var(--glass);
-      border-radius:var(--radius);
-      opacity:0;transform:translateY(40px);
-      transition:.8s ease;
-    }
-    section.show {opacity:1;transform:none}
-    h2 {text-align:center;margin-bottom:20px;color:var(--accent)}
+/* Navbar */
+nav {
+    background:#001f3f;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 20px;
+    position:sticky;
+    top:0;
+    z-index:100;
+    box-shadow:0 4px 15px rgba(0,0,0,0.5);
+}
+nav .logo { color:#fff; font-weight:bold; font-size:20px; text-shadow:0 0 5px #0ff,0 0 10px #0ff; }
+nav ul { list-style:none; display:flex; gap:20px; transition:max-height 0.3s ease-in-out; }
+nav ul li a { color:#fff; text-decoration:none; font-weight:600; transition: color 0.3s; }
+nav ul li a:hover { color:#00f; text-shadow:0 0 5px #0ff,0 0 10px #0ff; }
 
-    /* About */
-    #tentang p {text-align:center;max-width:800px;margin:auto}
-    .skills {
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-      gap:16px;margin-top:24px;
-    }
-    .skill-card {
-      background:rgba(255,255,255,0.05);
-      padding:20px;border-radius:12px;
-      text-align:center;
-      transition:.3s;
-    }
-    .skill-card:hover {transform:translateY(-6px);background:rgba(255,255,255,0.1)}
+/* Hamburger */
+.hamburger { display:none; flex-direction: column; cursor:pointer; width:25px; height:20px; justify-content:space-between; }
+.hamburger span { height:3px; width:100%; background:#00f; border-radius:2px; transition: all 0.4s; }
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(4px, 4px); }
+.hamburger.active span:nth-child(2) { opacity:0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(4px, -4px); }
 
-    /* Portfolio */
-    .portfolio-grid {
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:20px;
-    }
-    .portfolio-item {
-      background:rgba(255,255,255,0.05);
-      border-radius:12px;overflow:hidden;
-      transition:.3s;
-    }
-    .portfolio-item:hover {transform:translateY(-6px);box-shadow:0 10px 25px rgba(0,0,0,0.5)}
-    .portfolio-item img {
-      width:100%;height:180px;object-fit:cover;
-    }
-    .portfolio-item div {padding:16px}
+/* Sections */
+section { max-width:1100px; margin:50px auto; padding:0 20px; opacity:0; transform:translateY(20px); transition:0.8s ease-out; }
+section.show { opacity:1; transform:translateY(0); }
 
-    /* Contact */
-    .links-row {
-      display:flex;gap:14px;flex-wrap:wrap;justify-content:center;
-      margin-top:20px;
-    }
-    .btn {
-      padding:10px 18px;border-radius:10px;
-      background:var(--accent);color:#111;
-      font-weight:700;text-decoration:none;
-      transition:.25s;
-    }
-    .btn:hover {transform:scale(1.07)}
+/* Hero */
+.hero {
+    text-align:center;
+    background:linear-gradient(135deg,#001f3f,#003366);
+    color:#fff;
+    padding:80px 20px;
+    border-radius:25px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.7);
+    border:2px solid #00f;
+}
+.hero p { color:#cce6ff; font-size:1.2em; margin-top:10px; }
+.hero button {
+    margin-top:25px;
+    padding:15px 30px;
+    font-size:16px;
+    font-weight:bold;
+    color:#fff;
+    background:none;
+    border:2px solid #00f;
+    border-radius:10px;
+    cursor:pointer;
+    box-shadow:0 0 10px #00f,0 0 20px #0ff,0 0 30px #00f;
+    transition:0.3s all;
+}
+.hero button:hover { background:#00f; color:#fff; box-shadow:0 0 20px #0ff,0 0 30px #00f,0 0 40px #0ff; }
 
-    /* Footer */
-    footer {
-      text-align:center;padding:20px;margin-top:60px;
-      background:rgba(0,0,0,0.6);
-      color:#aaa;font-size:.9rem;
-    }
+/* Kandidat */
+.kandidat { display:flex; justify-content:space-around; flex-wrap:wrap; gap:25px; margin-top:30px; }
+.kandidat div {
+    background:#002244;
+    padding:25px 20px;
+    border-radius:20px;
+    box-shadow:0 6px 20px rgba(0,0,0,0.5);
+    text-align:center;
+    flex:1 1 280px;
+    max-width:320px;
+    transition: transform 0.4s, box-shadow 0.4s;
+    border:2px solid #00f;
+}
+.kandidat div:hover { transform:translateY(-8px); box-shadow:0 10px 25px rgba(0,0,0,0.8),0 0 15px #0ff; }
+.kandidat img { width:150px; height:150px; border-radius:50%; object-fit:cover; margin-bottom:15px; border:2px solid #00f; }
+.kandidat h3, .kandidat p { color:#fff; }
 
-    /* Responsive nav simple */
-    @media(max-width:768px){
-      nav{display:none}
-    }
-  </style>
+/* Visi & Program & Kontak */
+.visi-misi, .program, #kontak {
+    background:#001f3f;
+    border:2px solid #00f;
+    border-radius:20px;
+    padding:35px 30px;
+    box-shadow:0 8px 20px rgba(0,0,0,0.6);
+}
+h2 { color:#00f; text-align:center; margin-bottom:20px; text-shadow:0 0 5px #0ff,0 0 10px #0ff; }
+ul { list-style: disc; padding-left:25px; margin-top:10px; }
+ul li { margin-bottom:10px; color:#fff; }
+
+/* Footer */
+footer {
+    text-align:center;
+    padding:25px;
+    background:#001f3f;
+    color:#fff;
+    box-shadow:0 -4px 10px rgba(0,0,0,0.5);
+    border-top-left-radius:20px;
+    border-top-right-radius:20px;
+}
+
+/* Responsive */
+@media(max-width:768px){
+    nav ul { flex-direction:column; position:absolute; top:55px; right:10px; width:200px; background:#001f3f; overflow:hidden; max-height:0; border-radius:10px; }
+    nav ul.show { max-height:300px; padding-bottom:10px; }
+    nav ul li { text-align:left; padding:10px 15px; }
+    .hamburger { display:flex; }
+}
+</style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <div class="brand">
-        <div class="logo" aria-label="Logo HQ">HQ</div>
-        <div class="brand-text">
-          <h1 id="typing"></h1>
-          <p>Web Developer | Engineer | Creator</p>
-        </div>
-      </div>
-      <nav>
-        <a href="#tentang">Tentang</a>
-        <a href="#pengalaman">Pengalaman</a>
-        <a href="#kontak">Kontak</a>
-      </nav>
+
+<header>
+    <h1>Paslon 01</h1>
+    <p>Dari suara muda tercipta sekolah bijaksana</p>
+</header>
+
+<nav>
+    <div class="logo">OSIS 2024</div>
+    <ul>
+        <li><a href="#home">Beranda</a></li>
+        <li><a href="#kandidat">Kandidat</a></li>
+        <li><a href="#visi">Visi & Misi</a></li>
+        <li><a href="#program">Program Kerja</a></li>
+        <li><a href="#kontak">Kontak</a></li>
+    </ul>
+    <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
-  </header>
+</nav>
 
-  <main>
-    <section id="tentang">
-      <h2>Tentang Saya</h2>
-      <p>Halo, saya Habil Qodam Wahyudi! Seorang pengembang web sekaligus audio & elektronika enthusiast. Saya suka mengubah ide jadi nyata, entah lewat website, sistem elektronik, atau sound system custom.</p>
-      <div class="skills">
-        <div class="skill-card">💻 Web Development</div>
-        <div class="skill-card">🎧 Audio Engineering</div>
-        <div class="skill-card">🔧 Elektronika</div>
-        <div class="skill-card">⚡ PLC & Automation</div>
-      </div>
-    </section>
+<section id="home" class="hero">
+    <h2>Selamat Datang di Kampanye Kami!</h2>
+    <p>Kami berkomitmen untuk membawa perubahan positif di sekolah kita. Dukung kami dengan suara Anda!</p>
+    <button onclick="alert('Terima kasih atas dukungannya!')">Dukung Kami</button>
+</section>
 
-    <section id="pengalaman">
-      <h2>Pengalaman</h2>
-      <div class="portfolio-grid">
-        <div class="portfolio-item">
-          <img src="WhatsApp Image 2025-09-19 at 20.22.08.jpeg" alt="Proyek 1">
-          <div><h3>Desain 3D Model</h3><p>Membuat model dengan Blender.</p></div>
+<section id="kandidat">
+    <h2>Tentang Kandidat</h2>
+    <div class="kandidat">
+        <div>
+            <img src="foto-ketua.jpg" alt="Ketua OSIS">
+            <h3>Habil Qodam Wahyudi</h3>
+            <p>Ketua OSIS Calon</p>
+            <p>Siswa kelas XI TAV</p>
         </div>
-        <div class="portfolio-item">
-          <img src="WhatsApp Image 2025-09-19 at 20.22.07 (1).jpeg" alt="Proyek 2">
-          <div><h3>Mini Sound System</h3><p>Rakitan audio portable dengan 2 speaker.</p></div>
+        <div>
+            <img src="foto-wakil.jpg" alt="Wakil Ketua OSIS">
+            <h3>Ahmad Safaulloh Jaelani</h3>
+            <p>Wakil Ketua OSIS Calon</p>
+            <p>Siswa kelas X TAV</p>
         </div>
-        <div class="portfolio-item">
-          <img src="WhatsApp Image 2025-09-19 at 20.22.07.jpeg" alt="Proyek 3">
-          <div><h3>Perakitan PLC</h3><p>Membangun sistem kontrol berbasis PLC.</p></div>
-        </div>
-      </div>
-    </section>
+    </div>
+</section>
 
-    <section id="kontak">
-      <h2>Kontak</h2>
-      <p style="text-align:center">Temukan saya di platform berikut:</p>
-      <div class="links-row">
-        <a class="btn" href="https://www.instagram.com/habilqw_" target="_blank">Instagram</a>
-        <a class="btn" href="https://www.tiktok.com/@habilwahyudi" target="_blank">TikTok</a>
-        <a class="btn" href="https://github.com/habilwahyudi56-hash" target="_blank">GitHub</a>
-        <a class="btn" href="https://wokwi.com/makers/habil_qw" target="_blank">Wokwi</a>
-      </div>
-    </section>
-  </main>
+<section id="visi" class="visi-misi">
+    <h2>Visi & Misi</h2>
+    <h3>Visi:</h3>
+    <p>Mewujudkan lingkungan sekolah yang harmonis, hijau, dan peduli, dengan memperkuat komunikasi antara siswa, guru, dan kepala sekolah serta menciptakan ruang aman bagi siswa untuk berkembang secara emosional dan sosial.</p>
+    <h3>Misi:</h3>
+    <ul>
+        <li>Membangun komunikasi dua arah yang aktif dan terbuka antara siswa, guru, dan kepala sekolah untuk menampung serta menindaklanjuti aspirasi siswa.</li>
+        <li>Menginisiasi program penghijauan sekolah untuk menciptakan lingkungan yang sejuk, sehat, dan nyaman bagi seluruh warga sekolah.</li>
+        <li>Mengembangkan program konselor sebaya sebagai wadah siswa untuk saling mendukung dan berbagi cerita secara positif.</li>
+    </ul>
+</section>
 
-  <footer>
-    © 2025 Habil Qodam Wahyudi | Semua Hak Dilindungi
-  </footer>
+<section id="program" class="program">
+    <h2>Program Kerja</h2>
+    <ul>
+        <li><strong>Suara Siswa:</strong> Menampung aspirasi siswa dan memperkuat partisipasi aktif dalam kegiatan sekolah.</li>
+        <li><strong>Penghijauan:</strong> Menginisiasi program penghijauan untuk menciptakan lingkungan sekolah yang asri dan nyaman.</li>
+        <li><strong>Konselor Sebaya:</strong> Mengembangkan program konselor sebaya sebagai wadah siswa untuk saling mendukung dan berbagi cerita secara positif.</li>
+    </ul>
+</section>
 
-  <script>
-    // Typing effect
-    const text = "HABIL QODAM WAHYUDI";
-    let i=0;
-    function type(){
-      if(i<text.length){
-        document.getElementById("typing").textContent += text.charAt(i);
-        i++;setTimeout(type,100);
-      }
-    }
-    window.addEventListener("DOMContentLoaded",()=>setTimeout(type,200));
+<section id="kontak">
+    <h2>Hubungi Kami</h2>
+    <p>Email: timmajubersama@sekolah.com</p>
+    <p>Instagram: @timmajubersama</p>
+    <p>WhatsApp: 0812-3456-7890</p>
+    <button onclick="window.location.href='mailto:timmajubersama@sekolah.com'">Kirim Pesan</button>
+</section>
 
-    // Scroll reveal
-    const sections=document.querySelectorAll("section");
-    const io=new IntersectionObserver(entries=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){e.target.classList.add("show");}
-      })
-    },{threshold:0.2});
-    sections.forEach(s=>io.observe(s));
-  </script>
+<footer>
+    <p>&copy; 2024 Tim Maju Bersama. Semua hak dilindungi. Dibuat dengan ❤️ untuk OSIS.</p>
+</footer>
+
+<script>
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e){
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+    });
+});
+
+// Hamburger toggle
+const hamburger = document.querySelector('.hamburger');
+const navMenu = document.querySelector('nav ul');
+hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('show');
+    hamburger.classList.toggle('active');
+});
+
+// Fade-in scroll animation
+const sections = document.querySelectorAll('section');
+window.addEventListener('scroll', () => {
+    const triggerBottom = window.innerHeight / 5 * 4;
+    sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        if(sectionTop < triggerBottom) { section.classList.add('show'); }
+    });
+});
+</script>
+
 </body>
 </html>
+
