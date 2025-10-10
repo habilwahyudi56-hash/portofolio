@@ -10,9 +10,10 @@ body {
     background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
     color: #ffffff;
     line-height: 1.6;
+    padding-top: 100vh; /* Offset untuk fixed header */
 }
 
-/* Header */
+/* Header dengan Sticky Navbar */
 .header {
     height: 100vh;
     display: flex;
@@ -21,6 +22,21 @@ body {
     text-align: center;
     background: radial-gradient(circle, #0f3460 0%, #0c0c0c 100%);
     border-bottom: 2px solid #00ffff; /* Efek listrik sederhana: garis statis */
+    position: fixed; /* Sticky: Selalu di atas */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transition: transform 0.3s ease; /* Slide up/down smooth */
+    transform: translateY(0); /* Awal: Visible */
+}
+
+.sticky-nav.hidden {
+    transform: translateY(-100%); /* Hide ke atas saat scroll down */
+}
+
+.sticky-nav.visible {
+    transform: translateY(0); /* Muncul lagi saat scroll up */
 }
 
 .nav ul {
@@ -53,17 +69,22 @@ body {
     margin-bottom: 1rem;
 }
 
-/* Animasi Scroll (Awal: Tersembunyi) */
+/* Animasi Scroll Elemen (Fade-in saat down, optional fade-out saat up) */
 .animate-on-scroll {
     opacity: 0;
-    transform: translateY(50px); /* Slide dari bawah */
-    transition: all 0.6s ease; /* Smooth fade-in dan slide-up */
+    transform: translateY(50px); /* Slide dari bawah saat down */
+    transition: all 0.6s ease; /* Smooth */
 }
 
-/* Saat Aktif: Masuk ke posisi normal */
 .animate-on-scroll.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Optional: Fade-out saat scroll up (komentar kalau nggak mau) */
+.animate-on-scroll.hidden {
+    opacity: 0.5;
+    transform: translateY(20px);
 }
 
 /* Sections */
@@ -191,8 +212,6 @@ p {
     .nav ul { flex-direction: column; gap: 1rem; }
     .project-grid { grid-template-columns: 1fr; }
     .header { height: 80vh; }
-    /* Animasi lebih cepat di mobile biar nggak terlalu lambat */
-    .animate-on-scroll {
-        transition: all 0.4s ease;
+    body { padding-top: 80vh; } /* Adjust untuk mobile */
+    .animate-on-scroll { transition: all 0.4s ease; } /* Lebih cepat di mobile */
     }
-}
