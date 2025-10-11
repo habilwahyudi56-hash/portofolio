@@ -1,88 +1,682 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio Saya - Neon Blue Simple</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Portofolio - HABIL_QW</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <style>
+        /* Reset dan Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            background: #000;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Neon Glow Base */
+        .neon-text {
+            text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff, 0 0 20px #ff00ff;
+            animation: neonPulse 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonPulse {
+            from {
+                text-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff, 0 0 15px #00ffff, 0 0 20px #ff00ff;
+            }
+
+            to {
+                text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #ff00ff;
+            }
+        }
+
+        /* Header dengan Neon - Diperbaiki (No Celah Kosong) */
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 2px solid #00ffff;
+            box-shadow: 0 0 20px #00ffff;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: box-shadow 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0;
+            /* Hilangkan padding untuk no celah kosong */
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff00ff;
+            text-shadow: 0 0 10px #ff00ff;
+            padding-left: 2rem;
+            /* Jarak minimal hanya di logo */
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            padding-right: 2rem;
+            /* Jarak di kanan untuk simetri */
+        }
+
+        .nav-links a {
+            color: #00ffff;
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff00ff;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: #ff00ff;
+            text-shadow: 0 0 10px #ff00ff;
+        }
+
+        /* Hamburger Menu untuk Mobile */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding-right: 2rem;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #00ffff;
+            margin: 3px 0;
+            transition: 0.3s;
+            box-shadow: 0 0 5px #00ffff;
+        }
+
+        .nav-links.mobile {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            flex-direction: column;
+            padding: 1rem 0;
+            gap: 1rem;
+            text-align: center;
+            border-top: 1px solid #00ffff;
+            display: none;
+            /* Default hidden */
+        }
+
+        .nav-links.mobile.active {
+            display: flex;
+            /* Tampilkan saat diklik */
+        }
+
+        /* Hero Section dengan Efek Petir */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            padding: 0 2rem;
+            margin-top: 60px;
+            position: relative;
+            background: radial-gradient(circle, #001122 0%, #000 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            background: none;
+            animation: none;
+            opacity: 0;
+        }
+
+
+        @keyframes lightning {
+
+            0%,
+            90%,
+            100% {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+
+            10% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+
+        .cta-button {
+            background: transparent;
+            color: #00ffff;
+            padding: 1rem 2rem;
+            border: 2px solid #00ffff;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 20px #00ffff;
+            animation: electricPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes electricPulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px #00ffff;
+            }
+
+            50% {
+                box-shadow: 0 0 30px #ff00ff, 0 0 40px #ff00ff;
+            }
+        }
+
+        .cta-button:hover {
+            background: #00ffff;
+            color: #000;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px #ff00ff;
+        }
+
+        .cta-button:active {
+            animation: none;
+            transform: scale(0.95);
+        }
+
+        /* Services Section */
+        .services-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #00ffff;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            color: #fff;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 0, 255, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            animation: sparkRotate 2s linear infinite;
+        }
+
+        @keyframes sparkRotate {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 0 30px #ff00ff, inset 0 0 20px rgba(0, 255, 255, 0.2);
+            border-color: #ff00ff;
+        }
+
+        .card.vibrate {
+            animation: vibrate 0.3s ease-in-out;
+        }
+
+        @keyframes vibrate {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            25% {
+                transform: translateX(-2px);
+            }
+
+            75% {
+                transform: translateX(2px);
+            }
+        }
+
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #00ffff;
+        }
+
+        .card p {
+            opacity: 0.9;
+        }
+
+        /* Simple Slider for Products (Galeri) */
+        .products-section {
+            padding: 5rem 2rem;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .slider {
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            border: 2px solid #ff00ff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px #ff00ff;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            text-align: center;
+            padding: 2rem;
+            background: #001122;
+        }
+
+        .slide img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 0 15px #00ffff;
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .slider-btn {
+            background: #00ffff;
+            color: #000;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .slider-btn:hover {
+            box-shadow: 0 0 15px #00ffff;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            color: #00ffff;
+            text-align: center;
+            padding: 2rem;
+            border-top: 2px solid #ff00ff;
+            box-shadow: 0 -5px 15px #ff00ff;
+        }
+
+        /* Sparks Effect (CSS Particles) */
+        .sparks {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: #ff00ff;
+            border-radius: 50%;
+            pointer-events: none;
+            animation: sparkFly 0.6s ease-out forwards;
+            z-index: 9999;
+        }
+
+        @keyframes sparkFly {
+            0% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: scale(0) translateY(-50px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            /* Sembunyikan default di mobile */
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links.mobile.active {
+                display: flex;
+            }
+
+            .logo {
+                padding-left: 1rem;
+            }
+
+            /* Kurangi di mobile */
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .slider-nav {
+                flex-direction: column;
+            }
+
+            .hero {
+                padding: 0 1rem;
+                margin-top: 70px;
+            }
+
+            .services-section {
+                padding: 3rem 1rem;
+            }
+
+            .footer-sosmed {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 40px;
+                padding: 30px 0;
+                background: transparent;
+                /* Bisa kamu ubah jadi warna lain */
+            }
+
+            .footer-sosmed a {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-decoration: none;
+                color: white;
+                font-size: 14px;
+                transition: transform 0.3s ease;
+            }
+
+            .footer-sosmed a i {
+                font-size: 36px;
+                margin-bottom: 5px;
+            }
+
+            .footer-sosmed a:hover {
+                transform: scale(1.2);
+            }
+
+            /* Warna ikon */
+            .footer-sosmed a:nth-child(1) i {
+                color: #e1306c;
+                /* Instagram */
+            }
+
+            .footer-sosmed a:nth-child(2) i {
+                color: #25d366;
+                /* WhatsApp */
+            }
+
+            .footer-sosmed a:nth-child(3) i {
+                color: #000000;
+                /* TikTok */
+            }
+
+            .footer-sosmed a:nth-child(4) i {
+                color: #ffffff;
+                /* GitHub */
+            }
+
+            /* Responsif */
+            @media (max-width: 768px) {
+                .footer-sosmed {
+                    flex-wrap: wrap;
+                    gap: 20px;
+                }
+
+                .footer-sosmed a i {
+                    font-size: 28px;
+                }
+
+                .footer-sosmed a span {
+                    font-size: 12px;
+                }
+            }
+
+        }
+    </style>
 </head>
+
 <body>
-    <!-- Navbar Kecil & Sticky -->
-    <nav class="navbar sticky-nav">
-        <div class="nav-container">
-            <h1 class="neon-text logo">Nama Kamu</h1>
-            <ul class="nav-menu">
-                <li><a href="#about">Tentang</a></li>
-                <li><a href="#projects">Proyek</a></li>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">HABIL_QW</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Layanan</a></li>
+                <li><a href="#products">Produk</a></li>
                 <li><a href="#contact">Kontak</a></li>
             </ul>
-        </div>
-    </nav>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
 
-    <!-- Hero Section (Bagian Besar Awal) -->
-    <section class="hero">
-        <div class="hero-content animate-on-scroll">
-            <h2 class="neon-text">Selamat Datang di Portofolio Saya</h2>
-            <p>Developer passionate dengan desain cyber biru. Mari lihat karya saya!</p>
-        </div>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1 class="neon-text">ELECTRONICS ENGGINERING</h1>
+        <p>MERANCANG, MEMPERBAIKI DAN MENGEMBANGKAN</p>
+        <button class="cta-button" onclick="playElectricSound(); createSparks(event)">SEE BELOW</button>
     </section>
 
-    <!-- Section About -->
-    <section id="about" class="section">
-        <div class="container">
-            <h2 class="neon-text animate-on-scroll">Tentang Saya</h2>
-            <p class="animate-on-scroll">Saya adalah seorang developer passionate dengan desain modern. Suka bereksperimen dengan tema cyber biru.</p>
-            <div class="skills">
-                <span class="skill-tag animate-on-scroll">HTML/CSS</span>
-                <span class="skill-tag animate-on-scroll">JavaScript</span>
-                <span class="skill-tag animate-on-scroll">React</span>
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <h2 class="section-title neon-text">ACTIVITY</h2>
+        <div class="cards-grid">
+            <div class="card" onclick="createSparks(event); vibrateCard(this)">
+                <h3>PROGRAMABLE LOGIC CONTROLLER</h3>
+                <p>PERAKITAN INSTALASI PLC DAN PEMOGRAMAN PLC</p>
+            </div>
+            <div class="card" onclick="createSparks(event); vibrateCard(this)">
+                <h3>BLUETOOTH CONTROL CAR</h3>
+                <p>RC MOBIL YANG DIRANCANG MENGGUNAKAN ARDUINO UNO DAN BLUETOOTH HC_05</p>
+            </div>
+            <div class="card" onclick="createSparks(event); vibrateCard(this)">
+                <h3>INSTALASI SOUND Audio</h3>
+                <p>PERANCANGAN BOX DAN MIXING AUDIO</p>
+            </div>
+            <div class="card" onclick="createSparks(event); vibrateCard(this)">
+                <h3>SERVICE ELEKTRONIK</h3>
+                <p>SERVICE ALAT-ALAT ELEKTRONIK SEPERTI KIPAS,TV,AC DAN LAINYA</p>
             </div>
         </div>
     </section>
 
-    <!-- Section Projects -->
-    <section id="projects" class="section alternate">
-        <div class="container">
-            <h2 class="neon-text animate-on-scroll">Proyek Saya</h2>
-            <div class="project-grid">
-                <div class="project-card animate-on-scroll">
-                    <h3>Proyek 1: Web App</h3>
-                    <p>Deskripsi singkat proyek keren.</p>
-                    <button class="neon-btn">Lihat Demo</button>
-                </div>
-                <div class="project-card animate-on-scroll">
-                    <h3>Proyek 2: Mobile App</h3>
-                    <p>Aplikasi mobile dengan tema biru.</p>
-                    <button class="neon-btn">Lihat Demo</button>
-                </div>
-                <div class="project-card animate-on-scroll">
-                    <h3>Proyek 3: Desain UI</h3>
-                    <p>Portofolio desain sederhana.</p>
-                    <button class="neon-btn">Lihat Demo</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Contact -->
-    <section id="contact" class="section">
-        <div class="container">
-            <h2 class="neon-text animate-on-scroll">Kontak Saya</h2>
-            <p class="animate-on-scroll">Email: emailkamu@example.com | LinkedIn: linkedin.com/in/namkamu</p>
-            <form class="contact-form animate-on-scroll">
-                <input type="text" placeholder="Nama" required>
-                <input type="email" placeholder="Email" required>
-                <textarea placeholder="Pesan" required></textarea>
-                <button type="submit" class="neon-btn">Kirim</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p>&copy; 2023 Nama Kamu. Dibuat dengan sederhana.</p>
+    <footer class="footer-sosmed">
+        <a href="https://www.instagram.com" target="_blank">
+            <i class="fab fa-instagram"></i>
+            <span>Instagram</span>
+        </a>
+        <a href="https://wa.me/6281234567890" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+            <span>WhatsApp</span>
+        </a>
+        <a href="https://www.tiktok.com" target="_blank">
+            <i class="fab fa-tiktok"></i>
+            <span>TikTok</span>
+        </a>
+        <a href="https://github.com" target="_blank">
+            <i class="fab fa-github"></i>
+            <span>GitHub</span>
+        </a>
     </footer>
 
-    <script src="script.js"></script>
 </body>
-</html>
+<script>
+    // Fungsi untuk toggle hamburger menu
+    function toggleMenu() {
+        const navLinks = document.getElementById('navLinks');
+        navLinks.classList.toggle('mobile');
+        navLinks.classList.toggle('active');
+    }
+
+    // Efek Spark saat klik tombol CTA atau Card
+    function createSparks(e) {
+        for (let i = 0; i < 15; i++) {
+            const spark = document.createElement('div');
+            spark.classList.add('sparks');
+            document.body.appendChild(spark);
+
+            const x = e.clientX;
+            const y = e.clientY;
+
+            spark.style.left = `${x}px`;
+            spark.style.top = `${y}px`;
+
+            const angle = Math.random() * 2 * Math.PI;
+            const distance = Math.random() * 80 + 20;
+            const tx = Math.cos(angle) * distance;
+            const ty = Math.sin(angle) * distance;
+
+            spark.animate(
+                [
+                    { transform: `translate(0, 0)`, opacity: 1 },
+                    { transform: `translate(${tx}px, ${ty}px)`, opacity: 0 }
+                ],
+                { duration: 600, easing: 'ease-out' }
+            );
+
+            setTimeout(() => spark.remove(), 600);
+        }
+    }
+
+    // Efek Vibrate Card saat diklik
+    function vibrateCard(card) {
+        card.classList.add('vibrate');
+        setTimeout(() => card.classList.remove('vibrate'), 300);
+    }
+
+    // Efek suara listrik saat tombol CTA ditekan (opsional)
+    function playElectricSound() {
+        const audio = new Audio('https://www.soundjay.com/electric/electric-zap-1.mp3');
+        audio.volume = 0.10;
+        audio.play();
+    }
+
+    // Slider Produk
+    let currentSlide = 0;
+    const slides = document.getElementById('slides');
+    const totalSlides = slides.children.length;
+
+    function showSlide(index) {
+        if (index < 0) index = totalSlides - 1;
+        if (index >= totalSlides) index = 0;
+        slides.style.transform = `translateX(-${index * 100}%)`;
+        currentSlide = index;
+    }
+
+    function nextSlide() {
+        showSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+        showSlide(currentSlide - 1);
+    }
+
+    setInterval(nextSlide, 4000); // Ganti slide otomatis setiap 4 detik
+</script>
