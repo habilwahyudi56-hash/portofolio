@@ -468,14 +468,23 @@
                 padding: 3rem 1rem;
             }
 
+            .contact-section {
+                padding: 4rem 2rem;
+                text-align: center;
+            }
+
+            .contact-desc {
+                margin-bottom: 2rem;
+                color: #ccc;
+                font-size: 1rem;
+            }
+
             .footer-sosmed {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 gap: 40px;
-                padding: 30px 0;
-                background: transparent;
-                /* Bisa kamu ubah jadi warna lain */
+                flex-wrap: wrap;
             }
 
             .footer-sosmed a {
@@ -502,34 +511,24 @@
                 color: #e1306c;
             }
 
+            /* Instagram */
             .footer-sosmed a:nth-child(2) i {
                 color: #25d366;
             }
 
+            /* WhatsApp */
             .footer-sosmed a:nth-child(3) i {
                 color: #ffffff;
+                text-shadow: 0 0 10px white, 0 0 20px white;
             }
 
-
+            /* TikTok putih + glow */
             .footer-sosmed a:nth-child(4) i {
                 color: #ffffff;
             }
 
-            /* Responsif */
-            @media (max-width: 768px) {
-                .footer-sosmed {
-                    flex-wrap: wrap;
-                    gap: 20px;
-                }
+            /* GitHub */
 
-                .footer-sosmed a i {
-                    font-size: 28px;
-                }
-
-                .footer-sosmed a span {
-                    font-size: 12px;
-                }
-            }
 
         }
     </style>
@@ -543,7 +542,6 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#services">Layanan</a></li>
-                <li><a href="#products">Produk</a></li>
                 <li><a href="#contact">Kontak</a></li>
             </ul>
             <div class="hamburger" onclick="toggleMenu()">
@@ -584,28 +582,32 @@
         </div>
     </section>
 
-    <!-- Produk Section -->
-<section class="products-section" id="products">
-    <h2 class="section-title neon-text">PRODUK</h2>
-    <div class="slider" id="slider">
-        <div class="slides" id="slides">
-            <div class="slide"><img src="https://via.placeholder.com/800x300" alt="Produk 1"></div>
-            <div class="slide"><img src="https://via.placeholder.com/800x300" alt="Produk 2"></div>
-            <div class="slide"><img src="https://via.placeholder.com/800x300" alt="Produk 3"></div>
-        </div>
-    </div>
-    <div class="slider-nav">
-        <button class="slider-btn" onclick="prevSlide()">Prev</button>
-        <button class="slider-btn" onclick="nextSlide()">Next</button>
-    </div>
-</section>
+    <!-- Kontak Section -->
+    <section id="contact" class="contact-section">
+        <h2 class="section-title neon-text">KONTAK</h2>
+        <p class="contact-desc">Hubungi saya melalui sosial media berikut 👇</p>
 
-<!-- Kontak Section -->
-<section id="contact" style="padding: 4rem 2rem; text-align: center;">
-    <h2 class="section-title neon-text">KONTAK</h2>
-    <p>Hubungi saya melalui sosial media di bawah ini 👇</p>
-</section>
-    
+        <div class="footer-sosmed">
+            <a href="#" target="_blank">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+            <a href="#" target="_blank">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </a>
+            <a href="#" target="_blank">
+                <i class="fab fa-tiktok"></i>
+                <span>TikTok</span>
+            </a>
+            <a href="#" target="_blank">
+                <i class="fab fa-github"></i>
+                <span>GitHub</span>
+            </a>
+        </div>
+    </section>
+
+
 </body>
 <script>
     // Fungsi untuk toggle hamburger menu
