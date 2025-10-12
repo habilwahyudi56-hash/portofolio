@@ -478,19 +478,24 @@
                 color: #ccc;
                 font-size: 1rem;
             }
-/* =========================
-   SOSIAL MEDIA SECTION
-=========================*/
+            
 .footer-sosmed {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;           /* Biar di HP bisa turun baris */
-  gap: 25px;
+  flex-wrap: nowrap;         /* Ubah dari wrap ke nowrap di desktop */
+  gap: 40px;                 /* Lebarkan jarak antar ikon */
   margin-top: 20px;
   padding-bottom: 40px;
 }
 
+@media (max-width: 768px) {
+  .footer-sosmed {
+    flex-wrap: wrap;         /* Baru di layar kecil (HP) baru turun baris */
+    gap: 25px;
+  }
+}
+            
 .footer-sosmed a {
   color: #00ffff;
   text-decoration: none;
@@ -512,7 +517,7 @@
   min-width: 28px;
   text-align: center;
 }
-
+            
 /* Teks ajakan di atas sosmed */
 .sosmed-title {
   text-align: center;
