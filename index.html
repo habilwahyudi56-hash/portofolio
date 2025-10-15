@@ -72,6 +72,38 @@
             /* Jarak minimal hanya di logo */
         }
 
+        .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff00ff;
+    text-shadow: 0 0 10px #ff00ff;
+    padding-left: 2rem;
+}
+
+.logo-img-neon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    border: 2px solid #00ffff;
+    box-shadow:
+        0 0 8px #00ffff,
+        0 0 16px #00ffff,
+        0 0 24px #ff00ff;
+    transition: all 0.3s ease;
+}
+
+.logo-img-neon:hover {
+    transform: scale(1.15);
+    box-shadow:
+        0 0 12px #00ffff,
+        0 0 24px #00ffff,
+        0 0 36px #ff00ff,
+        0 0 48px #ff00ff;
+}
+
         .nav-links {
             display: flex;
             list-style: none;
@@ -562,7 +594,10 @@
     <!-- Header -->
     <header>
         <nav>
-            <div class="logo">HABIL_QW</div>
+            <div class="logo">
+    <img src="https://via.placeholder.com/40/00ffff/000000?text=HW" alt="Logo" class="logo-img-neon">
+    <span>HABIL_QW</span>
+</div>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home">HOME</a></li>
                 <li><a href="#services">ACTIVITY</a></li>
