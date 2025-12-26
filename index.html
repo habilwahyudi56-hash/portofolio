@@ -110,6 +110,7 @@
             transition: 0.3s;
             cursor: pointer;
             font-family: 'Orbitron', sans-serif;
+            display: inline-block;
         }
 
         .btn:hover {
@@ -118,7 +119,7 @@
             box-shadow: 0 0 20px rgba(0, 242, 255, 0.6);
         }
 
-        /* --- SERVICES / PROJECTS --- */
+        /* --- SECTIONS UMUM --- */
         .section {
             padding: 80px 5%;
         }
@@ -127,6 +128,7 @@
             text-align: center;
             font-size: 2rem;
             margin-bottom: 50px;
+            color: var(--text);
         }
 
         .grid {
@@ -154,6 +156,159 @@
             color: var(--primary);
         }
 
+        /* --- IOT GALLERY STYLES (BARU) --- */
+        .iot-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .iot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .iot-card {
+            background: #0f0f0f;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #333;
+            transition: 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .iot-card:hover {
+            border-color: var(--secondary);
+            transform: scale(1.02);
+            box-shadow: 0 0 15px rgba(112, 0, 255, 0.4);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        /* Overlay Hitam saat Hover Gambar */
+        .overlay-hover {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .iot-card:hover .overlay-hover {
+            opacity: 1;
+        }
+
+        .overlay-hover span {
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 8px 20px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            border-radius: 4px;
+        }
+
+        .iot-content {
+            padding: 20px;
+        }
+
+        .iot-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .iot-desc-short {
+            font-size: 0.85rem;
+            color: #aaa;
+        }
+
+        /* --- MODAL / POPUP STYLES (BARU) --- */
+        .modal-overlay {
+            display: none; /* Default sembunyi */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: #1a1a1a;
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 15px;
+            border: 1px solid var(--primary);
+            padding: 30px;
+            position: relative;
+            animation: zoomIn 0.3s ease;
+        }
+
+        @keyframes zoomIn {
+            from {transform: scale(0.9); opacity: 0;}
+            to {transform: scale(1); opacity: 1;}
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 25px;
+            font-size: 2rem;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-btn:hover {
+            color: var(--secondary);
+        }
+
+        .wokwi-frame-large {
+            width: 100%;
+            height: 400px;
+            background: #000;
+            margin: 20px 0;
+            border: 1px solid #333;
+            border-radius: 8px;
+        }
+
+        .wokwi-frame-large iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .modal-body h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .modal-body p {
+            line-height: 1.6;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
         /* --- FOOTER --- */
         footer {
             text-align: center;
@@ -163,7 +318,7 @@
             font-size: 0.9rem;
         }
 
-        /* --- ANIMATION --- */
+        /* --- ANIMATION GLOW --- */
         @keyframes glow {
             from { text-shadow: 0 0 10px rgba(0, 242, 255, 0.2); }
             to { text-shadow: 0 0 20px rgba(112, 0, 255, 0.6); }
@@ -172,7 +327,8 @@
         /* RESPONSIVE */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2.5rem; }
-            .nav-links { display: none; } /* Simpel hide dulu untuk mobile */
+            .nav-links { display: none; }
+            .wokwi-frame-large { height: 300px; }
         }
     </style>
 </head>
@@ -183,14 +339,14 @@
         <div class="nav-links">
             <a href="#home">Home</a>
             <a href="#services">Layanan</a>
-            <a href="#contact">Kontak</a>
+            <a href="#iot">IoT Projects</a> <a href="#contact">Kontak</a>
         </div>
     </nav>
 
     <section class="hero" id="home">
         <h1>THE FUTURE IS HERE</h1>
         <p>Selamat datang di HABIL_QW PRODUCTION. Kami menciptakan solusi digital futuristik, desain inovatif, dan integrasi AI canggih untuk bisnis Anda.</p>
-        <a href="#contact" class="btn" onclick="openChat()">NGOBROL DENGAN NEXUS</a>
+        <a href="#iot" class="btn">LIHAT PROYEK IOT</a>
     </section>
 
     <section class="section" id="services">
@@ -211,6 +367,34 @@
         </div>
     </section>
 
+    <section class="section" id="iot">
+        <div class="iot-header">
+            <h2 class="section-title" style="color: var(--secondary);">IOT INNOVATION LAB</h2>
+            <p style="color: #aaa;">Klik pada kartu proyek untuk mencoba simulasi langsung.</p>
+        </div>
+
+        <div class="iot-grid" id="iot-gallery">
+            </div>
+    </section>
+
+    <div id="project-modal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeDetail()">&times;</span>
+            
+            <h2 id="modal-title" style="color: var(--primary);">Judul Proyek</h2>
+            
+            <div class="wokwi-frame-large" id="modal-wokwi">
+                </div>
+
+            <div class="modal-body">
+                <h3>Deskripsi & Cara Kerja</h3>
+                <p id="modal-desc">Keterangan panjang...</p>
+                
+                <a id="modal-link" href="#" target="_blank" class="btn">BUKA FULLSCREEN DI WOKWI</a>
+            </div>
+        </div>
+    </div>
+
     <footer id="contact">
         <p>&copy; 2025 HABIL_QW PRODUCTION. All Rights Reserved.</p>
         <p>Powered by NEXUS AI</p>
@@ -220,7 +404,82 @@
     <zapier-interfaces-chatbot-embed is-popup='true' chatbot-id='cmjlrm34m0018p4dv6aaqcqoh'></zapier-interfaces-chatbot-embed>
 
     <script>
-        // Efek agar elemen muncul pelan-pelan saat di-scroll
+        // --- 1. DATA PROYEK (ADMIN AREA) ---
+        // Ganti data di bawah ini sesuai keinginan Anda
+        const iotProjects = [
+            {
+                id: 1,
+                title: "Smart Door Lock",
+                // Gambar contoh (bisa diganti link gambar Anda sendiri)
+                image: "images/image.png", 
+                shortDesc: "kunci pintu yang dilengkapi sandi pin untuk membuka",
+                fullDesc: "Project ini menggabungkan Arduino sebagai otak dari seluruh rangkaian, dengan komponen bantuan keypad sebagai input pin untuk membuka, servo sebagai pengunci yng dapat di menahan pintu dan disesuaikan oleh kondisi dan ketahanan, lalu ada lcd I2C sebagai display yang menampilkan keterangan",
+                wokwiID: "437005754222643201" 
+            },
+            {
+                id: 2,
+                title: "penerjemah morse",
+                image: "images/morse.png",
+                shortDesc: "penerjemah mini untu sandi morse",
+                fullDesc: "Project ini menggabungkan Arduino sebagai otak dari seluruh rangkaian, dan dilengkapi dengan 2X push button sebagai triger untuk arduino menerjemahkan sandi morse ke aksara latin, 1 push button memiliki arti yang berbeda yaitu strip dan titik/ panjang dan pendek dari deretan sandi morse",
+                wokwiID: "437901756680937473"
+            },
+            // Tambah project baru di bawah sini (Copy dari { sampai }, )
+        ];
+
+        // --- 2. FUNGSI MENAMPILKAN GALERI ---
+        function loadGallery() {
+            const container = document.getElementById('iot-gallery');
+            let htmlContent = '';
+
+            iotProjects.forEach((project, index) => {
+                htmlContent += `
+                <div class="iot-card" onclick="openDetail(${index})">
+                    <div class="card-image" style="background-image: url('${project.image}');">
+                        <div class="overlay-hover">
+                            <span>LIHAT SIMULASI</span>
+                        </div>
+                    </div>
+                    <div class="iot-content">
+                        <div class="iot-title">${project.title}</div>
+                        <p class="iot-desc-short">${project.shortDesc}</p>
+                    </div>
+                </div>
+                `;
+            });
+
+            container.innerHTML = htmlContent;
+        }
+
+        // --- 3. FUNGSI BUKA POPUP (MODAL) ---
+        function openDetail(index) {
+            const project = iotProjects[index];
+            const modal = document.getElementById('project-modal');
+            
+            // Isi data ke modal
+            document.getElementById('modal-title').innerText = project.title;
+            document.getElementById('modal-desc').innerText = project.fullDesc;
+            
+            // Embed Wokwi
+            const wokwiContainer = document.getElementById('modal-wokwi');
+            wokwiContainer.innerHTML = `<iframe src="https://wokwi.com/projects/${project.wokwiID}/embed" allow="autoplay"></iframe>`;
+            
+            // Link Tombol
+            document.getElementById('modal-link').href = `https://wokwi.com/projects/${project.wokwiID}`;
+
+            // Tampilkan Modal
+            modal.style.display = 'flex';
+        }
+
+        // --- 4. FUNGSI TUTUP POPUP ---
+        function closeDetail() {
+            const modal = document.getElementById('project-modal');
+            modal.style.display = 'none';
+            // Hapus iframe agar tidak berat saat ditutup
+            document.getElementById('modal-wokwi').innerHTML = '';
+        }
+
+        // --- 5. ANIMASI SCROLL (BAWAAN) ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -230,12 +489,8 @@
             });
         });
 
-        // Script tambahan kalau mau tombol di tengah membuka chat (Opsional, karena Zapier handle sendiri)
-        function openChat() {
-            // Biasanya tombol chat Zapier otomatis ada di pojok, 
-            // user akan mengklik icon di pojok kanan bawah.
-            alert("Silakan klik ikon Chat di pojok kanan bawah untuk bicara dengan NEXUS!");
-        }
+        // Jalankan saat web selesai dimuat
+        document.addEventListener("DOMContentLoaded", loadGallery);
     </script>
 </body>
 </html>
